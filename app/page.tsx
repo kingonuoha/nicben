@@ -38,10 +38,9 @@ export default function HomePage() {
           <h2 className="text-3xl sm:text-4xl font-bold text-ink-950 mt-4 tracking-tight">
             Three areas of work, one company
           </h2>
-          <p className="text-text-600 mt-3 text-base">
-            Operating with institutional diligence, tactical oversight, and strict
-            corporate alignment across every endeavor.
-          </p>
+          {/* R1-4: an uncited institutional-diligence claim was removed here.
+              docs/03-copy-deck.md section 2 gives this section an eyebrow, this H2
+              and the three cards — no supporting paragraph. */}
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 items-stretch">
@@ -74,22 +73,6 @@ export default function HomePage() {
                   location.
                 </p>
               </div>
-
-              {/* Capability list with teal diamond markers */}
-              <ul className="space-y-2 pt-2 border-t border-line/60">
-                <li className="flex items-center gap-2 text-xs font-medium text-text-600">
-                  <span className="w-1.5 h-1.5 rotate-45 bg-brand-500 shrink-0" aria-hidden="true" />
-                  <span>General contracting oversight</span>
-                </li>
-                <li className="flex items-center gap-2 text-xs font-medium text-text-600">
-                  <span className="w-1.5 h-1.5 rotate-45 bg-brand-500 shrink-0" aria-hidden="true" />
-                  <span>Sub-trade vetting &amp; procurement</span>
-                </li>
-                <li className="flex items-center gap-2 text-xs font-medium text-text-600">
-                  <span className="w-1.5 h-1.5 rotate-45 bg-brand-500 shrink-0" aria-hidden="true" />
-                  <span>Milestone scheduling &amp; quality checks</span>
-                </li>
-              </ul>
             </div>
 
             <div className="pt-6 mt-4 border-t border-line flex items-center justify-between">
@@ -100,9 +83,6 @@ export default function HomePage() {
                 Learn more
                 <span aria-hidden="true">→</span>
               </Link>
-              <span className="text-[11px] font-semibold text-text-600 uppercase tracking-wider">
-                Execution
-              </span>
             </div>
           </Card>
 
@@ -135,22 +115,6 @@ export default function HomePage() {
                   and technicians.
                 </p>
               </div>
-
-              {/* Capability list with teal diamond markers */}
-              <ul className="space-y-2 pt-2 border-t border-line/60">
-                <li className="flex items-center gap-2 text-xs font-medium text-text-600">
-                  <span className="w-1.5 h-1.5 rotate-45 bg-brand-500 shrink-0" aria-hidden="true" />
-                  <span>Commercial &amp; residential improvements</span>
-                </li>
-                <li className="flex items-center gap-2 text-xs font-medium text-text-600">
-                  <span className="w-1.5 h-1.5 rotate-45 bg-brand-500 shrink-0" aria-hidden="true" />
-                  <span>Full plumbing &amp; mechanical services</span>
-                </li>
-                <li className="flex items-center gap-2 text-xs font-medium text-text-600">
-                  <span className="w-1.5 h-1.5 rotate-45 bg-brand-500 shrink-0" aria-hidden="true" />
-                  <span>Scheduled preventive facility maintenance</span>
-                </li>
-              </ul>
             </div>
 
             <div className="pt-6 mt-4 border-t border-line flex items-center justify-between">
@@ -161,9 +125,6 @@ export default function HomePage() {
                 Learn more
                 <span aria-hidden="true">→</span>
               </Link>
-              <span className="text-[11px] font-semibold text-text-600 uppercase tracking-wider">
-                Upkeep
-              </span>
             </div>
           </Card>
 
@@ -196,22 +157,6 @@ export default function HomePage() {
                   company&apos;s benefit.
                 </p>
               </div>
-
-              {/* Capability list with teal diamond markers */}
-              <ul className="space-y-2 pt-2 border-t border-surface/20">
-                <li className="flex items-center gap-2 text-xs font-medium text-text-on-dark/80">
-                  <span className="w-1.5 h-1.5 rotate-45 bg-accent-300 shrink-0" aria-hidden="true" />
-                  <span>Self-funded asset allocation</span>
-                </li>
-                <li className="flex items-center gap-2 text-xs font-medium text-text-on-dark/80">
-                  <span className="w-1.5 h-1.5 rotate-45 bg-accent-300 shrink-0" aria-hidden="true" />
-                  <span>Direct internal corporate balance sheet</span>
-                </li>
-                <li className="flex items-center gap-2 text-xs font-medium text-text-on-dark/80">
-                  <span className="w-1.5 h-1.5 rotate-45 bg-accent-300 shrink-0" aria-hidden="true" />
-                  <span>Zero third-party public fund solicitation</span>
-                </li>
-              </ul>
             </div>
 
             <div className="pt-6 mt-4 border-t border-surface/20 flex items-center justify-between">
@@ -222,9 +167,6 @@ export default function HomePage() {
                 Learn more
                 <span aria-hidden="true">→</span>
               </Link>
-              <span className="text-[11px] font-semibold text-text-on-dark/60 uppercase tracking-wider">
-                Proprietary
-              </span>
             </div>
           </Card>
         </div>
@@ -247,7 +189,8 @@ export default function HomePage() {
               project requires.
             </p>
 
-            {/* Fact Banner */}
+            {/* Fact Banner — docs/03-copy-deck.md:44
+                "Texas LLC · Project-based · Serving clients in various U.S. states" */}
             <div className="p-4 rounded-xl bg-surface border border-line shadow-card flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
               <div className="flex items-center gap-3">
                 <div className="w-10 h-10 rounded-lg bg-tint-100 flex items-center justify-center text-brand-700">
@@ -267,20 +210,17 @@ export default function HomePage() {
                 </div>
                 <div>
                   <span className="text-xs font-bold text-ink-950 block">
-                    Texas LLC Structure
+                    Texas LLC
                   </span>
                   <span className="text-xs text-text-600">
-                    Privately Held Entity
+                    Project-based
                   </span>
                 </div>
               </div>
 
               <div className="flex items-center gap-2">
                 <span className="inline-flex items-center px-2.5 py-1 rounded-md bg-tint-100 text-xs font-semibold text-brand-700">
-                  Project-Based
-                </span>
-                <span className="inline-flex items-center px-2.5 py-1 rounded-md bg-brand-700 text-surface text-xs font-semibold">
-                  Multi-State
+                  Serving clients in various U.S. states
                 </span>
               </div>
             </div>
@@ -317,32 +257,8 @@ export default function HomePage() {
                 />
               </div>
 
-              {/* Column 2: White Texas Oversight Card + Image 2 (Diagonally offset with sm:pt-6) */}
+              {/* Column 2: image frame + (R1-4 removed card) (Diagonally offset with sm:pt-6) */}
               <div className="space-y-4 sm:pt-6">
-                <div className="bg-surface p-6 rounded-xl shadow-card border border-line">
-                  <div className="flex items-center gap-2 text-brand-700 mb-1">
-                    <svg
-                      className="w-4 h-4 text-brand-700 shrink-0"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      strokeWidth="2"
-                      stroke="currentColor"
-                      aria-hidden="true"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z"
-                      />
-                    </svg>
-                    <span className="text-xs font-bold uppercase tracking-wider">
-                      Texas Oversight
-                    </span>
-                  </div>
-                  <div className="text-xs text-text-900 leading-relaxed">
-                    Raymondville corporate foundation ensuring institutional rigor and ethical project execution.
-                  </div>
-                </div>
                 <div className="rounded-xl overflow-hidden shadow-card h-52 bg-tint-100 border border-line">
                   <img
                     className="w-full h-full object-cover"
@@ -363,9 +279,9 @@ export default function HomePage() {
           <h2 className="text-3xl sm:text-4xl font-bold text-ink-950 mt-4 tracking-tight">
             From enquiry to completion
           </h2>
-          <p className="text-text-600 mt-3 text-base">
-            A predictable, structured cadence designed to manage risk, uphold craft quality, and verify scope delivery.
-          </p>
+          {/* R1-4: an uncited risk-management/craft-quality claim was removed here.
+              docs/03-copy-deck.md:46-50 gives this section an eyebrow, this H2 and
+              the five steps — no supporting paragraph. */}
         </div>
 
         {/* 5-Step Process Timeline Cards */}
@@ -504,16 +420,12 @@ export default function HomePage() {
       <SectionWrapper background="surface" className="border-t border-line">
         <div className="max-w-4xl mx-auto bg-tint-50 rounded-2xl p-8 sm:p-10 border border-line shadow-card flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
           <div className="space-y-3 max-w-2xl">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-pill bg-surface text-brand-700 text-xs font-bold border border-line shadow-sm">
-              <span className="w-1.5 h-1.5 rounded-full bg-brand-500" aria-hidden="true" />
-              Relationship-Driven Model
-            </div>
+            {/* R1-4: an uncited relationship-model chip and an uncited
+                reputation/performance line were removed here.
+                docs/03-copy-deck.md:57-58 gives the referral note as body copy only. */}
             <p className="text-xl sm:text-2xl font-bold text-ink-950 tracking-tight leading-snug">
               &ldquo;Most of our work comes through professional referrals, client
               referrals, direct enquiries and repeat customers.&rdquo;
-            </p>
-            <p className="text-xs text-text-600">
-              Built on direct reputation and uncompromising project follow-through.
             </p>
           </div>
         </div>
@@ -535,9 +447,9 @@ export default function HomePage() {
 
           <div className="relative z-10 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8">
             <div className="space-y-4 max-w-xl">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-pill bg-surface/10 text-accent-300 text-xs font-semibold uppercase tracking-wider">
-                Initiate Consultation
-              </div>
+              {/* R1-4: the uncited consultation chip was an unsourced label.
+                  docs/03-copy-deck.md:63-66 gives this band an H2, a body line and
+                  the "Get in Touch" button. */}
 
               <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-surface tracking-tight leading-none heading-spark">
                 Have a project or an enquiry?{" "}

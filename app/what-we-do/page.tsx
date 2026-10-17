@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Button } from "@/components/ui/Button";
-import { EyebrowChip } from "@/components/ui/EyebrowChip";
 import { SectionWrapper } from "@/components/ui/SectionWrapper";
 
 export const metadata: Metadata = {
@@ -27,7 +26,8 @@ export default function WhatWeDoPage() {
         />
 
         <div className="relative z-10 max-w-3xl">
-          <EyebrowChip dotColor="teal">Overview</EyebrowChip>
+          {/* R1-4/D-008: the section eyebrow chip carried an uncited label and was
+              removed. docs/03-copy-deck.md:72 gives this page an H1 and an intro. */}
 
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-ink-950 mt-6 leading-tight heading-spark">
             What we do
@@ -38,9 +38,10 @@ export default function WhatWeDoPage() {
             Texas company.
           </p>
 
+          {/* docs/03-copy-deck.md:44 fact card wording */}
           <div className="mt-6 inline-flex items-center gap-2 px-3.5 py-1.5 rounded-pill bg-surface border border-line text-xs font-semibold text-text-600 shadow-sm">
             <span className="w-2 h-2 rounded-full bg-brand-500" aria-hidden="true" />
-            <span>Texas LLC · Project-Based Execution · Corporate Treasury</span>
+            <span>Texas LLC · Project-based · Serving clients in various U.S. states</span>
           </div>
         </div>
       </SectionWrapper>
@@ -57,15 +58,9 @@ export default function WhatWeDoPage() {
                 alt="Commercial construction site engineering review with technical blueprints and structural framing"
                 src="https://lh3.googleusercontent.com/aida-public/AB6AXuAKib9Qh2cYQ5lyHuy2OEx2ERxjNFhvbRtWDxqSQ1EHr9xKRpzSmjCdMHRlXuxNUeE0Eyog1RNIsf-ofD7zoXcVKEy9_8sSiwA1Ue1n88jqzv3yZQ1pMarffjIbCxbCygYRDOeBRrVWdiNSMm7-Q1g64U7lfS1OUOuXMr89dG0u8cYH1DVlCMIBaia3irfjsmIRol7vGeL0D9XVJoDnlPjwwzeFOhN29eWeav8fLCUrP_cdQ_N5s0MzUg"
               />
-              <div className="absolute top-4 left-4 px-2.5 py-1 bg-ink-950/80 backdrop-blur-sm rounded text-surface text-[11px] font-semibold tracking-wider uppercase">
-                SEC. 01 / SPEC
-              </div>
-              <div className="absolute bottom-4 left-4 inline-flex items-center gap-2 px-3.5 py-1.5 bg-surface/95 backdrop-blur-md rounded-pill shadow-card border border-line">
-                <span className="w-2 h-2 rounded-full bg-brand-500" aria-hidden="true" />
-                <span className="text-xs font-semibold text-ink-950 uppercase tracking-wider">
-                  Field Coordination
-                </span>
-              </div>
+              {/* R1-4/D-008: the two overlay badges that sat over this visual
+                  carried uncited labels and were removed. R1-5 replaces the
+                  photograph with a token-only treatment. */}
             </div>
 
             {/* Content Column */}
@@ -88,25 +83,12 @@ export default function WhatWeDoPage() {
                   location.
                 </p>
 
-                {/* Capabilities list */}
-                <ul className="space-y-2.5 pt-2 border-t border-line/60">
-                  <li className="flex items-center gap-2.5 text-xs font-medium text-text-600">
-                    <span className="w-1.5 h-1.5 rotate-45 bg-brand-500 shrink-0" aria-hidden="true" />
-                    <span>Project coordination and timeline oversight</span>
-                  </li>
-                  <li className="flex items-center gap-2.5 text-xs font-medium text-text-600">
-                    <span className="w-1.5 h-1.5 rotate-45 bg-brand-500 shrink-0" aria-hidden="true" />
-                    <span>Engaging vetted, qualified contractors and technicians</span>
-                  </li>
-                  <li className="flex items-center gap-2.5 text-xs font-medium text-text-600">
-                    <span className="w-1.5 h-1.5 rotate-45 bg-brand-500 shrink-0" aria-hidden="true" />
-                    <span>Material procurement and field supervision</span>
-                  </li>
-                  <li className="flex items-center gap-2.5 text-xs font-medium text-text-600">
-                    <span className="w-1.5 h-1.5 rotate-45 bg-brand-500 shrink-0" aria-hidden="true" />
-                    <span>Transparent milestone management and handover</span>
-                  </li>
-                </ul>
+                {/* R1-4: the uncited capability list that stood here was removed.
+                    docs/03-copy-deck.md:74 defines this block as the card text plus
+                    the link. The section 4 scope list is explicitly
+                    [CLIENT TO CONFIRM] (deck:85) and must not be published, so no
+                    replacement list is shown — keeping one on some pillars only
+                    would also breach the three-pillar parity rule (D-001). */}
               </div>
 
               <div className="pt-2">
@@ -143,25 +125,8 @@ export default function WhatWeDoPage() {
                   and technicians.
                 </p>
 
-                {/* Capabilities list */}
-                <ul className="space-y-2.5 pt-2 border-t border-line/60">
-                  <li className="flex items-center gap-2.5 text-xs font-medium text-text-600">
-                    <span className="w-1.5 h-1.5 rotate-45 bg-brand-500 shrink-0" aria-hidden="true" />
-                    <span>Residential and commercial property renovations</span>
-                  </li>
-                  <li className="flex items-center gap-2.5 text-xs font-medium text-text-600">
-                    <span className="w-1.5 h-1.5 rotate-45 bg-brand-500 shrink-0" aria-hidden="true" />
-                    <span>Complete plumbing diagnostics, repairs, and installations</span>
-                  </li>
-                  <li className="flex items-center gap-2.5 text-xs font-medium text-text-600">
-                    <span className="w-1.5 h-1.5 rotate-45 bg-brand-500 shrink-0" aria-hidden="true" />
-                    <span>Preventive structural maintenance and property upkeep</span>
-                  </li>
-                  <li className="flex items-center gap-2.5 text-xs font-medium text-text-600">
-                    <span className="w-1.5 h-1.5 rotate-45 bg-brand-500 shrink-0" aria-hidden="true" />
-                    <span>Turnkey interior finishes and space enhancements</span>
-                  </li>
-                </ul>
+                {/* R1-4: the uncited capability list that stood here was removed
+                    (docs/03-copy-deck.md:74-76 — block text plus link only). */}
               </div>
 
               <div className="pt-2">
@@ -182,15 +147,8 @@ export default function WhatWeDoPage() {
                 alt="Master mechanical plumbing and technical building finish installation in commercial facility"
                 src="https://lh3.googleusercontent.com/aida-public/AB6AXuD2mAjoiNAZmpJx76feysGjvCmg-iTUAsjL9k2Q_TZKEPSkgc32pztBzptT-jpPykAeqeNRv3ag3inXDCHXeZGnodb14_19A0zD4oy1Bhxjh_lLd2wJdTFvos1KyEimc2COmp_hMiSDQQTNBHjppICxoCDGu2jaXUJkVY0u2g-eNVQ8_Xpe4fiU4jTIgp_MNt2WxaWWHikZX4lkKPvQpOex-l2tGHEReSusC9LFelTXHl2WBXLS55p6uA"
               />
-              <div className="absolute top-4 right-4 px-2.5 py-1 bg-ink-950/80 backdrop-blur-sm rounded text-surface text-[11px] font-semibold tracking-wider uppercase">
-                SEC. 02 / TRADE
-              </div>
-              <div className="absolute bottom-4 right-4 inline-flex items-center gap-2 px-3.5 py-1.5 bg-surface/95 backdrop-blur-md rounded-pill shadow-card border border-line">
-                <span className="w-2 h-2 rounded-full bg-brand-500" aria-hidden="true" />
-                <span className="text-xs font-semibold text-ink-950 uppercase tracking-wider">
-                  Residential &amp; Commercial
-                </span>
-              </div>
+              {/* R1-4/D-008: the two overlay badges that sat over this visual
+                  carried uncited labels and were removed. */}
             </div>
           </div>
 
@@ -203,15 +161,8 @@ export default function WhatWeDoPage() {
                 alt="Institutional boardroom with minimalist stone accents and structural glass overlooking metro district"
                 src="https://lh3.googleusercontent.com/aida-public/AB6AXuBCHfur9FyhSiu0MYYoL1LyRC99sfYJroGxdGjnkKmKliv1wGq0AL8nS-pjj6GRuYhLytmI7jsjAE7LU1be1Uh-k6FTzTRc3oFndm2rSg7tOFk6tuxCTB4ToBxNI-Kq9tItzv4PP5kOyOYe-Yx0LJzLlwSLBgteVpuG85JVjdtyhB1qnKYkhXdZe-h6sQoq9cj6pbSze2lchC357oKaZPlbjlHzB7q5Hbaynt3abcS8logwi58Ib3URKA"
               />
-              <div className="absolute top-4 left-4 px-2.5 py-1 bg-surface/20 backdrop-blur-sm rounded text-surface text-[11px] font-semibold tracking-wider uppercase">
-                SEC. 03 / ASSETS
-              </div>
-              <div className="absolute bottom-4 left-4 inline-flex items-center gap-2 px-3.5 py-1.5 bg-ink-950/95 backdrop-blur-md rounded-pill shadow-card border border-surface/20">
-                <span className="w-2 h-2 rounded-full bg-accent-400" aria-hidden="true" />
-                <span className="text-xs font-semibold text-surface uppercase tracking-wider">
-                  Company-Owned Capital
-                </span>
-              </div>
+              {/* R1-4/D-008: the two overlay badges that sat over this visual
+                  carried uncited labels and were removed. */}
             </div>
 
             {/* Content Column */}
@@ -234,25 +185,12 @@ export default function WhatWeDoPage() {
                   company&apos;s benefit.
                 </p>
 
-                {/* Capabilities list */}
-                <ul className="space-y-2.5 pt-2 border-t border-surface/20">
-                  <li className="flex items-center gap-2.5 text-xs font-medium text-text-on-dark/80">
-                    <span className="w-1.5 h-1.5 rotate-45 bg-accent-300 shrink-0" aria-hidden="true" />
-                    <span>100% internal corporate balance sheet allocation</span>
-                  </li>
-                  <li className="flex items-center gap-2.5 text-xs font-medium text-text-on-dark/80">
-                    <span className="w-1.5 h-1.5 rotate-45 bg-accent-300 shrink-0" aria-hidden="true" />
-                    <span>Strict governance: zero third-party capital solicitation</span>
-                  </li>
-                  <li className="flex items-center gap-2.5 text-xs font-medium text-text-on-dark/80">
-                    <span className="w-1.5 h-1.5 rotate-45 bg-accent-300 shrink-0" aria-hidden="true" />
-                    <span>Strategic property and asset acquisition evaluation</span>
-                  </li>
-                  <li className="flex items-center gap-2.5 text-xs font-medium text-text-on-dark/80">
-                    <span className="w-1.5 h-1.5 rotate-45 bg-accent-300 shrink-0" aria-hidden="true" />
-                    <span>Full regulatory alignment and federal compliance (AML/KYC)</span>
-                  </li>
-                </ul>
+                {/* R1-4 / D-002: the previous list carried asset-strategy wording
+                    (prohibited inside the Pillar 3 card) and an unsupported
+                    regulatory compliance claim. Both are removed. The only approved
+                    compliance statement is the section 7 sentence on /about, which is
+                    client-sourced. docs/03-copy-deck.md:76 defines this block as the
+                    card text plus the link. */}
               </div>
 
               <div className="pt-2">
@@ -269,93 +207,16 @@ export default function WhatWeDoPage() {
         </div>
       </SectionWrapper>
 
-      {/* 3. CROSS-PILLAR SYNERGY STRIP (from docs/design/what_we_do lines 230-295) */}
-      <SectionWrapper background="tint-50" className="border-t border-line">
-        <div className="max-w-6xl mx-auto space-y-8">
-          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
-            <div>
-              <span className="text-xs font-bold text-brand-700 tracking-widest uppercase">
-                Structural Interlock
-              </span>
-              <h3 className="text-2xl sm:text-3xl font-bold text-ink-950 tracking-tight mt-1">
-                Cross-Pillar Synergy
-              </h3>
-            </div>
-            <p className="text-xs sm:text-sm text-text-600 max-w-md">
-              A disciplined single-entity model combining direct operational oversight
-              with self-funded balance sheet flexibility.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {/* Part 1 */}
-            <div className="bg-surface p-6 rounded-xl border border-line shadow-card flex flex-col justify-between">
-              <div>
-                <span className="text-[11px] font-bold text-brand-700 tracking-widest block mb-2">
-                  01 / GOVERNANCE
-                </span>
-                <h4 className="text-lg font-bold text-ink-950">
-                  Unified Texas LLC Entity
-                </h4>
-                <p className="text-xs text-text-600 mt-2 leading-relaxed">
-                  Centralized institutional ownership guarantees clear operational
-                  accountability and adherence to Texas commercial codes.
-                </p>
-              </div>
-              <div className="mt-4 pt-3 border-t border-line/60 flex items-center gap-2">
-                <span className="w-1.5 h-1.5 rounded-full bg-brand-500" aria-hidden="true" />
-                <span className="text-xs font-semibold text-ink-950">
-                  Consolidated Reporting
-                </span>
-              </div>
-            </div>
-
-            {/* Part 2 */}
-            <div className="bg-surface p-6 rounded-xl border border-line shadow-card flex flex-col justify-between">
-              <div>
-                <span className="text-[11px] font-bold text-brand-700 tracking-widest block mb-2">
-                  02 / EXECUTION
-                </span>
-                <h4 className="text-lg font-bold text-ink-950">
-                  Project-Driven Mobilization
-                </h4>
-                <p className="text-xs text-text-600 mt-2 leading-relaxed">
-                  Vetted trade specialists and engineers deployed on fixed milestone
-                  scopes, eliminating corporate overhead for clients.
-                </p>
-              </div>
-              <div className="mt-4 pt-3 border-t border-line/60 flex items-center gap-2">
-                <span className="w-1.5 h-1.5 rounded-full bg-brand-500" aria-hidden="true" />
-                <span className="text-xs font-semibold text-ink-950">
-                  Field Precision
-                </span>
-              </div>
-            </div>
-
-            {/* Part 3 */}
-            <div className="bg-surface p-6 rounded-xl border border-line shadow-card flex flex-col justify-between">
-              <div>
-                <span className="text-[11px] font-bold text-brand-700 tracking-widest block mb-2">
-                  03 / STABILITY
-                </span>
-                <h4 className="text-lg font-bold text-ink-950">
-                  Dedicated Internal Capital
-                </h4>
-                <p className="text-xs text-text-600 mt-2 leading-relaxed">
-                  Autonomous financing from company cash reserves ensures self-contained
-                  stability with zero external dependency.
-                </p>
-              </div>
-              <div className="mt-4 pt-3 border-t border-line/60 flex items-center gap-2">
-                <span className="w-1.5 h-1.5 rounded-full bg-brand-500" aria-hidden="true" />
-                <span className="text-xs font-semibold text-ink-950">
-                  Zero External Solicitations
-                </span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </SectionWrapper>
+      {/*
+        R1-4: the cross-pillar strip that stood here is removed. Every string in it
+        was uncited, and three of them were unsupported legal and performance claims.
+        docs/03-copy-deck.md section 3 defines /what-we-do as the hero, the three
+        blocks and the CTA band — it provides no approved content for a cross-pillar
+        section, and no compliant replacement can be written without inventing facts.
+        Escalated: the design screen carries this strip (docs/design/
+        nicben_what_we_do/code.html), so the copy deck needs client-approved copy
+        before it can be restored.
+      */}
 
       {/* 4. CTA BAND */}
       <SectionWrapper background="ink" className="border-t border-ink-950/40">
