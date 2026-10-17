@@ -93,7 +93,9 @@ export const Button: React.FC<ButtonProps> = ({
   }
 
   return (
-    <button className={combinedClasses} {...props}>
+    // R2a-7: an explicit `type` keeps this control inert in a form context until
+    // Phase 05 wires real submit handlers; callers can still override via props.
+    <button type="button" className={combinedClasses} {...props}>
       {children}
       {arrowCircle}
     </button>
