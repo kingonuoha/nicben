@@ -308,14 +308,13 @@ export default function HomePage() {
                     src="https://lh3.googleusercontent.com/aida-public/AB6AXuAFy9O74SZBBl2xSiEqvqBMhLsys1SigYUYRuNqTe4nzLgUi14IyHYksydzslY3AzW_wbNakgj217uGdgeWuFGcVsQXKDt-kel7-7XhhecdzJvQQ8SyDEeAhBUGfZwyG0iOUlEgD4cAnptoSBOKgOKdQT_scKhmNO1fzw64YeuawDW6VX0YBMke3t07fFByS2VW1oIdzNKajZnZ5XfH4trjM4l8Miwf6MLLJGR9ye5fSC1Pdxokpp9yuw"
                   />
                 </div>
-                <div className="bg-ink-950 p-6 rounded-xl text-surface shadow-float">
-                  <div className="font-heading font-extrabold text-2xl text-accent-300">
-                    100%
-                  </div>
-                  <div className="text-xs text-text-on-dark/80 mt-1 leading-relaxed">
-                    Direct corporate accountability with zero outside capital dependence.
-                  </div>
-                </div>
+                {/* R1-2: the fabricated "100%" metric card is removed. No number is
+                    substituted — docs/08-qa-checklist.md forbids unconfirmed statistics.
+                    A token-only colour block keeps the cluster's visual rhythm. */}
+                <div
+                  className="bg-ink-950 rounded-xl shadow-float h-24 texture-dots-on-dark"
+                  aria-hidden="true"
+                />
               </div>
 
               {/* Column 2: White Texas Oversight Card + Image 2 (Diagonally offset with sm:pt-6) */}
@@ -582,18 +581,6 @@ export default function HomePage() {
             <p className="text-xs text-text-600">
               Built on direct reputation and uncompromising project follow-through.
             </p>
-          </div>
-
-          <div className="shrink-0 bg-surface p-6 rounded-xl border border-line flex flex-col items-center justify-center text-center w-full md:w-56 shadow-sm">
-            <span className="text-2xl font-extrabold text-ink-950 font-heading">
-              Zero
-            </span>
-            <span className="text-xs font-bold text-text-600 uppercase tracking-wider mt-1">
-              Aggressive Solicitations
-            </span>
-            <span className="text-[11px] text-text-600 mt-2">
-              Discretion &amp; Trust First
-            </span>
           </div>
         </div>
       </SectionWrapper>
