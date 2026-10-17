@@ -629,19 +629,16 @@ export default function HomePage() {
               </p>
             </div>
 
+            {/*
+              D-012 — the direct contact detail is withheld until the client
+              confirms it. The slot below is reserved so the confirmed public
+              email or phone can be dropped in later without a redesign.
+              No mailto: and no substitute address may be rendered.
+            */}
             <div className="flex flex-col sm:flex-row lg:flex-col gap-3 w-full lg:w-auto shrink-0">
               <Button variant="accent" size="lg" withArrow href="/contact">
                 Get in Touch
               </Button>
-              <a
-                href="mailto:contact@nicbenholdings.com"
-                className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-pill bg-surface/10 text-surface hover:bg-surface/20 transition-colors text-xs font-semibold"
-              >
-                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
-                </svg>
-                <span>contact@nicbenholdings.com</span>
-              </a>
             </div>
           </div>
         </div>
