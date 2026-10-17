@@ -46,13 +46,11 @@ export default function ServiceAreasPage() {
   return (
     <main className="min-h-screen">
       {/* 1. HERO
-          ⚠️ OUT-OF-CONTRACT REPAIR (Phase 04): `app/layout.tsx` lost its global
-          `pt-20` header clearance while this phase was in flight, so this hero
-          pads itself clear of the fixed pill header. Revert to `pt-8 sm:pt-12`
-          if global clearance is restored. */}
+          Header clearance is global (`app/layout.tsx`), so this hero keeps the
+          standard pt-8 sm:pt-12 section rhythm. */}
       <SectionWrapper
         background="tint-50"
-        className="pt-28 sm:pt-32 pb-16 lg:pb-20"
+        className="pt-8 sm:pt-12 pb-16 lg:pb-20"
       >
         <nav aria-label="Breadcrumb" className="mb-6">
           <ol className="flex items-center gap-2 text-xs font-semibold text-text-600">

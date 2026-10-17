@@ -28,13 +28,11 @@ export default function TermsPage() {
   return (
     <main className="min-h-screen">
       {/* Legal shell — TOC + empty prose containers only.
-          ⚠️ OUT-OF-CONTRACT REPAIR (Phase 04): `app/layout.tsx` lost its global
-          `pt-20` header clearance while this phase was in flight, so this hero
-          pads itself clear of the fixed pill header. Revert to `pt-8 sm:pt-12`
-          if global clearance is restored. */}
+          Header clearance is global (`app/layout.tsx`), so this hero keeps the
+          standard pt-8 sm:pt-12 section rhythm. */}
       <SectionWrapper
         background="tint-50"
-        className="pt-28 sm:pt-32 pb-16 lg:pb-24"
+        className="pt-8 sm:pt-12 pb-16 lg:pb-24"
       >
         <div className="max-w-3xl mb-12 sm:mb-16">
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-ink-950 leading-tight heading-spark">
