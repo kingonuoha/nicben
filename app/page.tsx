@@ -24,8 +24,10 @@ export default function HomePage() {
       {/* 
         HERO SECTION:
         Easily switchable:
-        - <HeroCinematic />: Full-bleed edge-to-edge photography extending under navigation with frosted glass stat cards.
-        - <HeroSplit />: Original 2-column asymmetric split with architectural HeroCluster frame.
+        - <HeroCinematic />: dark full-bleed hero using the sanctioned ink-950 to
+          brand-700 gradient and grid texture. No photographic subject (R1-5).
+        - <HeroSplit />: 2-column asymmetric split with the HeroCluster frame.
+        Both heroes draw every visible string from docs/03-copy-deck.md section 2.
       */}
       <HeroCinematic />
 
@@ -237,7 +239,9 @@ export default function HomePage() {
             </div>
           </div>
 
-          {/* Right Column: 2 Images and 2 Cards Diagonally (Matching design HTML lines 304-328) */}
+          {/* Right Column: offset shape-panel cluster (design HTML lines 304-328
+              supply the structure; the two cards that stood here carried
+              fabricated claims and were removed under R1-2 and R1-4) */}
           <div className="lg:col-span-6 relative">
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {/* Column 1: shape panel + token colour block */}

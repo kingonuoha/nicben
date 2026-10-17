@@ -50,7 +50,7 @@ export default function WhatWeDoPage() {
       {/* 2. THREE PILLAR FEATURE BLOCKS (Strict Equal Weight Rule from docs/design/what_we_do) */}
       <SectionWrapper background="surface" className="border-t border-line">
         <div className="space-y-12 lg:space-y-16">
-          {/* PILLAR 01: Project Management & Contracting (Image Left, Content Right) */}
+          {/* PILLAR 01: Project Management & Contracting (visual left, content right) */}
           <div className="w-full bg-surface rounded-2xl border border-line shadow-card p-6 sm:p-8 lg:p-10 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
             {/* Visual Column — R1-5: the remote AI-generated image was removed.
                 docs/04-design-system.md section 8 forbids stock photography and
@@ -105,7 +105,7 @@ export default function WhatWeDoPage() {
             </div>
           </div>
 
-          {/* PILLAR 02: Property Improvement & Maintenance (Content Left, Image Right) */}
+          {/* PILLAR 02: Property Improvement & Maintenance (content left, visual right) */}
           <div className="w-full bg-tint-50 rounded-2xl border border-line shadow-card p-6 sm:p-8 lg:p-10 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
             {/* Content Column (order 2 on mobile, order 1 on desktop) */}
             <div className="lg:col-span-6 order-2 lg:order-1 flex flex-col justify-between h-full space-y-6">
@@ -153,7 +153,7 @@ export default function WhatWeDoPage() {
             </div>
           </div>
 
-          {/* PILLAR 03: Corporate Treasury & Investments (Image Left, Content Right) */}
+          {/* PILLAR 03: Corporate Treasury & Investments (visual left, content right) */}
           <div className="w-full bg-ink-950 rounded-2xl border border-surface/10 shadow-float p-6 sm:p-8 lg:p-10 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center text-surface">
             {/* Visual Column — R1-5: remote AI-generated image removed. The panel
                 uses the dark tone so Pillar 3 keeps the same structural weight as
