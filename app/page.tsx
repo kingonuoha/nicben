@@ -29,7 +29,18 @@ export default function HomePage() {
         - <HeroSplit />: 2-column asymmetric split with the HeroCluster frame.
         Both heroes draw every visible string from docs/03-copy-deck.md section 2.
       */}
-      <HeroCinematic />
+      {/*
+        R2a-1: header clearance lives once in `app/layout.tsx` (`pt-20`). The
+        homepage hero is the only full-bleed dark section that is designed to run
+        from the top of the browser under the translucent pill header, so it
+        cancels that padding with `-mt-20` — an explicit opt-out, not a
+        per-page compensation: the hero's own content already clears the header
+        (measured h1 top 241 px vs header bottom 78 px at 360 px). The hero
+        decision itself belongs to R2b.
+      */}
+      <div className="-mt-20">
+        <HeroCinematic />
+      </div>
 
       {/* 2. TICKER BAND */}
       <TickerBand />
@@ -432,13 +443,14 @@ export default function HomePage() {
       {/* 8. HIGH-IMPACT CTA BANNER */}
       <SectionWrapper background="ink" className="border-t border-ink-950/40">
         <div className="relative rounded-3xl p-8 sm:p-12 lg:p-16 overflow-hidden border border-surface/10 bg-gradient-to-br from-ink-950 to-brand-700/30">
-          {/* Architectural Drafting Grid Overlay */}
+          {/* Architectural Drafting Grid Overlay — tokens only (D-003):
+              `--color-accent-400` lines on the `--space-8` spacing token. */}
           <div
             className="absolute inset-0 opacity-10 pointer-events-none"
             style={{
               backgroundImage:
-                "linear-gradient(#3FB7F5 1px, transparent 1px), linear-gradient(90deg, #3FB7F5 1px, transparent 1px)",
-              backgroundSize: "32px 32px",
+                "linear-gradient(var(--color-accent-400) 1px, transparent 1px), linear-gradient(90deg, var(--color-accent-400) 1px, transparent 1px)",
+              backgroundSize: "var(--space-8) var(--space-8)",
             }}
             aria-hidden="true"
           />
