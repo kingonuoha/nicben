@@ -21,6 +21,28 @@
   --color-error: #D64545;
   --color-warning: #E0A02B;
 
+  /* RGB triplet mirrors of the palette above.
+     Tailwind v3 cannot apply an opacity modifier (bg-surface/10, text-on-dark/80)
+     to a colour defined as a raw `var()` string — it silently drops the class.
+     The config maps to these triplets with `<alpha-value>` so every alpha
+     modifier resolves. Values must stay in sync with the hex tokens above. */
+  --color-ink-950-rgb: 6 43 54;
+  --color-brand-700-rgb: 10 95 119;
+  --color-brand-500-rgb: 27 138 166;
+  --color-accent-400-rgb: 63 183 245;
+  --color-accent-300-rgb: 138 212 250;
+  --color-tint-100-rgb: 232 243 248;
+  --color-tint-50-rgb: 244 249 251;
+  --color-surface-rgb: 255 255 255;
+  --color-line-rgb: 217 230 236;
+  --color-text-900-rgb: 11 31 39;
+  --color-text-600-rgb: 74 100 112;
+  --color-text-on-dark-rgb: 230 242 246;
+  --color-text-on-accent-rgb: 6 43 54;
+  --color-success-rgb: 30 158 98;
+  --color-error-rgb: 214 69 69;
+  --color-warning-rgb: 224 160 43;
+
   --fontSize-display: clamp(2.5rem, 5vw + 1rem, 4.5rem);
   --fontSize-h2: clamp(2rem, 3vw + 1rem, 3rem);
   --fontSize-h3: clamp(1.25rem, 1vw + 1rem, 1.625rem);
@@ -85,17 +107,23 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Signature Heading Spark Accent (quito3.png) */
 .heading-spark {
-  display: inline-block;
+  /* Must stay block-level. `inline-block` here made the heading an inline-level
+     box, which let it share a line box with the inline-flex eyebrow chip above
+     it and baseline-align against it. Relative positioning is all the ::after
+     accent needs. */
   position: relative;
 }
 
 .heading-spark::after {
   content: "";
   display: inline-block;
-  vertical-align: super;
-  width: 0.6em;
-  height: 0.6em;
-  margin-left: 0.15em;
+  /* The source art has internal padding, so the visible mark is smaller than
+     the box. 0.75em + a lower lift keeps it reading at cap height next to a
+     display-size heading instead of floating above the line. */
+  vertical-align: 0.28em;
+  width: 0.75em;
+  height: 0.75em;
+  margin-left: 0.18em;
   background-image: url('/images/accents/quito3.png');
   background-size: contain;
   background-repeat: no-repeat;
