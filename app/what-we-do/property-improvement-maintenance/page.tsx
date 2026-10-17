@@ -124,7 +124,34 @@ export default function PropertyImprovementMaintenancePage() {
         </div>
       </SectionWrapper>
 
-      {/* 3. CTA BAND */}
+      {/* 3. RESIDENTIAL AND COMMERCIAL NOTE
+          docs/01-sitemap-wireframes.md:69. Both visible strings are deck verbatim:
+          the H2 is the deck's own "residential and commercial properties"
+          (docs/03-copy-deck.md:100-103) and the body is the pillar card text
+          (docs/03-copy-deck.md:36). The design screen's two scope cards
+          (docs/design/nicben_property_improvement_maintenance/code.html:115-192)
+          hold mock-only headings and bullets, so no scope-card wording is
+          reproduced and no eyebrow is shown — no cited eyebrow string exists. */}
+      <SectionWrapper background="tint-50" className="border-t border-line">
+        <div className="relative overflow-hidden rounded-lg bg-surface border border-line shadow-card p-6 sm:p-8 lg:p-10">
+          <div
+            className="absolute left-0 top-0 bottom-0 w-1.5 bg-brand-500"
+            aria-hidden="true"
+          />
+          <div className="pl-2 sm:pl-3 max-w-3xl">
+            <h2 className="text-3xl sm:text-4xl font-bold text-ink-950 tracking-tight">
+              Residential and commercial properties
+            </h2>
+            <p className="mt-4 text-base sm:text-lg text-text-600 leading-relaxed font-normal">
+              Improvement, renovation, plumbing and maintenance for residential
+              and commercial properties, carried out by qualified contractors and
+              technicians.
+            </p>
+          </div>
+        </div>
+      </SectionWrapper>
+
+      {/* 4. CTA BAND */}
       <SectionWrapper background="ink" className="border-t border-ink-950/40">
         <div className="max-w-3xl mx-auto text-center flex flex-col items-center">
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-surface tracking-tight leading-tight heading-spark">
