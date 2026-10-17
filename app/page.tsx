@@ -10,7 +10,6 @@ import { TickerBand } from "@/components/ui/TickerBand";
 import { HeroCluster } from "@/components/ui/HeroCluster";
 
 import { HeroCinematic } from "@/components/home/HeroCinematic";
-import { HeroSplit } from "@/components/home/HeroSplit";
 
 export const metadata: Metadata = {
   title: "NICBEN Asset Holdings & Investments, Texas",
@@ -18,16 +17,70 @@ export const metadata: Metadata = {
     "Privately owned Texas LLC: project management and contracting, property improvement and maintenance, and corporate treasury and investments.",
 };
 
+/**
+ * Pillar card line icon — one hand-drawn set, 1.5px stroke, `currentColor`.
+ * docs/04-design-system.md section 5 requires a small line icon per card and
+ * section 8 forbids emoji icons and mixed icon sets; the "slot" in
+ * docs/01-sitemap-wireframes.md section 4 is "icon, title, two-line
+ * description, circular arrow". Decorative, so it is hidden from assistive
+ * technology (the card title carries the meaning).
+ */
+type PillarIconName = "drafting" | "spanner" | "treasury";
+
+function PillarIcon({
+  name,
+  className = "",
+}: {
+  name: PillarIconName;
+  className?: string;
+}) {
+  return (
+    <svg
+      className={className}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+      focusable="false"
+    >
+      {name === "drafting" && (
+        <>
+          {/* set square over a baseline — project planning and coordination */}
+          <path d="M3.75 20.25h16.5" />
+          <path d="M6.75 20.25 12 3.75l5.25 16.5" />
+          <path d="M8.9 14.25h6.2" />
+        </>
+      )}
+      {name === "spanner" && (
+        <>
+          {/* spanner — improvement, renovation and maintenance trades */}
+          <path d="M9 3.75h6l1.65 3.75L15 11.25H9L7.35 7.5 9 3.75Z" />
+          <path d="M12 11.25v9" />
+        </>
+      )}
+      {name === "treasury" && (
+        <>
+          {/* classical facade — corporate treasury and investments */}
+          <path d="M3.75 9.75 12 4.5l8.25 5.25" />
+          <path d="M6.75 10.5v9M10.5 10.5v9M13.5 10.5v9M17.25 10.5v9" />
+          <path d="M5.25 20.25h13.5" />
+        </>
+      )}
+    </svg>
+  );
+}
+
 export default function HomePage() {
   return (
     <main className="min-h-screen">
-      {/* 
-        HERO SECTION:
-        Easily switchable:
-        - <HeroCinematic />: dark full-bleed hero using the sanctioned ink-950 to
-          brand-700 gradient and grid texture. No photographic subject (R1-5).
-        - <HeroSplit />: 2-column asymmetric split with the HeroCluster frame.
-        Both heroes draw every visible string from docs/03-copy-deck.md section 2.
+      {/*
+        HERO: <HeroCinematic /> — dark, full-bleed, using the sanctioned
+        ink-950 to brand-700 gradient plus the faint grid texture, and a
+        client-supplied local photograph when one is passed in. Every visible
+        string comes from docs/03-copy-deck.md section 2.
       */}
       {/*
         R2a-1: header clearance lives once in `app/layout.tsx` (`pt-20`). The
@@ -35,8 +88,7 @@ export default function HomePage() {
         from the top of the browser under the translucent pill header, so it
         cancels that padding with `-mt-20` — an explicit opt-out, not a
         per-page compensation: the hero's own content already clears the header
-        (measured h1 top 241 px vs header bottom 78 px at 360 px). The hero
-        decision itself belongs to R2b.
+        (measured h1 top 241 px vs header bottom 78 px at 360 px).
       */}
       <div className="-mt-20">
         <HeroCinematic />
@@ -49,7 +101,7 @@ export default function HomePage() {
       <SectionWrapper id="what-we-do" background="surface" className="border-t border-line">
         <div className="text-center max-w-2xl mx-auto mb-12 sm:mb-16">
           <EyebrowChip dotColor="sky">What we do</EyebrowChip>
-          <h2 className="text-3xl sm:text-4xl font-bold text-ink-950 mt-4 tracking-tight">
+          <h2 className="text-h2 font-bold text-ink-950 mt-4 tracking-tight">
             Three areas of work, one company
           </h2>
           {/* R1-4: an uncited institutional-diligence claim was removed here.
@@ -70,15 +122,15 @@ export default function HomePage() {
                 <span className="text-xs font-bold text-brand-700 tracking-wider uppercase">
                   Pillar 01
                 </span>
-                <CornerArrowButton
-                  href="/what-we-do/project-management-contracting"
-                  ariaLabel="Learn more about Project Management & Contracting"
-                  size="sm"
-                />
+                {/* Line icon slot per docs/04-design-system.md section 5 and
+                    docs/01-sitemap-wireframes.md section 4. */}
+                <span className="w-10 h-10 rounded-full bg-tint-100 text-brand-700 flex items-center justify-center">
+                  <PillarIcon name="drafting" className="w-5 h-5" />
+                </span>
               </div>
 
               <div>
-                <h3 className="text-xl font-bold text-ink-950 leading-snug">
+                <h3 className="text-h3 font-bold text-ink-950 leading-snug">
                   Project Management &amp; Contracting
                 </h3>
                 <p className="text-text-600 text-sm mt-3 leading-relaxed">
@@ -97,6 +149,11 @@ export default function HomePage() {
                 Learn more
                 <span aria-hidden="true">→</span>
               </Link>
+              <CornerArrowButton
+                href="/what-we-do/project-management-contracting"
+                ariaLabel="Learn more about Project Management & Contracting"
+                size="sm"
+              />
             </div>
           </Card>
 
@@ -112,15 +169,13 @@ export default function HomePage() {
                 <span className="text-xs font-bold text-brand-700 tracking-wider uppercase">
                   Pillar 02
                 </span>
-                <CornerArrowButton
-                  href="/what-we-do/property-improvement-maintenance"
-                  ariaLabel="Learn more about Property Improvement & Maintenance"
-                  size="sm"
-                />
+                <span className="w-10 h-10 rounded-full bg-surface text-brand-700 flex items-center justify-center">
+                  <PillarIcon name="spanner" className="w-5 h-5" />
+                </span>
               </div>
 
               <div>
-                <h3 className="text-xl font-bold text-ink-950 leading-snug">
+                <h3 className="text-h3 font-bold text-ink-950 leading-snug">
                   Property Improvement &amp; Maintenance
                 </h3>
                 <p className="text-text-600 text-sm mt-3 leading-relaxed">
@@ -139,6 +194,11 @@ export default function HomePage() {
                 Learn more
                 <span aria-hidden="true">→</span>
               </Link>
+              <CornerArrowButton
+                href="/what-we-do/property-improvement-maintenance"
+                ariaLabel="Learn more about Property Improvement & Maintenance"
+                size="sm"
+              />
             </div>
           </Card>
 
@@ -154,15 +214,13 @@ export default function HomePage() {
                 <span className="text-xs font-bold text-accent-300 tracking-wider uppercase">
                   Pillar 03
                 </span>
-                <CornerArrowButton
-                  href="/what-we-do/treasury-investments"
-                  ariaLabel="Learn more about Corporate Treasury & Investments"
-                  size="sm"
-                />
+                <span className="w-10 h-10 rounded-full bg-surface/10 text-accent-300 flex items-center justify-center">
+                  <PillarIcon name="treasury" className="w-5 h-5" />
+                </span>
               </div>
 
               <div>
-                <h3 className="text-xl font-bold text-surface leading-snug">
+                <h3 className="text-h3 font-bold text-surface leading-snug">
                   Corporate Treasury &amp; Investments
                 </h3>
                 <p className="text-text-on-dark/80 text-sm mt-3 leading-relaxed">
@@ -181,6 +239,11 @@ export default function HomePage() {
                 Learn more
                 <span aria-hidden="true">→</span>
               </Link>
+              <CornerArrowButton
+                href="/what-we-do/treasury-investments"
+                ariaLabel="Learn more about Corporate Treasury & Investments"
+                size="sm"
+              />
             </div>
           </Card>
         </div>
@@ -193,7 +256,7 @@ export default function HomePage() {
           <div className="lg:col-span-6 space-y-6">
             <EyebrowChip dotColor="navy">About NICBEN</EyebrowChip>
 
-            <h2 className="text-3xl sm:text-4xl font-bold text-ink-950 tracking-tight">
+            <h2 className="text-h2 font-bold text-ink-950 tracking-tight">
               A privately owned company, registered in Texas
             </h2>
 
@@ -264,9 +327,12 @@ export default function HomePage() {
                 <ShapePanel className="h-52 shadow-card" motif="blueprint" />
                 {/* R1-2: the fabricated "100%" metric card is removed. No number is
                     substituted — docs/08-qa-checklist.md forbids unconfirmed statistics.
-                    A token-only colour block keeps the cluster's visual rhythm. */}
+                    A token-only colour block keeps the cluster's visual rhythm.
+                    R2b: the full-strength `texture-dots-on-dark` fill that stood on
+                    this block is gone — docs/04-design-system.md section 5 keeps one
+                    texture per page and this page's texture is the CTA-band grid. */}
                 <div
-                  className="bg-ink-950 rounded-xl shadow-float h-24 texture-dots-on-dark"
+                  className="bg-ink-950 rounded-xl shadow-float h-24"
                   aria-hidden="true"
                 />
               </div>
@@ -285,7 +351,7 @@ export default function HomePage() {
       <SectionWrapper background="surface" className="border-t border-line">
         <div className="text-center max-w-2xl mx-auto mb-12 sm:mb-16">
           <EyebrowChip dotColor="teal">How it works</EyebrowChip>
-          <h2 className="text-3xl sm:text-4xl font-bold text-ink-950 mt-4 tracking-tight">
+          <h2 className="text-h2 font-bold text-ink-950 mt-4 tracking-tight">
             From enquiry to completion
           </h2>
           {/* R1-4: an uncited risk-management/craft-quality claim was removed here.
@@ -330,9 +396,12 @@ export default function HomePage() {
                 <span className="font-heading font-extrabold text-2xl text-brand-700 block mb-3">
                   {step.num}
                 </span>
-                <h4 className="text-base font-bold text-ink-950 mb-2">
+                {/* Heading level h3, not h4: the process section's H2 is the only
+                    heading above it, and h2 → h4 was the Lighthouse
+                    `heading-order` failure on `/` (qa-report-pass2.md P1-4). */}
+                <h3 className="text-base font-bold text-ink-950 mb-2">
                   {step.title}
-                </h4>
+                </h3>
                 <p className="text-xs text-text-600 leading-relaxed">
                   {step.desc}
                 </p>
@@ -359,7 +428,7 @@ export default function HomePage() {
           <div className="lg:col-span-5 space-y-6">
             <EyebrowChip dotColor="sky">Where we work</EyebrowChip>
 
-            <h2 className="text-3xl sm:text-4xl font-bold text-ink-950 tracking-tight leading-tight">
+            <h2 className="text-h2 font-bold text-ink-950 tracking-tight leading-tight">
               Based in Texas.<br />
               Working where the project is.
             </h2>
@@ -461,7 +530,7 @@ export default function HomePage() {
                   docs/03-copy-deck.md:63-66 gives this band an H2, a body line and
                   the "Get in Touch" button. */}
 
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-surface tracking-tight leading-none heading-spark">
+              <h2 className="text-h2 font-extrabold text-surface tracking-tight leading-tight heading-spark">
                 Have a project or an enquiry?{" "}
                 <span className="font-script text-[1.25em] text-accent-300">Talk</span>{" "}
                 to us.

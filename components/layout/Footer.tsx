@@ -26,7 +26,8 @@ export const Footer: React.FC = () => {
             </p>
             <div className="pt-2 text-xs text-text-on-dark/60 space-y-1">
               <p>494 Sonora Ave, Raymondville, TX 78580</p>
-              <p className="text-accent-300">Serving clients across various U.S. states on a project basis.</p>
+              {/* docs/03-copy-deck.md:44 — the only approved locality line. */}
+              <p className="text-accent-300">Serving clients in various U.S. states</p>
             </div>
           </div>
 
@@ -60,14 +61,11 @@ export const Footer: React.FC = () => {
                   Corporate Treasury & Investments
                 </Link>
               </li>
-              <li className="pt-1">
-                <Link
-                  href="/what-we-do"
-                  className="text-xs font-semibold text-accent-400 hover:text-surface transition-colors"
-                >
-                  All Disciplines Overview →
-                </Link>
-              </li>
+              {/*
+                docs/03-copy-deck.md:14 defines the What We Do column as the
+                three pillar links only. The uncited "All Disciplines Overview →"
+                link that stood here was removed under D-008.
+              */}
             </ul>
           </div>
 
@@ -112,7 +110,10 @@ export const Footer: React.FC = () => {
             </ul>
           </div>
 
-          {/* Column 3: Contact (address only — email and phone are [CLIENT TO CONFIRM]) */}
+          {/* Column 3: Contact. docs/03-copy-deck.md:14 defines this column as
+              address, email, phone; D-012 withholds the email and phone until the
+              client confirms them, so the slots below stay reserved and empty
+              rather than carrying a substitute address or a bare marker. */}
           <div>
             <h3 className="text-xs font-bold text-surface uppercase tracking-wider mb-4">
               Contact
@@ -123,12 +124,13 @@ export const Footer: React.FC = () => {
                   href="/contact"
                   className="text-text-on-dark/70 hover:text-accent-300 transition-colors"
                 >
-                  Contact & Enquiries
+                  Contact
                 </Link>
               </li>
               <li className="text-text-on-dark/70">
                 494 Sonora Ave, Raymondville, TX 78580
               </li>
+              {/* Reserved slot: confirmed email and phone drop in here. */}
             </ul>
           </div>
 
@@ -143,7 +145,7 @@ export const Footer: React.FC = () => {
                   href="/privacy"
                   className="text-text-on-dark/70 hover:text-accent-300 transition-colors"
                 >
-                  Privacy Policy
+                  Privacy
                 </Link>
               </li>
               <li>
@@ -151,19 +153,23 @@ export const Footer: React.FC = () => {
                   href="/terms"
                   className="text-text-on-dark/70 hover:text-accent-300 transition-colors"
                 >
-                  Terms of Use
+                  Terms
                 </Link>
               </li>
             </ul>
           </div>
         </div>
 
-        {/* Bottom Bar: Copyright & Compliance */}
+        {/* Bottom Bar: Copyright */}
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-text-on-dark/60">
           <p>© {currentYear} NICBEN Asset Holdings & Investments LLC. All rights reserved.</p>
-          <p className="text-text-on-dark/40 text-center sm:text-right">
-            Corporate Treasury manages proprietary company funds only. No external investment solicitation.
-          </p>
+          {/*
+            An uncited treasury-compliance line stood here. docs/03-copy-deck.md
+            provides no approved footer copy for it — the only investment-boundary
+            wording in the deck is the section 6 notice (marked
+            [PENDING CLIENT / LAWYER REVIEW]) which supplies the Pillar 3 page
+            notice, not a footer line. Removed under D-008 rather than paraphrased.
+          */}
         </div>
       </div>
     </footer>

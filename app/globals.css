@@ -131,9 +131,24 @@ h1, h2, h3, h4, h5, h6 {
   pointer-events: none;
 }
 
-/* Card Notched Corner Mask & Clip Utility */
-.notched-corner {
-  position: relative;
+/* ---------------------------------------------------------------------------
+   Notched card corner (docs/04-design-system.md section 5, "Signature shape")
+
+   The concave scoop is painted by a decorative, absolutely positioned
+   background layer rendered as Card's first child with `data-notch-layer`.
+   The card root is NEVER clipped, so the CornerArrowButton (and every other
+   descendant) sits outside the clipped subtree and cannot be cut by the notch
+   regardless of card width, padding or button position.
+
+   The rule below gives the real children their own positioned paint layer so
+   they render above the decorative layer (CSS 2.1 Appendix E: positioned
+   descendants paint in step 6, in tree order). It lives in the components
+   layer so Tailwind's utilities still win on the layer's own `absolute`.
+--------------------------------------------------------------------------- */
+@layer components {
+  .card-notched > *:not([data-notch-layer]) {
+    position: relative;
+  }
 }
 
 @keyframes ticker {
@@ -151,32 +166,115 @@ h1, h2, h3, h4, h5, h6 {
   animation: ticker 32s linear infinite;
 }
 
-.animate-ticker:hover {
+/* WCAG 2.2.2 (A): moving content that runs longer than 5s must be pausable.
+   `:hover` is the CSS-only safety net; `[data-paused]` is driven by the
+   component for focus, the visible control and reduced-motion. */
+.animate-ticker:hover,
+.animate-ticker[data-paused="true"] {
   animation-play-state: paused;
 }
 
 @media (prefers-reduced-motion: reduce) {
+  /* docs/05-motion-spec.md section 5: the ticker becomes a static, wrapped row. */
   .animate-ticker {
     animation: none;
     width: auto;
     flex-wrap: wrap;
     justify-content: center;
+    white-space: normal;
   }
 }
 
-/* Blueprint textures — built from tokens only, never raw hex (D-003) */
+/* Card hover motion (docs/05-motion-spec.md section 4 "Card hover":
+   lift 4px, increased shadow, circular arrow rotates 45deg, 180ms ease-out).
+   Transform and box-shadow only. Every value is a motion token. */
+.card-lift {
+  transition:
+    transform var(--motion-dur-fast) var(--motion-ease-out),
+    box-shadow var(--motion-dur-fast) var(--motion-ease-out);
+}
+
+.card-lift:hover,
+.card-lift:focus-within {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-float);
+}
+
+.corner-arrow {
+  transition:
+    transform var(--motion-dur-fast) var(--motion-ease-out),
+    background-color var(--motion-dur-fast) var(--motion-ease-out),
+    color var(--motion-dur-fast) var(--motion-ease-out);
+}
+
+.group:hover .corner-arrow,
+.group:focus-within .corner-arrow {
+  transform: rotate(45deg);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  /* docs/05-motion-spec.md section 5: no translate, no scale, no rotation.
+     The shadow change stays — it is a static state change, not motion. */
+  .card-lift {
+    transition-duration: 1ms;
+  }
+
+  .card-lift:hover,
+  .card-lift:focus-within {
+    transform: none;
+  }
+
+  .corner-arrow {
+    transition-duration: 1ms;
+  }
+
+  .group:hover .corner-arrow,
+  .group:focus-within .corner-arrow {
+    transform: none;
+  }
+}
+
+/* Blueprint textures — built from tokens only (D-003), and faint by default.
+   docs/04-design-system.md section 5 "Textures": a faint 1px grid at about
+   4% opacity. The alpha is baked in here (via the `-rgb` triplet tokens) so
+   callers no longer stack an `opacity-*` utility on top and double-dim it. */
 .texture-grid {
   background-image:
-    linear-gradient(to right, var(--color-brand-700) 1px, transparent 1px),
-    linear-gradient(to bottom, var(--color-brand-700) 1px, transparent 1px);
+    linear-gradient(to right, rgb(var(--color-brand-700-rgb) / 0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgb(var(--color-brand-700-rgb) / 0.04) 1px, transparent 1px);
   background-size: var(--space-8) var(--space-8);
 }
 
 .texture-grid-on-dark {
   background-image:
-    linear-gradient(to right, var(--color-text-on-dark) 1px, transparent 1px),
-    linear-gradient(to bottom, var(--color-text-on-dark) 1px, transparent 1px);
+    linear-gradient(to right, rgb(var(--color-text-on-dark-rgb) / 0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgb(var(--color-text-on-dark-rgb) / 0.04) 1px, transparent 1px);
   background-size: var(--space-8) var(--space-8);
+}
+
+/* Design chamfer cut (docs/design/nicben_what_we_do/code.html lines 47/153/171).
+   A flat 48px diagonal notch in a corner of a pillar image, painted in the card
+   surface colour so the shape reads as a cut. */
+.chamfer-tr {
+  clip-path: polygon(100% 0, 0 0, 100% 100%);
+}
+
+.chamfer-tl {
+  clip-path: polygon(0 0, 100% 0, 0 100%);
+}
+
+/* Hero scrim: directional left-to-right fade so the hero copy keeps full
+   contrast over the photograph. Built entirely from the ink-950 triplet token —
+   the raw rgba() literals that stood inline in HeroCinematic.tsx are gone
+   (D-003). Transparent stops, not colour values, so no hex appears either. */
+.hero-scrim {
+  background: linear-gradient(
+    to right,
+    rgb(var(--color-ink-950-rgb) / 0.96) 0%,
+    rgb(var(--color-ink-950-rgb) / 0.88) 35%,
+    rgb(var(--color-ink-950-rgb) / 0.45) 55%,
+    transparent 70%
+  );
 }
 
 .texture-dots {

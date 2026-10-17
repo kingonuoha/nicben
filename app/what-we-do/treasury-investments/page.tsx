@@ -12,22 +12,16 @@ export const metadata: Metadata = {
 };
 
 export default function TreasuryInvestmentsPage() {
+  /* docs/03-copy-deck.md:113-116 supplies these three "What this means" bullets
+     as titles only. The build previously added three uncited, claim-shaped
+     descriptions here — including an unapproved legal/regulatory negative
+     assurance. Removed per D-002/D-008/D-018. The deck's §6 notice box below
+     carries the only approved legal text, and it is [PENDING CLIENT / LAWYER
+     REVIEW]. Do not add claim copy here. */
   const principles = [
-    {
-      title: "Company-owned funds only",
-      description:
-        "All treasury operations and investments are funded exclusively from internal company capital.",
-    },
-    {
-      title: "Made solely for the benefit of NICBEN",
-      description:
-        "Investments and capital evaluations are executed for the company's own portfolio and operational resilience.",
-    },
-    {
-      title: "Not conducted on behalf of third parties",
-      description:
-        "NICBEN does not manage capital, solicit investments, or provide financial products to external parties.",
-    },
+    "Company-owned funds only",
+    "Made solely for the benefit of NICBEN",
+    "Not conducted on behalf of third parties",
   ];
 
   return (
@@ -60,7 +54,7 @@ export default function TreasuryInvestmentsPage() {
         <div className="max-w-3xl">
           <EyebrowChip dotColor="navy">Pillar 03</EyebrowChip>
 
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-ink-950 mt-6 leading-tight heading-spark">
+          <h1 className="text-display font-extrabold tracking-tight text-ink-950 mt-6 leading-tight heading-spark">
             Corporate treasury &amp; investments
           </h1>
 
@@ -79,7 +73,7 @@ export default function TreasuryInvestmentsPage() {
               General enquiries
             </Button>
             <Button variant="secondary" href="/what-we-do">
-              All Disciplines
+              What We Do
             </Button>
           </div>
         </div>
@@ -89,7 +83,7 @@ export default function TreasuryInvestmentsPage() {
       <SectionWrapper background="surface" className="border-t border-line">
         <div className="max-w-3xl mb-12">
           <EyebrowChip dotColor="teal">Governance</EyebrowChip>
-          <h2 className="text-3xl sm:text-4xl font-bold text-ink-950 mt-4 tracking-tight">
+          <h2 className="text-h2 font-bold text-ink-950 mt-4 tracking-tight">
             What this means
           </h2>
         </div>
@@ -97,7 +91,7 @@ export default function TreasuryInvestmentsPage() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
           {principles.map((item, index) => (
             <Card
-              key={item.title}
+              key={item}
               variant={index === 2 ? "tint" : "surface"}
               className="p-6 sm:p-8 flex flex-col justify-between"
             >
@@ -106,11 +100,8 @@ export default function TreasuryInvestmentsPage() {
                   0{index + 1}
                 </span>
                 <h3 className="text-xl font-bold text-ink-950 mt-2">
-                  {item.title}
+                  {item}
                 </h3>
-                <p className="text-text-600 text-sm mt-3 leading-relaxed">
-                  {item.description}
-                </p>
               </div>
             </Card>
           ))}
@@ -142,10 +133,8 @@ export default function TreasuryInvestmentsPage() {
       {/* 4. GENERAL ENQUIRIES CTA BAND (No investor solicitation) */}
       <SectionWrapper background="ink" className="border-t border-ink-950/40">
         <div className="max-w-3xl mx-auto text-center flex flex-col items-center">
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-surface tracking-tight leading-tight heading-spark">
-            Have a project or an enquiry?{" "}
-            <span className="font-script text-[1.18em] text-accent-300">Talk</span>{" "}
-            to us.
+          <h2 className="text-h2 font-extrabold text-surface tracking-tight leading-tight heading-spark">
+            Have a project or an enquiry? Talk to us.
           </h2>
           <p className="mt-4 text-base sm:text-lg text-text-on-dark/80">
             Reach us by email, phone or message.

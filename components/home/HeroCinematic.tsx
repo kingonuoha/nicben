@@ -34,19 +34,15 @@ export function HeroCinematic({
               sizes="100vw"
               className="object-cover object-right sm:object-center"
             />
-            {/* Directional Left-to-Right 70% Gradient Fade: solid on left for 100% text contrast, clear by 70% */}
-            <div
-              className="absolute inset-0 pointer-events-none"
-              style={{
-                background:
-                  "linear-gradient(to right, rgba(6, 43, 54, 0.96) 0%, rgba(6, 43, 54, 0.88) 35%, rgba(6, 43, 54, 0.45) 55%, rgba(6, 43, 54, 0) 70%)",
-              }}
-            />
+            {/* Directional Left-to-Right 70% Gradient Fade: solid on left for 100% text contrast, clear by 70%.
+                Tokenised as the `.hero-scrim` utility (D-003) — the raw rgba()
+                literals that stood inline here are gone. */}
+            <div className="absolute inset-0 pointer-events-none hero-scrim" />
           </>
         ) : (
           <>
             <div className="absolute inset-0 bg-gradient-to-br from-ink-950 via-ink-950 to-brand-700/40" />
-            <div className="absolute inset-0 opacity-[0.07] texture-grid-on-dark" />
+            <div className="absolute inset-0 texture-grid-on-dark" />
           </>
         )}
 
@@ -63,7 +59,7 @@ export function HeroCinematic({
               vertical margin and the hero rhythm collapsed. */}
           <div className="flex w-fit items-center gap-2 px-3.5 py-1.5 rounded-pill bg-surface/15 backdrop-blur-md border border-surface/20 text-eyebrow font-semibold uppercase tracking-[0.04em] text-accent-300 shadow-sm">
             <span
-              className="w-2 h-2 rounded-full bg-accent-400 shadow-[0_0_8px_rgba(63,183,245,0.8)]"
+              className="w-2 h-2 rounded-full bg-accent-400"
               aria-hidden="true"
             />
             <span>Registered in Texas</span>

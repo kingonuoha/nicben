@@ -28,11 +28,20 @@ export const CornerArrowButton: React.FC<CornerArrowButtonProps> = ({
     lg: "w-6 h-6",
   }[size];
 
-  const baseStyles = `inline-flex items-center justify-center rounded-full bg-ink-950 text-surface hover:bg-brand-700 active:bg-ink-950 transition-all duration-200 group-hover:rotate-45 shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-700 ${sizeStyles} ${className}`;
+  /*
+    The 45deg hover/focus rotation from docs/05-motion-spec.md section 4 is
+    driven by the `corner-arrow` utility in globals.css, which sits next to the
+    `.group` selector. That keeps the transform and its
+    `prefers-reduced-motion: reduce` fallback in one place — a Tailwind
+    `group-hover:rotate-45` pair cannot be reliably overridden by
+    `motion-reduce:group-hover:rotate-0` because both compile to the same
+    specificity and the winner is source order.
+  */
+  const baseStyles = `corner-arrow inline-flex items-center justify-center rounded-full bg-ink-950 text-surface hover:bg-brand-700 active:bg-ink-950 shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-700 ${sizeStyles} ${className}`;
 
   const icon = (
     <svg
-      className={`${iconSizes} transition-transform duration-200`}
+      className={iconSizes}
       fill="none"
       viewBox="0 0 24 24"
       strokeWidth="2.5"

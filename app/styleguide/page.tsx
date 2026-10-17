@@ -18,7 +18,7 @@ export default function StyleguidePage() {
     <main className="min-h-screen py-12">
       <SectionWrapper background="surface" className="border-b border-line">
         <EyebrowChip dotColor="teal">Design System Reference</EyebrowChip>
-        <h1 className="text-4xl md:text-5xl font-bold mt-4 heading-spark">
+        <h1 className="text-display font-bold mt-4 heading-spark">
           NICBEN Token & Component Styleguide
         </h1>
         <p className="text-text-600 mt-2 max-w-2xl">
@@ -28,25 +28,28 @@ export default function StyleguidePage() {
 
       {/* Typography & Spark Section */}
       <SectionWrapper background="tint-50">
-        <h2 className="text-2xl font-bold text-ink-950 mb-6 pb-2 border-b border-line">
+        <h2 className="text-h2 font-bold text-ink-950 mb-6 pb-2 border-b border-line">
           1. Typography & Spark Accent (`quito3.png`)
         </h2>
         <div className="space-y-6 bg-surface p-8 rounded-2xl border border-line">
           <div>
             <span className="text-xs text-text-600 block mb-1">Display Heading with .heading-spark</span>
-            <h1 className="text-4xl md:text-6xl font-bold heading-spark">
+            {/* A typography specimen, not a document heading: rendered as a <p>
+                with the display type token so the page keeps exactly one <h1>
+                (qa-report-pass2.md P1-4, "two h1s on /styleguide"). */}
+            <p className="text-display font-heading font-bold heading-spark">
               Institutional Strength in Texas
-            </h1>
+            </p>
           </div>
           <div>
             <span className="text-xs text-text-600 block mb-1">H2 Heading with .heading-spark</span>
-            <h2 className="text-3xl font-bold heading-spark">
+            <h2 className="text-h2 font-bold heading-spark">
               Three Disciplines. One Standard.
             </h2>
           </div>
           <div>
             <span className="text-xs text-text-600 block mb-1">H3 Heading</span>
-            <h3 className="text-xl font-semibold">
+            <h3 className="text-h3 font-semibold">
               Corporate Treasury & Capital Deployment
             </h3>
           </div>
@@ -64,7 +67,7 @@ export default function StyleguidePage() {
 
       {/* Buttons */}
       <SectionWrapper background="tint-50">
-        <h2 className="text-2xl font-bold text-ink-950 mb-6 pb-2 border-b border-line">
+        <h2 className="text-h2 font-bold text-ink-950 mb-6 pb-2 border-b border-line">
           2. Buttons & Arrows
         </h2>
         <div className="flex flex-wrap gap-4 items-center bg-surface p-8 rounded-2xl border border-line">
@@ -86,7 +89,7 @@ export default function StyleguidePage() {
 
       {/* Cards & Three Pillars Equal Weight Validation */}
       <SectionWrapper background="tint-50">
-        <h2 className="text-2xl font-bold text-ink-950 mb-6 pb-2 border-b border-line">
+        <h2 className="text-h2 font-bold text-ink-950 mb-6 pb-2 border-b border-line">
           3. Cards & Three-Pillar Equal Weight Grid
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">

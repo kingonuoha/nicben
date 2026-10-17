@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { Button } from "@/components/ui/Button";
 import { SectionWrapper } from "@/components/ui/SectionWrapper";
 import { ShapePanel } from "@/components/ui/ShapePanel";
@@ -10,16 +9,35 @@ export const metadata: Metadata = {
     "Three areas of work: project management and contracting, property improvement and maintenance, and corporate treasury and investments.",
 };
 
+/**
+ * Chamfer cut on the pillar image, per
+ * docs/design/nicben_what_we_do/code.html lines 47 / 153 / 171 (a flat 48px
+ * diagonal notch painted in the card surface colour). The build previously used
+ * a plain `rounded-xl` frame, which dropped the design's signature cut.
+ * Decorative only, so it is hidden from assistive technology.
+ */
+function Chamfer({ corner }: { corner: "tr" | "tl" }) {
+  return (
+    <span
+      aria-hidden="true"
+      className={`absolute top-0 h-12 w-12 bg-surface pointer-events-none ${
+        corner === "tr" ? "right-0 chamfer-tr" : "left-0 chamfer-tl"
+      }`}
+    />
+  );
+}
+
 export default function WhatWeDoPage() {
   return (
     <main className="min-h-screen">
       {/* 1. HERO SECTION */}
-      <SectionWrapper background="tint-50" className="pt-8 sm:pt-12 pb-16 lg:pb-20 relative overflow-hidden">
+      <SectionWrapper background="surface" className="pt-8 sm:pt-12 pb-16 lg:pb-20 relative overflow-hidden">
         {/* Faint architectural grid — the `texture-grid` utility is token-only
-            (--color-brand-700 lines on --space-8). R2a-3 replaced the raw hex
-            and the 40px literal that stood here. */}
+            and now paints at the documented ~4% (docs/04-design-system.md
+            section 5), so the extra `opacity-15` that used to dim it a second
+            time is gone. The design screen's hero also sits on white. */}
         <div
-          className="absolute inset-0 opacity-15 pointer-events-none texture-grid"
+          className="absolute inset-0 pointer-events-none texture-grid"
           aria-hidden="true"
         />
 
@@ -27,7 +45,7 @@ export default function WhatWeDoPage() {
           {/* R1-4/D-008: the section eyebrow chip carried an uncited label and was
               removed. docs/03-copy-deck.md:72 gives this page an H1 and an intro. */}
 
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-ink-950 mt-6 leading-tight heading-spark">
+          <h1 className="text-display font-extrabold tracking-tight text-ink-950 mt-6 leading-tight heading-spark">
             What we do
           </h1>
 
@@ -44,8 +62,19 @@ export default function WhatWeDoPage() {
         </div>
       </SectionWrapper>
 
-      {/* 2. THREE PILLAR FEATURE BLOCKS (Strict Equal Weight Rule from docs/design/what_we_do) */}
-      <SectionWrapper background="surface" className="border-t border-line">
+      {/*
+        2. THREE PILLAR FEATURE BLOCKS — D-001 equal recognition.
+
+        The build previously gave Pillar 3 the only `bg-ink-950` block and the
+        only `variant="accent"` CTA while
+        docs/design/nicben_what_we_do/code.html renders all three blocks white
+        (`bg-surface-container-lowest`) with an identical dark pill action.
+        D-001 forbids treatment that suggests a main pillar, so all three blocks
+        now share one surface treatment, one text treatment and one button
+        variant. Alternation is expressed through the image/content order only,
+        exactly as the design does it.
+      */}
+      <SectionWrapper background="tint-50" className="border-t border-line">
         <div className="space-y-12 lg:space-y-16">
           {/* PILLAR 01: Project Management & Contracting (visual left, content right) */}
           <div className="w-full bg-surface rounded-2xl border border-line shadow-card p-6 sm:p-8 lg:p-10 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
@@ -53,11 +82,12 @@ export default function WhatWeDoPage() {
                 docs/04-design-system.md section 8 forbids stock photography and
                 AI-generated people; no real work photograph exists yet, so the
                 frame keeps its shape and is filled with a token-only treatment. */}
-            <div className="lg:col-span-6 relative w-full">
+            <div className="lg:col-span-6 relative w-full rounded-xl overflow-hidden">
               <ShapePanel
                 className="w-full h-[320px] sm:h-[400px] shadow-sm"
                 motif="blueprint"
               />
+              <Chamfer corner="tr" />
               {/* R1-4/D-008: the two overlay badges that sat over this visual
                   carried uncited labels and were removed. */}
             </div>
@@ -72,7 +102,7 @@ export default function WhatWeDoPage() {
                   </span>
                 </div>
 
-                <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-ink-950 tracking-tight leading-snug">
+                <h2 className="text-h2 font-bold text-ink-950 tracking-tight leading-snug">
                   Project Management &amp; Contracting
                 </h2>
 
@@ -103,18 +133,18 @@ export default function WhatWeDoPage() {
           </div>
 
           {/* PILLAR 02: Property Improvement & Maintenance (content left, visual right) */}
-          <div className="w-full bg-tint-50 rounded-2xl border border-line shadow-card p-6 sm:p-8 lg:p-10 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+          <div className="w-full bg-surface rounded-2xl border border-line shadow-card p-6 sm:p-8 lg:p-10 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
             {/* Content Column (order 2 on mobile, order 1 on desktop) */}
             <div className="lg:col-span-6 order-2 lg:order-1 flex flex-col justify-between h-full space-y-6">
               <div className="space-y-4">
-                <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-surface rounded-pill border border-line">
+                <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-tint-100 rounded-pill">
                   <span className="w-1.5 h-1.5 rotate-45 bg-brand-700 shrink-0" aria-hidden="true" />
                   <span className="text-xs font-bold text-brand-700 tracking-widest uppercase">
                     Pillar 02
                   </span>
                 </div>
 
-                <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-ink-950 tracking-tight leading-snug">
+                <h2 className="text-h2 font-bold text-ink-950 tracking-tight leading-snug">
                   Property Improvement &amp; Maintenance
                 </h2>
 
@@ -139,28 +169,30 @@ export default function WhatWeDoPage() {
               </div>
             </div>
 
-            {/* Visual Column — R1-5: remote AI-generated image removed. */}
-            <div className="lg:col-span-6 order-1 lg:order-2 relative w-full">
+            {/* Visual Column — R1-5: remote AI-generated image removed.
+                The chamfer sits top-left here, as in the design screen. */}
+            <div className="lg:col-span-6 order-1 lg:order-2 relative w-full rounded-xl overflow-hidden">
               <ShapePanel
                 className="w-full h-[320px] sm:h-[400px] shadow-sm"
                 motif="drafting"
               />
+              <Chamfer corner="tl" />
               {/* R1-4/D-008: the two overlay badges that sat over this visual
                   carried uncited labels and were removed. */}
             </div>
           </div>
 
           {/* PILLAR 03: Corporate Treasury & Investments (visual left, content right) */}
-          <div className="w-full bg-ink-950 rounded-2xl border border-surface/10 shadow-float p-6 sm:p-8 lg:p-10 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center text-surface">
+          <div className="w-full bg-surface rounded-2xl border border-line shadow-card p-6 sm:p-8 lg:p-10 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
             {/* Visual Column — R1-5: remote AI-generated image removed. The panel
-                uses the dark tone so Pillar 3 keeps the same structural weight as
-                the other two blocks (D-001). */}
-            <div className="lg:col-span-6 relative w-full">
+                no longer uses the dark tone: D-001 parity means Pillar 3 reads
+                exactly like the other two blocks. */}
+            <div className="lg:col-span-6 relative w-full rounded-xl overflow-hidden">
               <ShapePanel
-                className="w-full h-[320px] sm:h-[400px] shadow-inner"
+                className="w-full h-[320px] sm:h-[400px] shadow-sm"
                 motif="arcs"
-                tone="dark"
               />
+              <Chamfer corner="tr" />
               {/* R1-4/D-008: the two overlay badges that sat over this visual
                   carried uncited labels and were removed. */}
             </div>
@@ -168,18 +200,18 @@ export default function WhatWeDoPage() {
             {/* Content Column */}
             <div className="lg:col-span-6 flex flex-col justify-between h-full space-y-6">
               <div className="space-y-4">
-                <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-surface/10 rounded-pill">
-                  <span className="w-1.5 h-1.5 rotate-45 bg-accent-300 shrink-0" aria-hidden="true" />
-                  <span className="text-xs font-bold text-accent-300 tracking-widest uppercase">
+                <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-tint-100 rounded-pill">
+                  <span className="w-1.5 h-1.5 rotate-45 bg-brand-700 shrink-0" aria-hidden="true" />
+                  <span className="text-xs font-bold text-brand-700 tracking-widest uppercase">
                     Pillar 03
                   </span>
                 </div>
 
-                <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-surface tracking-tight leading-snug">
+                <h2 className="text-h2 font-bold text-ink-950 tracking-tight leading-snug">
                   Corporate Treasury &amp; Investments
                 </h2>
 
-                <p className="text-base sm:text-lg text-text-on-dark/80 leading-relaxed font-normal">
+                <p className="text-base sm:text-lg text-text-600 leading-relaxed font-normal">
                   NICBEN manages its own corporate treasury and evaluates investment
                   opportunities using company-owned funds, solely for the
                   company&apos;s benefit.
@@ -195,7 +227,7 @@ export default function WhatWeDoPage() {
 
               <div className="pt-2">
                 <Button
-                  variant="accent"
+                  variant="primary"
                   withArrow
                   href="/what-we-do/treasury-investments"
                 >
@@ -218,13 +250,13 @@ export default function WhatWeDoPage() {
         before it can be restored.
       */}
 
-      {/* 4. CTA BAND */}
+      {/* 4. CTA BAND — the "Talk" script accent belongs to the shared CtaBand and
+          the homepage band only; docs/04-design-system.md section 3 caps script
+          headings at 2-3 site-wide, so this bespoke band renders the H2 plain. */}
       <SectionWrapper background="ink" className="border-t border-ink-950/40">
         <div className="max-w-3xl mx-auto text-center flex flex-col items-center">
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-surface tracking-tight leading-tight heading-spark">
-            Have a project or an enquiry?{" "}
-            <span className="font-script text-[1.18em] text-accent-300">Talk</span>{" "}
-            to us.
+          <h2 className="text-h2 font-extrabold text-surface tracking-tight leading-tight heading-spark">
+            Have a project or an enquiry? Talk to us.
           </h2>
           <p className="mt-4 text-base sm:text-lg text-text-on-dark/80">
             Reach us by email, phone or message.

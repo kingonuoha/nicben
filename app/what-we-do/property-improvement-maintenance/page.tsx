@@ -67,7 +67,7 @@ export default function PropertyImprovementMaintenancePage() {
         <div className="max-w-3xl">
           <EyebrowChip dotColor="teal">Pillar 02</EyebrowChip>
 
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-ink-950 mt-6 leading-tight heading-spark">
+          <h1 className="text-display font-extrabold tracking-tight text-ink-950 mt-6 leading-tight heading-spark">
             Property improvement &amp; maintenance
           </h1>
 
@@ -86,7 +86,7 @@ export default function PropertyImprovementMaintenancePage() {
               Discuss your property
             </Button>
             <Button variant="secondary" href="/what-we-do">
-              All Disciplines
+              What We Do
             </Button>
           </div>
         </div>
@@ -96,7 +96,7 @@ export default function PropertyImprovementMaintenancePage() {
       <SectionWrapper background="surface" className="border-t border-line">
         <div className="max-w-3xl mb-12">
           <EyebrowChip dotColor="sky">Services</EyebrowChip>
-          <h2 className="text-3xl sm:text-4xl font-bold text-ink-950 mt-4 tracking-tight">
+          <h2 className="text-h2 font-bold text-ink-950 mt-4 tracking-tight">
             Our trade services
           </h2>
         </div>
@@ -139,7 +139,7 @@ export default function PropertyImprovementMaintenancePage() {
             aria-hidden="true"
           />
           <div className="pl-2 sm:pl-3 max-w-3xl">
-            <h2 className="text-3xl sm:text-4xl font-bold text-ink-950 tracking-tight">
+            <h2 className="text-h2 font-bold text-ink-950 tracking-tight">
               Residential and commercial properties
             </h2>
             <p className="mt-4 text-base sm:text-lg text-text-600 leading-relaxed font-normal">
@@ -154,10 +154,8 @@ export default function PropertyImprovementMaintenancePage() {
       {/* 4. CTA BAND */}
       <SectionWrapper background="ink" className="border-t border-ink-950/40">
         <div className="max-w-3xl mx-auto text-center flex flex-col items-center">
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-surface tracking-tight leading-tight heading-spark">
-            Have a project or an enquiry?{" "}
-            <span className="font-script text-[1.18em] text-accent-300">Talk</span>{" "}
-            to us.
+          <h2 className="text-h2 font-extrabold text-surface tracking-tight leading-tight heading-spark">
+            Have a project or an enquiry? Talk to us.
           </h2>
           <p className="mt-4 text-base sm:text-lg text-text-on-dark/80">
             Reach us by email, phone or message.

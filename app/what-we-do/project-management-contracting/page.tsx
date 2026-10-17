@@ -12,27 +12,15 @@ export const metadata: Metadata = {
 };
 
 export default function ProjectManagementContractingPage() {
+  /* docs/03-copy-deck.md:85-89 supplies these scope TITLES only, marked
+     [CLIENT TO CONFIRM scope items]. Four invented descriptions previously
+     sat here — pure mock copy with zero deck hits. Removed per D-008/D-018.
+     Do not add descriptive copy until the deck supplies it. */
   const scopeItems = [
-    {
-      title: "Project coordination",
-      description:
-        "End-to-end scheduling and management of construction-related activities.",
-    },
-    {
-      title: "Engaging qualified contractors and technicians",
-      description:
-        "Sourcing and directing vetted, experienced specialists for on-site execution.",
-    },
-    {
-      title: "Scheduling and progress oversight",
-      description:
-        "Continuous supervision to ensure milestones are met on schedule and to specification.",
-    },
-    {
-      title: "Handover on completion",
-      description:
-        "Final walkthrough, quality verification, and handover once work is complete.",
-    },
+    "Project coordination",
+    "Engaging qualified contractors and technicians",
+    "Scheduling and progress oversight",
+    "Handover on completion",
   ];
 
   const steps = [
@@ -73,7 +61,7 @@ export default function ProjectManagementContractingPage() {
         <div className="max-w-3xl">
           <EyebrowChip dotColor="teal">Pillar 01</EyebrowChip>
 
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-ink-950 mt-6 leading-tight heading-spark">
+          <h1 className="text-display font-extrabold tracking-tight text-ink-950 mt-6 leading-tight heading-spark">
             Project management &amp; contracting
           </h1>
 
@@ -93,7 +81,7 @@ export default function ProjectManagementContractingPage() {
               Discuss a project
             </Button>
             <Button variant="secondary" href="/what-we-do">
-              All Disciplines
+              What We Do
             </Button>
           </div>
         </div>
@@ -103,23 +91,20 @@ export default function ProjectManagementContractingPage() {
       <SectionWrapper background="surface" className="border-t border-line">
         <div className="max-w-3xl mb-12">
           <EyebrowChip dotColor="sky">Scope</EyebrowChip>
-          <h2 className="text-3xl sm:text-4xl font-bold text-ink-950 mt-4 tracking-tight">
+          <h2 className="text-h2 font-bold text-ink-950 mt-4 tracking-tight">
             What this covers
           </h2>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
           {scopeItems.map((item, index) => (
-            <Card key={item.title} variant="surface" className="p-6 sm:p-8">
+            <Card key={item} variant="surface" className="p-6 sm:p-8">
               <span className="text-xs font-bold text-brand-700 uppercase tracking-wider">
                 0{index + 1}
               </span>
               <h3 className="text-xl font-bold text-ink-950 mt-2">
-                {item.title}
+                {item}
               </h3>
-              <p className="text-text-600 text-sm mt-2 leading-relaxed">
-                {item.description}
-              </p>
             </Card>
           ))}
         </div>
@@ -129,7 +114,7 @@ export default function ProjectManagementContractingPage() {
       <SectionWrapper background="tint-50" className="border-t border-line">
         <div className="max-w-3xl mb-12">
           <EyebrowChip dotColor="navy">Process</EyebrowChip>
-          <h2 className="text-3xl sm:text-4xl font-bold text-ink-950 mt-4 tracking-tight">
+          <h2 className="text-h2 font-bold text-ink-950 mt-4 tracking-tight">
             How a project runs
           </h2>
         </div>
@@ -154,10 +139,8 @@ export default function ProjectManagementContractingPage() {
       {/* 4. CTA BAND */}
       <SectionWrapper background="ink" className="border-t border-ink-950/40">
         <div className="max-w-3xl mx-auto text-center flex flex-col items-center">
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-surface tracking-tight leading-tight heading-spark">
-            Have a project or an enquiry?{" "}
-            <span className="font-script text-[1.18em] text-accent-300">Talk</span>{" "}
-            to us.
+          <h2 className="text-h2 font-extrabold text-surface tracking-tight leading-tight heading-spark">
+            Have a project or an enquiry? Talk to us.
           </h2>
           <p className="mt-4 text-base sm:text-lg text-text-on-dark/80">
             Reach us by email, phone or message.
