@@ -1,0 +1,44 @@
+# NicBen application source repository
+# Companion to the agentic repo (github.com/kingonuoha/project-agents, branch: nicben)
+# The agentic repo deliberately gitignores /web/ — this repository is that code's home.
+
+# Dependencies
+node_modules/
+.pnp
+.pnp.js
+
+# Next.js build output
+.next/
+out/
+build/
+dist/
+
+# TypeScript incremental build info
+*.tsbuildinfo
+tsconfig.tsbuildinfo
+
+# Environment — never commit real values; .env.example only
+.env
+.env*.local
+.env.production
+
+# Testing
+coverage/
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# OS artifacts
+.DS_Store
+Thumbs.db
+
+# Vercel
+.vercel
+
+# Editor
+.idea/
+.vscode/*
+!.vscode/extensions.json

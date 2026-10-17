@@ -1,0 +1,196 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Design Tokens for NICBEN Asset Holdings & Investments */
+:root {
+  --color-ink-950: #062B36;
+  --color-brand-700: #0A5F77;
+  --color-brand-500: #1B8AA6;
+  --color-accent-400: #3FB7F5;
+  --color-accent-300: #8AD4FA;
+  --color-tint-100: #E8F3F8;
+  --color-tint-50: #F4F9FB;
+  --color-surface: #FFFFFF;
+  --color-line: #D9E6EC;
+  --color-text-900: #0B1F27;
+  --color-text-600: #4A6470;
+  --color-text-on-dark: #E6F2F6;
+  --color-text-on-accent: #062B36;
+  --color-success: #1E9E62;
+  --color-error: #D64545;
+  --color-warning: #E0A02B;
+
+  --fontSize-display: clamp(2.5rem, 5vw + 1rem, 4.5rem);
+  --fontSize-h2: clamp(2rem, 3vw + 1rem, 3rem);
+  --fontSize-h3: clamp(1.25rem, 1vw + 1rem, 1.625rem);
+  --fontSize-body-lg: 1.125rem;
+  --fontSize-body: 1rem;
+  --fontSize-small: 0.875rem;
+  --fontSize-eyebrow: 0.8125rem;
+
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-12: 48px;
+  --space-16: 64px;
+  --space-24: 96px;
+  --space-32: 128px;
+
+  --layout-container: 1200px;
+  --layout-section-y: clamp(64px, 8vw, 128px);
+
+  --radius-sm: 12px;
+  --radius-md: 20px;
+  --radius-lg: 28px;
+  --radius-pill: 999px;
+
+  --shadow-card: 0 1px 2px rgba(6,43,54,.06), 0 8px 24px rgba(6,43,54,.06);
+  --shadow-float: 0 12px 40px rgba(6,43,54,.16);
+
+  --motion-ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --motion-ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --motion-dur-fast: 180ms;
+  --motion-dur-base: 450ms;
+  --motion-dur-slow: 800ms;
+  --motion-stagger: 80ms;
+  --motion-reveal-distance: 24px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --motion-dur-fast: 1ms;
+    --motion-dur-base: 1ms;
+    --motion-dur-slow: 1ms;
+    --motion-reveal-distance: 0px;
+  }
+}
+
+body {
+  color: var(--color-text-900);
+  background-color: var(--color-tint-50);
+  font-family: var(--font-body), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading), system-ui, sans-serif;
+  color: var(--color-ink-950);
+  letter-spacing: -0.02em;
+}
+
+/* Signature Heading Spark Accent (quito3.png) */
+.heading-spark {
+  display: inline-block;
+  position: relative;
+}
+
+.heading-spark::after {
+  content: "";
+  display: inline-block;
+  vertical-align: super;
+  width: 0.6em;
+  height: 0.6em;
+  margin-left: 0.15em;
+  background-image: url('/images/accents/quito3.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  pointer-events: none;
+}
+
+/* Card Notched Corner Mask & Clip Utility */
+.notched-corner {
+  position: relative;
+}
+
+@keyframes ticker {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+.animate-ticker {
+  display: flex;
+  width: max-content;
+  animation: ticker 32s linear infinite;
+}
+
+.animate-ticker:hover {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-ticker {
+    animation: none;
+    width: auto;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+}
+
+/* Blueprint textures — built from tokens only, never raw hex (D-003) */
+.texture-grid {
+  background-image:
+    linear-gradient(to right, var(--color-brand-700) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--color-brand-700) 1px, transparent 1px);
+  background-size: var(--space-8) var(--space-8);
+}
+
+.texture-grid-on-dark {
+  background-image:
+    linear-gradient(to right, var(--color-text-on-dark) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--color-text-on-dark) 1px, transparent 1px);
+  background-size: var(--space-8) var(--space-8);
+}
+
+.texture-dots {
+  background-image: radial-gradient(
+    var(--color-brand-500) 1px,
+    transparent 1px
+  );
+  background-size: var(--space-6) var(--space-6);
+}
+
+.texture-dots-on-dark {
+  background-image: radial-gradient(
+    var(--color-text-on-dark) 1px,
+    transparent 1px
+  );
+  background-size: var(--space-6) var(--space-6);
+}
+
+/* FAQ accordion panel: grid-rows height transition driven by motion tokens.
+   Under prefers-reduced-motion the tokens collapse to 1ms, so the panel
+   shows and hides instantly as required by docs/05-motion-spec.md section 5. */
+.accordion-panel {
+  display: grid;
+  grid-template-rows: 0fr;
+  opacity: 0;
+  transition:
+    grid-template-rows var(--motion-dur-base) var(--motion-ease-in-out),
+    opacity var(--motion-dur-base) var(--motion-ease-in-out);
+}
+
+.accordion-panel[data-open="true"] {
+  grid-template-rows: 1fr;
+  opacity: 1;
+}
+
+.accordion-panel > div {
+  min-height: 0;
+  overflow: hidden;
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
