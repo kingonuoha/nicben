@@ -430,9 +430,9 @@ export default function HomePage() {
       {/* 6. GEOGRAPHIC REACH (WHERE WE WORK) */}
       <SectionWrapper background="tint-50" className="border-t border-line">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
-          {/* Left Text */}
+          {/* Left Text — docs/03-copy-deck.md section 2 "Where we work" */}
           <div className="lg:col-span-5 space-y-6">
-            <EyebrowChip dotColor="sky">Geographic Reach</EyebrowChip>
+            <EyebrowChip dotColor="sky">Where we work</EyebrowChip>
 
             <h2 className="text-3xl sm:text-4xl font-bold text-ink-950 tracking-tight leading-tight">
               Based in Texas.<br />
@@ -443,41 +443,6 @@ export default function HomePage() {
               We are registered in Texas and serve clients in various U.S. states,
               based on project requests. The work takes place at your location.
             </p>
-
-            <div className="space-y-3 pt-2">
-              <div className="flex items-center gap-3 bg-surface p-3.5 rounded-xl border border-line shadow-card">
-                <div className="w-8 h-8 rounded-lg bg-tint-100 flex items-center justify-center text-brand-700 shrink-0">
-                  <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
-                  </svg>
-                </div>
-                <div>
-                  <span className="text-[11px] font-bold text-text-600 uppercase tracking-wider block">
-                    Corporate Seat
-                  </span>
-                  <span className="text-sm font-semibold text-ink-950">
-                    Raymondville, Willacy County, TX
-                  </span>
-                </div>
-              </div>
-
-              <div className="flex items-center gap-3 bg-surface p-3.5 rounded-xl border border-line shadow-card">
-                <div className="w-8 h-8 rounded-lg bg-tint-100 flex items-center justify-center text-brand-700 shrink-0">
-                  <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 16.875h3.375m0 0h3.375m-3.375 0V13.5m0 3.375v3.375M6 10.5h2.25a2.25 2.25 0 002.25-2.25V6a2.25 2.25 0 00-2.25-2.25H6A2.25 2.25 0 003.75 6v2.25A2.25 2.25 0 006 10.5zm0 9.75h2.25A2.25 2.25 0 0010.5 18v-2.25a2.25 2.25 0 00-2.25-2.25H6a2.25 2.25 0 00-2.25 2.25V18A2.25 2.25 0 006 20.25zm9.75-9.75H18a2.25 2.25 0 002.25-2.25V6A2.25 2.25 0 0018 3.75h-2.25A2.25 2.25 0 0013.5 6v2.25a2.25 2.25 0 002.25 2.25z" />
-                  </svg>
-                </div>
-                <div>
-                  <span className="text-[11px] font-bold text-text-600 uppercase tracking-wider block">
-                    Operations
-                  </span>
-                  <span className="text-sm font-semibold text-ink-950">
-                    Project-Driven Multi-State Reach
-                  </span>
-                </div>
-              </div>
-            </div>
 
             <div className="pt-2">
               <Link
@@ -490,77 +455,46 @@ export default function HomePage() {
             </div>
           </div>
 
-          {/* Right SVG Map Arc Diagram */}
+          {/* Right — abstract project-arc diagram.
+              R1-3: the previous version named four operating regions and carried
+              footprint and node-count labels lifted from the design mock. None of it
+              traces to the copy deck, which allows only "serve clients in various
+              U.S. states". The diagram is now decorative geometry, aria-hidden, with
+              no place names and no counts. */}
           <div className="lg:col-span-7 bg-surface p-6 sm:p-8 rounded-2xl border border-line shadow-card relative overflow-hidden">
-            <div className="flex items-center justify-between pb-4 border-b border-line mb-4">
-              <span className="text-xs font-bold text-text-600 tracking-wider uppercase">
-                Active Operational Footprint
-              </span>
-              <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-pill bg-tint-100 text-brand-700 text-xs font-semibold">
-                <span className="w-2 h-2 rounded-full bg-brand-500 animate-pulse" aria-hidden="true" />
-                Live Nodes
-              </span>
-            </div>
-
-            {/* Stylized US Hub Arc Diagram */}
             <div className="relative w-full h-[260px] sm:h-[280px] bg-tint-50 rounded-xl flex items-center justify-center p-4 overflow-hidden border border-line/60">
               <svg
                 className="w-full h-full text-brand-700"
                 fill="none"
                 viewBox="0 0 600 300"
                 xmlns="http://www.w3.org/2000/svg"
-                aria-label="Map illustration showing Texas headquarters and project connection arcs"
+                aria-hidden="true"
+                focusable="false"
               >
-                {/* Regional Grid lines */}
+                {/* Blueprint grid */}
                 <path d="M50 50h500M50 100h500M50 150h500M50 200h500M50 250h500" stroke="currentColor" strokeOpacity="0.08" strokeWidth="1" />
                 <path d="M100 30v240M200 30v240M300 30v240M400 30v240M500 30v240" stroke="currentColor" strokeOpacity="0.08" strokeWidth="1" />
 
-                {/* Texas Hub: 310, 235 */}
+                {/* Central hub */}
                 <g>
                   <circle cx="310" cy="235" fill="currentColor" fillOpacity="0.1" r="28" />
                   <circle cx="310" cy="235" fill="currentColor" fillOpacity="0.25" r="14" />
                   <circle cx="310" cy="235" fill="currentColor" r="6" />
-                  <text fill="#062B36" fontFamily="var(--font-heading)" fontSize="11" fontWeight="700" x="325" y="240">
-                    TX HEADQUARTERS
-                  </text>
-                  <text fill="#4A6470" fontFamily="var(--font-body)" fontSize="9" x="325" y="253">
-                    Raymondville Hub
-                  </text>
                 </g>
 
-                {/* Western Assets Node */}
+                {/* Unnamed connection arcs */}
                 <path d="M310 235 Q 220 180 160 160" stroke="currentColor" strokeDasharray="4 4" strokeOpacity="0.5" strokeWidth="2" />
                 <circle cx="160" cy="160" fill="currentColor" r="4" />
-                <text fill="#062B36" fontFamily="var(--font-body)" fontSize="10" fontWeight="600" x="110" y="150">
-                  Western Assets
-                </text>
 
-                {/* Midwest Corridor Node */}
                 <path d="M310 235 Q 350 150 400 110" stroke="currentColor" strokeDasharray="4 4" strokeOpacity="0.5" strokeWidth="2" />
                 <circle cx="400" cy="110" fill="currentColor" r="4" />
-                <text fill="#062B36" fontFamily="var(--font-body)" fontSize="10" fontWeight="600" x="412" y="114">
-                  Midwest Corridor
-                </text>
 
-                {/* Southeast Sites Node */}
                 <path d="M310 235 Q 410 230 470 210" stroke="currentColor" strokeDasharray="4 4" strokeOpacity="0.5" strokeWidth="2" />
                 <circle cx="470" cy="210" fill="currentColor" r="4" />
-                <text fill="#062B36" fontFamily="var(--font-body)" fontSize="10" fontWeight="600" x="440" y="235">
-                  Southeast Sites
-                </text>
 
-                {/* Mid-Atlantic Node */}
                 <path d="M310 235 Q 430 140 490 100" stroke="currentColor" strokeDasharray="4 4" strokeOpacity="0.5" strokeWidth="2" />
                 <circle cx="490" cy="100" fill="currentColor" r="4" />
-                <text fill="#062B36" fontFamily="var(--font-body)" fontSize="10" fontWeight="600" x="470" y="88">
-                  Mid-Atlantic
-                </text>
               </svg>
-            </div>
-
-            <div className="mt-4 flex items-center justify-between text-xs text-text-600">
-              <span>Mobilizing qualified trade teams nationwide</span>
-              <span className="font-semibold text-brand-700">Project-Based Mobility</span>
             </div>
           </div>
         </div>
