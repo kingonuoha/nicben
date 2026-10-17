@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Button } from "@/components/ui/Button";
 import { SectionWrapper } from "@/components/ui/SectionWrapper";
+import { ShapePanel } from "@/components/ui/ShapePanel";
 
 export const metadata: Metadata = {
   title: "What We Do | NICBEN",
@@ -51,16 +52,17 @@ export default function WhatWeDoPage() {
         <div className="space-y-12 lg:space-y-16">
           {/* PILLAR 01: Project Management & Contracting (Image Left, Content Right) */}
           <div className="w-full bg-surface rounded-2xl border border-line shadow-card p-6 sm:p-8 lg:p-10 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
-            {/* Visual Column */}
-            <div className="lg:col-span-6 relative w-full h-[320px] sm:h-[400px] rounded-xl overflow-hidden bg-tint-100 shadow-sm group">
-              <img
-                className="w-full h-full object-cover object-center transition-transform duration-700 ease-out group-hover:scale-105"
-                alt="Commercial construction site engineering review with technical blueprints and structural framing"
-                src="https://lh3.googleusercontent.com/aida-public/AB6AXuAKib9Qh2cYQ5lyHuy2OEx2ERxjNFhvbRtWDxqSQ1EHr9xKRpzSmjCdMHRlXuxNUeE0Eyog1RNIsf-ofD7zoXcVKEy9_8sSiwA1Ue1n88jqzv3yZQ1pMarffjIbCxbCygYRDOeBRrVWdiNSMm7-Q1g64U7lfS1OUOuXMr89dG0u8cYH1DVlCMIBaia3irfjsmIRol7vGeL0D9XVJoDnlPjwwzeFOhN29eWeav8fLCUrP_cdQ_N5s0MzUg"
+            {/* Visual Column — R1-5: the remote AI-generated image was removed.
+                docs/04-design-system.md section 8 forbids stock photography and
+                AI-generated people; no real work photograph exists yet, so the
+                frame keeps its shape and is filled with a token-only treatment. */}
+            <div className="lg:col-span-6 relative w-full">
+              <ShapePanel
+                className="w-full h-[320px] sm:h-[400px] shadow-sm"
+                motif="blueprint"
               />
               {/* R1-4/D-008: the two overlay badges that sat over this visual
-                  carried uncited labels and were removed. R1-5 replaces the
-                  photograph with a token-only treatment. */}
+                  carried uncited labels and were removed. */}
             </div>
 
             {/* Content Column */}
@@ -140,12 +142,11 @@ export default function WhatWeDoPage() {
               </div>
             </div>
 
-            {/* Visual Column (order 1 on mobile, order 2 on desktop) */}
-            <div className="lg:col-span-6 order-1 lg:order-2 relative w-full h-[320px] sm:h-[400px] rounded-xl overflow-hidden bg-tint-100 shadow-sm group">
-              <img
-                className="w-full h-full object-cover object-center transition-transform duration-700 ease-out group-hover:scale-105"
-                alt="Master mechanical plumbing and technical building finish installation in commercial facility"
-                src="https://lh3.googleusercontent.com/aida-public/AB6AXuD2mAjoiNAZmpJx76feysGjvCmg-iTUAsjL9k2Q_TZKEPSkgc32pztBzptT-jpPykAeqeNRv3ag3inXDCHXeZGnodb14_19A0zD4oy1Bhxjh_lLd2wJdTFvos1KyEimc2COmp_hMiSDQQTNBHjppICxoCDGu2jaXUJkVY0u2g-eNVQ8_Xpe4fiU4jTIgp_MNt2WxaWWHikZX4lkKPvQpOex-l2tGHEReSusC9LFelTXHl2WBXLS55p6uA"
+            {/* Visual Column — R1-5: remote AI-generated image removed. */}
+            <div className="lg:col-span-6 order-1 lg:order-2 relative w-full">
+              <ShapePanel
+                className="w-full h-[320px] sm:h-[400px] shadow-sm"
+                motif="drafting"
               />
               {/* R1-4/D-008: the two overlay badges that sat over this visual
                   carried uncited labels and were removed. */}
@@ -154,12 +155,14 @@ export default function WhatWeDoPage() {
 
           {/* PILLAR 03: Corporate Treasury & Investments (Image Left, Content Right) */}
           <div className="w-full bg-ink-950 rounded-2xl border border-surface/10 shadow-float p-6 sm:p-8 lg:p-10 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center text-surface">
-            {/* Visual Column */}
-            <div className="lg:col-span-6 relative w-full h-[320px] sm:h-[400px] rounded-xl overflow-hidden bg-ink-950 shadow-inner group">
-              <img
-                className="w-full h-full object-cover object-center transition-transform duration-700 ease-out group-hover:scale-105 opacity-90"
-                alt="Institutional boardroom with minimalist stone accents and structural glass overlooking metro district"
-                src="https://lh3.googleusercontent.com/aida-public/AB6AXuBCHfur9FyhSiu0MYYoL1LyRC99sfYJroGxdGjnkKmKliv1wGq0AL8nS-pjj6GRuYhLytmI7jsjAE7LU1be1Uh-k6FTzTRc3oFndm2rSg7tOFk6tuxCTB4ToBxNI-Kq9tItzv4PP5kOyOYe-Yx0LJzLlwSLBgteVpuG85JVjdtyhB1qnKYkhXdZe-h6sQoq9cj6pbSze2lchC357oKaZPlbjlHzB7q5Hbaynt3abcS8logwi58Ib3URKA"
+            {/* Visual Column — R1-5: remote AI-generated image removed. The panel
+                uses the dark tone so Pillar 3 keeps the same structural weight as
+                the other two blocks (D-001). */}
+            <div className="lg:col-span-6 relative w-full">
+              <ShapePanel
+                className="w-full h-[320px] sm:h-[400px] shadow-inner"
+                motif="arcs"
+                tone="dark"
               />
               {/* R1-4/D-008: the two overlay badges that sat over this visual
                   carried uncited labels and were removed. */}

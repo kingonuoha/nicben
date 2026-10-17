@@ -5,6 +5,7 @@ import { Card } from "@/components/ui/Card";
 import { EyebrowChip } from "@/components/ui/EyebrowChip";
 import { CornerArrowButton } from "@/components/ui/CornerArrowButton";
 import { SectionWrapper } from "@/components/ui/SectionWrapper";
+import { ShapePanel } from "@/components/ui/ShapePanel";
 import { TickerBand } from "@/components/ui/TickerBand";
 import { HeroCluster } from "@/components/ui/HeroCluster";
 
@@ -239,15 +240,13 @@ export default function HomePage() {
           {/* Right Column: 2 Images and 2 Cards Diagonally (Matching design HTML lines 304-328) */}
           <div className="lg:col-span-6 relative">
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              {/* Column 1: Image 1 + Dark 100% Card */}
+              {/* Column 1: shape panel + token colour block */}
               <div className="space-y-4">
-                <div className="rounded-xl overflow-hidden shadow-card h-52 bg-tint-100 border border-line">
-                  <img
-                    className="w-full h-full object-cover"
-                    alt="Interior architectural inspection in progress with structural engineer reviewing conduits"
-                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuAFy9O74SZBBl2xSiEqvqBMhLsys1SigYUYRuNqTe4nzLgUi14IyHYksydzslY3AzW_wbNakgj217uGdgeWuFGcVsQXKDt-kel7-7XhhecdzJvQQ8SyDEeAhBUGfZwyG0iOUlEgD4cAnptoSBOKgOKdQT_scKhmNO1fzw64YeuawDW6VX0YBMke3t07fFByS2VW1oIdzNKajZnZ5XfH4trjM4l8Miwf6MLLJGR9ye5fSC1Pdxokpp9yuw"
-                  />
-                </div>
+                {/* R1-5: a remote AI-generated image stood here. docs/04-design-system.md
+                    section 8 forbids stock photography and AI-generated people, and no
+                    real work photograph is available yet, so the frame is filled with a
+                    token-only treatment instead of a substitute image. */}
+                <ShapePanel className="h-52 shadow-card" motif="blueprint" />
                 {/* R1-2: the fabricated "100%" metric card is removed. No number is
                     substituted — docs/08-qa-checklist.md forbids unconfirmed statistics.
                     A token-only colour block keeps the cluster's visual rhythm. */}
@@ -257,15 +256,10 @@ export default function HomePage() {
                 />
               </div>
 
-              {/* Column 2: image frame + (R1-4 removed card) (Diagonally offset with sm:pt-6) */}
+              {/* Column 2: shape panel (diagonally offset with sm:pt-6) */}
               <div className="space-y-4 sm:pt-6">
-                <div className="rounded-xl overflow-hidden shadow-card h-52 bg-tint-100 border border-line">
-                  <img
-                    className="w-full h-full object-cover"
-                    alt="Architect and mechanical contractor examining schematics on a construction site"
-                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuDMsUJtnNopXzrfjuOgU6ED-c7PZE9IysO_XhyNG4Gk-j0lzAe0ZW8i-lzHUyEyZWLQKDylvLulKPm1RC6cGyfU0KeNSMyVmtVfUkUwWUWP_hPSen4--KOCBhBNIS29gWQvLmMXTDgJaL4_utwBNWqmKSkoAgh-t_4q-xUtBLST5fcgZKvEkp_Oi5tSjpc6UOoI9Dqo8nbaXKadrynEqK68zZxUS3MVL0eqnS72YXRgwPxsMYY6fyDOkA"
-                  />
-                </div>
+                {/* R1-5: remote AI-generated image removed; token-only treatment used. */}
+                <ShapePanel className="h-52 shadow-card" motif="arcs" />
               </div>
             </div>
           </div>
