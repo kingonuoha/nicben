@@ -15,14 +15,11 @@ export default function WhatWeDoPage() {
     <main className="min-h-screen">
       {/* 1. HERO SECTION */}
       <SectionWrapper background="tint-50" className="pt-8 sm:pt-12 pb-16 lg:pb-20 relative overflow-hidden">
-        {/* Architectural drafting grid background accent */}
+        {/* Faint architectural grid — the `texture-grid` utility is token-only
+            (--color-brand-700 lines on --space-8). R2a-3 replaced the raw hex
+            and the 40px literal that stood here. */}
         <div
-          className="absolute inset-0 opacity-15 pointer-events-none"
-          style={{
-            backgroundImage:
-              "linear-gradient(to right, #0A5F77 1px, transparent 1px), linear-gradient(to bottom, #0A5F77 1px, transparent 1px)",
-            backgroundSize: "40px 40px",
-          }}
+          className="absolute inset-0 opacity-15 pointer-events-none texture-grid"
           aria-hidden="true"
         />
 
