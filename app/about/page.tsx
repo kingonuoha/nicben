@@ -6,6 +6,7 @@ import { CornerArrowButton } from "@/components/ui/CornerArrowButton";
 import { CtaBand } from "@/components/ui/CtaBand";
 import { EyebrowChip } from "@/components/ui/EyebrowChip";
 import { SectionWrapper } from "@/components/ui/SectionWrapper";
+import { ShapePanel } from "@/components/ui/ShapePanel";
 
 export const metadata: Metadata = {
   title: "About NICBEN",
@@ -41,13 +42,11 @@ export default function AboutPage() {
   return (
     <main className="min-h-screen">
       {/* 1. INTRO — WHO NICBEN IS
-          ⚠️ OUT-OF-CONTRACT REPAIR (Phase 04): `app/layout.tsx` lost its global
-          `pt-20` header clearance while this phase was in flight, so this hero
-          pads itself clear of the fixed pill header. Revert to `pt-8 sm:pt-12`
-          if global clearance is restored. */}
+          Header clearance is global (`app/layout.tsx`), so this hero keeps the
+          standard pt-8 sm:pt-12 section rhythm. */}
       <SectionWrapper
         background="tint-50"
-        className="pt-28 sm:pt-32 pb-16 lg:pb-20"
+        className="pt-8 sm:pt-12 pb-16 lg:pb-20"
       >
         <nav aria-label="Breadcrumb" className="mb-6">
           <ol className="flex items-center gap-2 text-xs font-semibold text-text-600">
@@ -177,14 +176,20 @@ export default function AboutPage() {
           </div>
 
           <div className="lg:col-span-5 relative">
-            <div className="relative overflow-hidden rounded-lg border border-line shadow-card bg-tint-100">
-              <img
-                className="w-full h-96 object-cover"
-                alt="Construction site with engineers reviewing structural framing"
-                src="https://lh3.googleusercontent.com/aida-public/AB6AXuB42HONn_ZUkNnSVOW5DJijMbv_4_S_AbEvo40d5QWDbGz1NeCxhj_0gOGU8IwIfj1X6eRWJItgKT41IoGng04eWLlX8fkGPF1SC5DOor74Y65z2LSCMTTu4na-8fxxfrBRuZnNRdymGhG8RXBkg5gGJvbwGRtRc_lHp8eVh_Dq-5-rlgEa0_gdN85eym5PnU3yxugYq9adawmFJP-4EhfHHAmgYyNLWFgB2X13JIbxwfG5Vwgl9g7pIg"
+            {/* R2a-2: this frame held the last remote image host in the codebase —
+                the same AI-generated-imagery class R1-5 removed everywhere
+                else. docs/04-design-system.md section 8 forbids stock
+                photography and AI-generated people, and no real work
+                photograph exists yet, so the frame keeps its composition
+                (h-96, overlay gradient, floating metadata bar) and is filled with
+                the token-only ShapePanel. Decorative, so it carries no alt text. */}
+            <div className="relative">
+              <ShapePanel
+                className="w-full h-96 shadow-card"
+                motif="drafting"
               />
               <div
-                className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-ink-950/80 to-transparent pointer-events-none"
+                className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-ink-950/80 to-transparent rounded-b-xl pointer-events-none"
                 aria-hidden="true"
               />
               <div className="absolute bottom-4 left-4 right-4 rounded-md bg-surface/95 backdrop-blur-md border border-line shadow-float p-4 flex items-center justify-between gap-3">
