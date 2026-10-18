@@ -53,11 +53,11 @@ export default function ServiceAreasPage() {
         className="pt-8 sm:pt-12 pb-16 lg:pb-20"
       >
         <nav aria-label="Breadcrumb" className="mb-6">
-          <ol className="flex items-center gap-2 text-xs font-semibold text-text-600">
+          <ol className="flex items-center gap-2 text-eyebrow font-semibold text-text-600">
             <li>
               <Link
                 href="/"
-                className="hover:text-ink-950 transition-colors rounded-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-700"
+                className="hover:text-ink-950 transition-colors duration-[var(--motion-dur-fast)] rounded-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-700"
               >
                 Home
               </Link>
@@ -73,7 +73,7 @@ export default function ServiceAreasPage() {
           <div className="lg:col-span-8">
             <EyebrowChip dotColor="sky">Geographic reach</EyebrowChip>
 
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-ink-950 mt-6 leading-tight heading-spark">
+            <h1 className="text-display font-extrabold tracking-tight text-ink-950 mt-6 leading-tight heading-spark">
               Where we work
             </h1>
 
@@ -170,7 +170,7 @@ export default function ServiceAreasPage() {
               </span>
             </div>
 
-            <div className="relative">
+            <div className="relative rounded-md bg-surface/5 border border-surface/20 px-4 py-8 sm:py-10">
               <svg
                 className="w-full max-w-3xl mx-auto h-auto"
                 fill="none"
@@ -263,7 +263,7 @@ export default function ServiceAreasPage() {
                 />
               </svg>
 
-              <div className="absolute bottom-0 left-1/2 -translate-x-1/2 rounded-pill bg-ink-950/90 backdrop-blur-md border border-surface/20 px-4 py-2 shadow-float flex items-center gap-2 w-max max-w-full">
+              <div className="absolute bottom-4 left-1/2 -translate-x-1/2 rounded-pill bg-ink-950/90 backdrop-blur-md border border-surface/20 px-4 py-2 shadow-float flex items-center gap-2 w-max max-w-full">
                 <span
                   className="w-2.5 h-2.5 rounded-full bg-accent-400 shrink-0"
                   aria-hidden="true"
@@ -309,7 +309,7 @@ export default function ServiceAreasPage() {
       <SectionWrapper background="surface" className="border-t border-line">
         <div className="max-w-3xl mb-12">
           <EyebrowChip dotColor="teal">How we operate</EyebrowChip>
-          <h2 className="text-3xl sm:text-4xl font-bold text-ink-950 mt-4 tracking-tight">
+          <h2 className="text-h2 font-bold text-ink-950 mt-4 tracking-tight">
             Based in Texas. Working where the project is.
           </h2>
         </div>
@@ -337,7 +337,7 @@ export default function ServiceAreasPage() {
                       />
                     </svg>
                   </span>
-                  <h3 className="text-xl font-bold text-ink-950 tracking-tight">
+                  <h3 className="text-h3 font-bold text-ink-950 tracking-tight">
                     Registered office
                   </h3>
                 </div>
@@ -424,7 +424,7 @@ export default function ServiceAreasPage() {
                       />
                     </svg>
                   </span>
-                  <h3 className="text-xl font-bold text-ink-950 tracking-tight">
+                  <h3 className="text-h3 font-bold text-ink-950 tracking-tight">
                     Work takes place at the client&apos;s location
                   </h3>
                 </div>
@@ -484,7 +484,7 @@ export default function ServiceAreasPage() {
       <SectionWrapper background="tint-50" className="border-t border-line">
         <div className="max-w-3xl mb-12">
           <EyebrowChip dotColor="sky">How we operate</EyebrowChip>
-          <h2 className="text-3xl sm:text-4xl font-bold text-ink-950 mt-4 tracking-tight">
+          <h2 className="text-h2 font-bold text-ink-950 mt-4 tracking-tight">
             Serving clients in various U.S. states, based on project requests.
           </h2>
         </div>
@@ -513,7 +513,7 @@ export default function ServiceAreasPage() {
                       {item.num}
                     </span>
                   </div>
-                  <h3 className={`text-xl font-bold leading-snug ${titleClass}`}>
+                  <h3 className={`text-h3 font-bold leading-snug ${titleClass}`}>
                     {item.title}
                   </h3>
                   <p className={`text-sm leading-relaxed mt-1 ${bodyClass}`}>
@@ -548,7 +548,7 @@ export default function ServiceAreasPage() {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
             <div className="lg:col-span-8">
               <EyebrowChip dotColor="teal">Ask us</EyebrowChip>
-              <h2 className="text-2xl sm:text-3xl font-bold text-ink-950 tracking-tight mt-4">
+              <h2 className="text-h2 font-bold text-ink-950 tracking-tight mt-4">
                 Not sure we cover your area? Ask us.
               </h2>
               <p className="mt-3 text-base text-text-600 leading-relaxed max-w-2xl">

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { LegalTocLayout } from "@/components/ui/LegalTocLayout";
 import { SectionWrapper } from "@/components/ui/SectionWrapper";
 
@@ -33,8 +34,25 @@ export default function PrivacyPage() {
         background="tint-50"
         className="pt-8 sm:pt-12 pb-16 lg:pb-24"
       >
+        <nav aria-label="Breadcrumb" className="mb-6">
+          <ol className="flex items-center gap-2 text-eyebrow font-semibold text-text-600">
+            <li>
+              <Link
+                href="/"
+                className="hover:text-ink-950 transition-colors duration-[var(--motion-dur-fast)] rounded-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-700"
+              >
+                Home
+              </Link>
+            </li>
+            <li aria-hidden="true">/</li>
+            <li className="text-ink-950" aria-current="page">
+              Privacy Policy
+            </li>
+          </ol>
+        </nav>
+
         <div className="max-w-3xl mb-12 sm:mb-16">
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-ink-950 leading-tight heading-spark">
+          <h1 className="text-display font-extrabold tracking-tight text-ink-950 leading-tight heading-spark">
             Privacy Policy
           </h1>
         </div>

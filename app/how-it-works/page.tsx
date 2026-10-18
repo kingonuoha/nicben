@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
+import Link from "next/link";
 import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
 import { CtaBand } from "@/components/ui/CtaBand";
@@ -96,8 +97,25 @@ export default function HowItWorksPage() {
         background="tint-50"
         className="pt-8 sm:pt-12 pb-16 lg:pb-20"
       >
+        <nav aria-label="Breadcrumb" className="mb-6">
+          <ol className="flex items-center gap-2 text-eyebrow font-semibold text-text-600">
+            <li>
+              <Link
+                href="/"
+                className="hover:text-ink-950 transition-colors duration-[var(--motion-dur-fast)] rounded-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-700"
+              >
+                Home
+              </Link>
+            </li>
+            <li aria-hidden="true">/</li>
+            <li className="text-ink-950" aria-current="page">
+              How it works
+            </li>
+          </ol>
+        </nav>
+
         <div className="max-w-3xl">
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-ink-950 leading-tight heading-spark">
+          <h1 className="text-display font-extrabold tracking-tight text-ink-950 leading-tight heading-spark">
             How it works
           </h1>
           <p className="mt-6 text-lg sm:text-xl text-text-600 leading-relaxed font-normal">
@@ -109,7 +127,7 @@ export default function HowItWorksPage() {
       <SectionWrapper background="surface" className="border-t border-line">
         <div className="max-w-2xl mb-12 sm:mb-16">
           <EyebrowChip dotColor="teal">How it works</EyebrowChip>
-          <h2 className="text-3xl sm:text-4xl font-bold text-ink-950 mt-4 tracking-tight">
+          <h2 className="text-h2 font-bold text-ink-950 mt-4 tracking-tight">
             From enquiry to completion
           </h2>
         </div>
@@ -122,7 +140,7 @@ export default function HowItWorksPage() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-start">
           <div className="lg:col-span-5 space-y-5">
             <EyebrowChip dotColor="sky">How it works</EyebrowChip>
-            <h2 className="text-3xl sm:text-4xl font-bold text-ink-950 tracking-tight">
+            <h2 className="text-h2 font-bold text-ink-950 tracking-tight">
               What to prepare
             </h2>
             <p className="text-base sm:text-lg text-text-600 leading-relaxed font-normal">
@@ -164,7 +182,7 @@ export default function HowItWorksPage() {
       <SectionWrapper background="surface" className="border-t border-line">
         <div className="max-w-2xl mb-10">
           <EyebrowChip dotColor="teal">FAQ</EyebrowChip>
-          <h2 className="text-3xl sm:text-4xl font-bold text-ink-950 mt-4 tracking-tight">
+          <h2 className="text-h2 font-bold text-ink-950 mt-4 tracking-tight">
             FAQ
           </h2>
         </div>
@@ -172,7 +190,7 @@ export default function HowItWorksPage() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8 items-stretch">
           <Card variant="surface" className="flex flex-col justify-between">
             <div className="space-y-3">
-              <h3 className="text-lg font-bold text-ink-950 leading-snug">
+              <h3 className="text-h3 font-bold text-ink-950 leading-snug">
                 Do you do the work yourselves?
               </h3>
               <p className="text-sm text-text-600 leading-relaxed">
@@ -184,7 +202,7 @@ export default function HowItWorksPage() {
 
           <Card variant="tint" className="flex flex-col justify-between">
             <div className="space-y-3">
-              <h3 className="text-lg font-bold text-ink-950 leading-snug">
+              <h3 className="text-h3 font-bold text-ink-950 leading-snug">
                 How do I start a project or ask for a quote?
               </h3>
               <p className="text-sm text-text-600 leading-relaxed">

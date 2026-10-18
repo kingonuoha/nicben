@@ -129,14 +129,22 @@ export default function FaqPage() {
           standard pt-8 sm:pt-12 section rhythm. */}
       <SectionWrapper
         background="tint-50"
-        className="pt-8 sm:pt-12 pb-16 lg:pb-20"
+        className="relative overflow-hidden pt-8 sm:pt-12 pb-16 lg:pb-20"
       >
-        <nav aria-label="Breadcrumb" className="mb-6">
-          <ol className="flex items-center gap-2 text-xs font-semibold text-text-600">
+        {/* Architectural grid backdrop from the design screen, rendered from the
+            shared token texture at the documented faint strength
+            (`docs/04-design-system.md` section 5). Decorative. */}
+        <div
+          className="absolute inset-0 opacity-5 texture-grid pointer-events-none"
+          aria-hidden="true"
+        />
+
+        <nav aria-label="Breadcrumb" className="relative z-10 mb-6">
+          <ol className="flex items-center gap-2 text-eyebrow font-semibold text-text-600">
             <li>
               <Link
                 href="/"
-                className="hover:text-ink-950 transition-colors rounded-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-700"
+                className="hover:text-ink-950 transition-colors duration-[var(--motion-dur-fast)] rounded-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-700"
               >
                 Home
               </Link>
@@ -148,9 +156,13 @@ export default function FaqPage() {
           </ol>
         </nav>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-end">
+        <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-end">
           <div className="lg:col-span-8">
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-ink-950 leading-tight heading-spark">
+            <EyebrowChip dotColor="sky" className="mb-6">
+              FAQ
+            </EyebrowChip>
+
+            <h1 className="text-display font-extrabold tracking-tight text-ink-950 leading-tight heading-spark">
               FAQ
             </h1>
             <p className="mt-6 text-lg sm:text-xl text-text-600 leading-relaxed font-normal max-w-2xl">

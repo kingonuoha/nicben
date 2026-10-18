@@ -25,21 +25,21 @@ export const LegalTocLayout: React.FC<LegalTocLayoutProps> = ({ sections }) => {
         className="lg:col-span-4 lg:sticky lg:top-28"
       >
         <div className="rounded-md bg-surface border border-line shadow-card p-6">
-          <span className="text-xs font-bold text-brand-700 uppercase tracking-wider">
+          <span className="text-eyebrow font-bold text-brand-700 uppercase tracking-wider">
             Contents
           </span>
           <ol className="mt-4 space-y-2.5">
             {sections.map((section, index) => (
               <li key={section.id} className="flex items-baseline gap-2">
                 <span
-                  className="text-xs font-semibold text-text-600 tabular-nums"
+                  className="text-eyebrow font-semibold text-text-600 tabular-nums"
                   aria-hidden="true"
                 >
                   {index + 1}.
                 </span>
                 <a
                   href={`#${section.id}`}
-                  className="text-sm text-text-600 hover:text-ink-950 transition-colors rounded-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-700"
+                  className="text-sm text-text-600 hover:text-ink-950 transition-colors duration-[var(--motion-dur-fast)] rounded-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-700"
                 >
                   {section.heading}
                 </a>
@@ -59,7 +59,7 @@ export const LegalTocLayout: React.FC<LegalTocLayoutProps> = ({ sections }) => {
           >
             <h2
               id={`${section.id}-heading`}
-              className="text-xl sm:text-2xl font-bold text-ink-950 tracking-tight"
+              className="text-h3 font-bold text-ink-950 tracking-tight"
             >
               {section.heading}
             </h2>
