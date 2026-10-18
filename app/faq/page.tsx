@@ -11,21 +11,6 @@ export const metadata: Metadata = {
     "Answers about what NICBEN does, how projects start, and how the company operates.",
 };
 
-const facts = [
-  {
-    title: "Registered in Texas",
-    detail: "Privately owned limited liability company",
-  },
-  {
-    title: "Company-owned funds",
-    detail: "No external investment solicitation",
-  },
-  {
-    title: "Project-based work",
-    detail: "Qualified contractors and technicians",
-  },
-];
-
 const jumpLinks = [
   { label: "About the company", href: "#faq-group-about" },
   { label: "Projects and quotes", href: "#faq-group-projects" },
@@ -93,9 +78,9 @@ const groups = [
               aria-hidden="true"
             />
             <div className="space-y-1.5">
-              <span className="text-xs font-bold uppercase tracking-wider text-brand-700">
-                Informational only
-              </span>
+              {/* R-L: the `Informational only` label was deleted — no deck line
+                  supplies an eyebrow for the notice box, and deck:117 already
+                  opens with "This page is for information only." */}
               <p className="text-sm font-semibold text-ink-950 leading-relaxed">
                 This page is for information only. It is not an offer, invitation
                 or solicitation to invest, and NICBEN does not offer investment
@@ -132,10 +117,11 @@ export default function FaqPage() {
         className="relative overflow-hidden pt-8 sm:pt-12 pb-16 lg:pb-20"
       >
         {/* Architectural grid backdrop from the design screen, rendered from the
-            shared token texture at the documented faint strength
-            (`docs/04-design-system.md` section 5). Decorative. */}
+            shared token texture. `.texture-grid` already bakes the documented
+            ~4% alpha (`docs/04-design-system.md` section 5), so no caller-side
+            `opacity-*` is applied — stacking one double-dimmed it to 0.2%. */}
         <div
-          className="absolute inset-0 opacity-5 texture-grid pointer-events-none"
+          className="absolute inset-0 texture-grid pointer-events-none"
           aria-hidden="true"
         />
 
@@ -205,67 +191,29 @@ export default function FaqPage() {
                 className="w-2 h-2 rounded-full bg-brand-500"
                 aria-hidden="true"
               />
-              Project-based work
+              {/* R-L: `Project-based work` → deck:44 fragment `Project-based`. */}
+              Project-based
             </div>
           </div>
         </div>
       </SectionWrapper>
 
-      {/* 2. QUICK FACTS STRIP */}
-      <SectionWrapper background="surface" className="border-t border-line">
-        <ul className="grid grid-cols-1 md:grid-cols-3 gap-4 lg:gap-6">
-          {facts.map((fact) => (
-            <li
-              key={fact.title}
-              className="flex items-center gap-4 rounded-md bg-surface border border-line shadow-card p-4"
-            >
-              <span
-                className="w-10 h-10 rounded-md bg-tint-100 text-brand-700 flex items-center justify-center shrink-0"
-                aria-hidden="true"
-              >
-                <svg
-                  className="w-5 h-5"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth="1.5"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M9 12.75L11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 01-1.043 3.296 3.745 3.745 0 01-3.296 1.043A3.745 3.745 0 0112 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 01-3.296-1.043 3.745 3.745 0 01-1.043-3.296A3.745 3.745 0 013 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 011.043-3.296 3.746 3.746 0 013.296-1.043A3.746 3.746 0 0112 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 013.296 1.043 3.746 3.746 0 011.043 3.296A3.745 3.745 0 0121 12z"
-                  />
-                </svg>
-              </span>
-              <div className="min-w-0">
-                <p className="font-heading text-base font-bold text-ink-950">
-                  {fact.title}
-                </p>
-                <p className="text-sm text-text-600">{fact.detail}</p>
-              </div>
-            </li>
-          ))}
-        </ul>
-      </SectionWrapper>
-
-      {/* 3. GROUPS */}
+      {/* 2. GROUPS
+          The uncited "quick facts" strip that stood here is deleted in full.
+          docs/03-copy-deck.md supplies no facts strip for `/faq`, and
+          docs/01-sitemap-wireframes.md:103-105 defines the page as grouped
+          accordions plus a contact CTA. Its `No external investment
+          solicitation` detail was an unapproved investment-boundary assertion
+          (D-002 class), and the other four strings had no deck line either. */}
       <SectionWrapper background="tint-50" className="border-t border-line">
         <div className="mb-12">
           <EyebrowChip dotColor="teal">FAQ</EyebrowChip>
           <nav aria-label="FAQ topics" className="mt-6">
             <ul className="flex flex-wrap items-center gap-2 rounded-md bg-surface border border-line p-2 w-fit max-w-full shadow-card">
-              <li>
-                <a
-                  href="#faq-group-about"
-                  className="inline-flex items-center gap-2 px-4 py-2 rounded-sm bg-ink-950 text-surface text-sm font-semibold focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-700"
-                >
-                  <span
-                    className="w-1.5 h-1.5 rounded-full bg-accent-400"
-                    aria-hidden="true"
-                  />
-                  All questions
-                </a>
-              </li>
+              {/* R-L: the leading `All questions` chip was deleted — no deck line
+                  supplies it, and its target (`#faq-group-about`) was already
+                  carried by the cited `About the company` (deck:160) chip
+                  directly beneath it. */}
               {jumpLinks.map((link) => (
                 <li key={link.href}>
                   <a

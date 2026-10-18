@@ -224,12 +224,15 @@ export default function AboutPage() {
                     aria-hidden="true"
                   />
                   <div className="min-w-0">
+                    {/* R-L: `Project-based work` → deck:44 (`Project-based`), and
+                        the truncated deck:127 clause that stood beneath it is
+                        replaced with deck:152 verbatim. Deck copy is rendered
+                        exactly, never trimmed. */}
                     <span className="block text-xs font-bold text-ink-950 uppercase tracking-wider">
-                      Project-based work
+                      Project-based
                     </span>
                     <span className="block text-xs text-text-600">
-                      Qualified contractors and technicians, at the client&apos;s
-                      location
+                      Work takes place at the client&apos;s location.
                     </span>
                   </div>
                 </div>
@@ -305,9 +308,12 @@ export default function AboutPage() {
                 <h2 className="text-h3 font-bold text-ink-950">
                   Registered details
                 </h2>
-                <p className="text-sm text-text-600">
-                  Legal name, structure, state of registration and address.
-                </p>
+                {/* R-L: the mock's sub-heading
+                    (`.../about/code.html:130`, "Verified State Registration &
+                    Commercial Filing Record") had no deck line, and the
+                    descriptor that replaced it was not deck-verbatim either.
+                    `docs/03-copy-deck.md:128` supplies this card's labels only,
+                    so the descriptor is deleted rather than reworded. */}
               </div>
             </div>
             <span className="inline-flex items-center gap-2 px-3 py-1 rounded-pill bg-surface border border-line text-xs font-semibold text-text-600">
@@ -329,7 +335,6 @@ export default function AboutPage() {
                   NICBEN Asset Holdings &amp; Investments LLC
                 </dd>
               </div>
-              <span className="text-xs text-text-600">Registered entity</span>
             </div>
             <div className="bg-surface p-6 flex flex-col justify-between gap-4">
               <div>
@@ -362,7 +367,6 @@ export default function AboutPage() {
                   494 Sonora Ave, Raymondville, TX 78580
                 </dd>
               </div>
-              <span className="text-xs text-text-600">Registered office</span>
             </div>
           </dl>
 
@@ -435,39 +439,17 @@ export default function AboutPage() {
                 during compliance reviews.
               </p>
 
-              <div className="flex flex-col sm:flex-row flex-wrap gap-2 pt-6">
-                <span className="inline-flex items-center gap-2 px-3 py-2 rounded-sm bg-tint-100 text-xs font-medium text-text-600">
-                  <span
-                    className="w-1.5 h-1.5 rotate-45 bg-brand-500 shrink-0"
-                    aria-hidden="true"
-                  />
-                  Anti-money laundering
-                </span>
-                <span className="inline-flex items-center gap-2 px-3 py-2 rounded-sm bg-tint-100 text-xs font-medium text-text-600">
-                  <span
-                    className="w-1.5 h-1.5 rotate-45 bg-brand-500 shrink-0"
-                    aria-hidden="true"
-                  />
-                  Know-your-customer requirements
-                </span>
-                <span className="inline-flex items-center gap-2 px-3 py-2 rounded-sm bg-tint-100 text-xs font-medium text-text-600">
-                  <span
-                    className="w-1.5 h-1.5 rotate-45 bg-brand-500 shrink-0"
-                    aria-hidden="true"
-                  />
-                  Applicable federal and state regulations
-                </span>
-              </div>
+              {/* Four chips that fragmented the deck:130 sentence above into
+                  standalone labels (`Anti-money laundering`,
+                  `Know-your-customer requirements`,
+                  `Applicable federal and state regulations`,
+                  `Cooperation with financial institutions`) are deleted. Each
+                  presented one clause of a single sentence as a discrete posture,
+                  which reads as an asserted credential (08-qa-checklist.md). The
+                  sentence itself is rendered verbatim above. */}
             </div>
 
             <div className="mt-8 pt-4 border-t border-line flex flex-wrap items-center justify-between gap-3 text-xs">
-              <span className="flex items-center gap-2 text-text-600">
-                <span
-                  className="w-2 h-2 rounded-full bg-brand-500"
-                  aria-hidden="true"
-                />
-                Cooperation with financial institutions
-              </span>
               <span className="font-semibold text-ink-950">
                 Registered in Texas
               </span>
@@ -508,7 +490,7 @@ export default function AboutPage() {
               </span>
               <div>
                 <span className="block text-xs font-semibold uppercase tracking-wider text-text-600">
-                  Legal entity
+                  Legal name
                 </span>
                 <span className="block text-sm font-semibold text-ink-950">
                   NICBEN Asset Holdings &amp; Investments LLC
@@ -527,7 +509,8 @@ export default function AboutPage() {
             Three areas of work, one company
           </h2>
           <p className="text-text-600 mt-3 text-base">
-            Each discipline is run as part of one privately owned Texas company.
+            NICBEN works in three areas. Each is run as part of one privately
+            owned Texas company.
           </p>
         </div>
 
@@ -539,7 +522,6 @@ export default function AboutPage() {
               ? "text-text-on-dark/80"
               : "text-text-600";
             const dividerClass = isDark ? "border-surface/20" : "border-line/60";
-            const labelClass = isDark ? "text-accent-300" : "text-brand-700";
             const iconTileClass = isDark
               ? "bg-surface/10 text-accent-300"
               : pillar.variant === "tint"
@@ -581,11 +563,10 @@ export default function AboutPage() {
                     />
                   </div>
 
-                  <span
-                    className={`block text-xs font-bold tracking-wider uppercase ${labelClass}`}
-                  >
-                    Pillar {pillar.num}
-                  </span>
+                  {/* R-L: the card eyebrow rendered `Pillar 01/02/03`, taken from
+                      the mock (`docs/design/.../about/code.html:284`,
+                      `:307`, `:330` — "01 / Operational" etc.). No deck line
+                      supplies a card eyebrow, so the element is deleted. */}
 
                   <div>
                     <h3
@@ -640,7 +621,7 @@ export default function AboutPage() {
             </span>
             <div>
               <span className="block text-xs font-semibold uppercase tracking-wider text-text-600">
-                Registered office
+                Address
               </span>
               <p className="font-heading text-lg font-bold text-ink-950">
                 494 Sonora Ave, Raymondville, TX 78580

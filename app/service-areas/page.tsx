@@ -12,24 +12,35 @@ export const metadata: Metadata = {
     "Registered in Texas, serving clients in various U.S. states based on project requests.",
 };
 
+/* R-H: `Project-based work` (hero fact, operating-card title, card list item),
+   `Registered entity`, `Informational`, `Registered office`, `Project-based
+   model`, `Geographic reach` and the reworded project-basis sentence had no deck
+   line. All are deleted or replaced with the deck's own strings — see the notes
+   at each site. The card body that reworded deck:42 now publishes deck:42
+   verbatim (D-018: rewording is itself a D-008 breach). */
 const heroFacts = [
   { label: "Registered in Texas", icon: "verified" },
-  { label: "Project-based work", icon: "compass" },
   { label: "Work takes place at your location", icon: "pin" },
 ] as const;
 
-const operatingCards = [
+const operatingCards: {
+  num: string;
+  /** Deck-cited card heading. Omitted where the deck supplies none. */
+  title?: string;
+  body: string;
+  /** Deck-cited footer label. Omitted where the deck supplies none. */
+  footer?: string;
+  variant: "surface" | "tint" | "ink";
+}[] = [
   {
     num: "01",
     title: "Registered in Texas",
     body: "NICBEN Asset Holdings & Investments LLC is a privately owned limited liability company registered in Texas.",
-    footer: "Registered entity",
     variant: "surface" as const,
   },
   {
     num: "02",
-    title: "Project-based work",
-    body: "We work on a project basis. We serve clients in various U.S. states, depending on what each project requires.",
+    body: "NICBEN is a limited liability company that works on a project basis. We serve clients in various U.S. states, depending on what each project requires.",
     footer: "Project-based",
     variant: "tint" as const,
   },
@@ -37,7 +48,6 @@ const operatingCards = [
     num: "03",
     title: "Company-owned funds",
     body: "In addition to its project work, NICBEN manages its own corporate treasury and evaluates investment opportunities using company-owned funds.",
-    footer: "Informational",
     variant: "ink" as const,
   },
 ];
@@ -71,9 +81,10 @@ export default function ServiceAreasPage() {
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-end">
           <div className="lg:col-span-8">
-            <EyebrowChip dotColor="sky">Geographic reach</EyebrowChip>
-
-            <h1 className="text-display font-extrabold tracking-tight text-ink-950 mt-6 leading-tight heading-spark">
+            {/* R-H: the `Geographic reach` eyebrow is the design screen's own
+                name (`nicben_service_areas_geographic_reach`) carried into the
+                UI — a mock artefact with no deck line (D-008/D-018). Deleted. */}
+            <h1 className="text-display font-extrabold tracking-tight text-ink-950 leading-tight heading-spark">
               Where we work
             </h1>
 
@@ -107,20 +118,6 @@ export default function ServiceAreasPage() {
                         strokeLinejoin="round"
                         d="M9 12.75L11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 01-1.043 3.296 3.745 3.745 0 01-3.296 1.043A3.745 3.745 0 0112 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 01-3.296-1.043 3.745 3.745 0 01-1.043-3.296A3.745 3.745 0 013 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 011.043-3.296 3.746 3.746 0 013.296-1.043A3.746 3.746 0 0112 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 013.296 1.043 3.746 3.746 0 011.043 3.296A3.745 3.745 0 0121 12z"
                       />
-                    )}
-                    {fact.icon === "compass" && (
-                      <>
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          d="M12 21a9 9 0 100-18 9 9 0 000 18z"
-                        />
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          d="M15.75 8.25l-2.25 5.25-5.25 2.25 2.25-5.25 5.25-2.25z"
-                        />
-                      </>
                     )}
                     {fact.icon === "pin" && (
                       <>
@@ -277,7 +274,7 @@ export default function ServiceAreasPage() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="rounded-md bg-surface/5 border border-surface/20 p-6 flex flex-col gap-2">
                 <span className="text-xs font-semibold uppercase tracking-wider text-accent-300">
-                  Registered office
+                  Address
                 </span>
                 <p className="font-heading text-lg font-bold text-surface">
                   494 Sonora Ave, Raymondville, TX 78580
@@ -288,10 +285,9 @@ export default function ServiceAreasPage() {
                 </p>
               </div>
 
+              {/* R-H: the `Project-based model` label that sat above this value
+                  had no deck line and was deleted. */}
               <div className="rounded-md bg-surface/5 border border-surface/20 p-6 flex flex-col gap-2">
-                <span className="text-xs font-semibold uppercase tracking-wider text-accent-300">
-                  Project-based model
-                </span>
                 <p className="font-heading text-lg font-bold text-surface">
                   Work takes place at the client&apos;s location.
                 </p>
@@ -338,7 +334,7 @@ export default function ServiceAreasPage() {
                     </svg>
                   </span>
                   <h3 className="text-h3 font-bold text-ink-950 tracking-tight">
-                    Registered office
+                    Registered details
                   </h3>
                 </div>
                 <span className="px-2.5 py-1 rounded-pill bg-tint-100 text-brand-700 text-xs font-semibold shrink-0">
@@ -377,13 +373,6 @@ export default function ServiceAreasPage() {
                     aria-hidden="true"
                   />
                   Registered in Texas
-                </li>
-                <li className="flex items-center gap-2.5 text-sm text-text-600">
-                  <span
-                    className="w-1.5 h-1.5 rotate-45 bg-brand-500 shrink-0"
-                    aria-hidden="true"
-                  />
-                  Project-based work
                 </li>
               </ul>
             </div>
@@ -445,9 +434,6 @@ export default function ServiceAreasPage() {
                   <span className="block text-xs font-semibold uppercase tracking-wider text-brand-700">
                     Qualified contractors and technicians
                   </span>
-                  <span className="block text-sm text-text-600 mt-1">
-                    Engaged project by project.
-                  </span>
                 </div>
                 <div className="rounded-sm bg-tint-50 border border-line p-4">
                   <span className="block text-xs font-semibold uppercase tracking-wider text-brand-700">
@@ -480,15 +466,16 @@ export default function ServiceAreasPage() {
         </div>
       </SectionWrapper>
 
-      {/* 4. THREE OPERATING CARDS — equal dimensions, rotating treatment (D-001) */}
+      {/* 4. THREE OPERATING CARDS — equal dimensions, rotating treatment (D-001)
+          P1-6: this cluster's heading was the deck's intro *sentence*
+          (deck:226/deck:162 "Serving clients in various U.S. states, based on
+          project requests.") published as an `<h2>`. The deck supplies no
+          heading for this cluster and docs/01-sitemap-wireframes.md:98-101
+          specifies the page as intro + map + ask-us CTA only, so the invented
+          header block is deleted and the cards read as a continuation of the
+          "Based in Texas. Working where the project is." section above. The
+          outline stays valid: h1 -> h2 -> h3. */}
       <SectionWrapper background="tint-50" className="border-t border-line">
-        <div className="max-w-3xl mb-12">
-          <EyebrowChip dotColor="sky">How we operate</EyebrowChip>
-          <h2 className="text-h2 font-bold text-ink-950 mt-4 tracking-tight">
-            Serving clients in various U.S. states, based on project requests.
-          </h2>
-        </div>
-
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 items-stretch">
           {operatingCards.map((item) => {
             const isDark = item.variant === "ink";
@@ -513,29 +500,33 @@ export default function ServiceAreasPage() {
                       {item.num}
                     </span>
                   </div>
-                  <h3 className={`text-h3 font-bold leading-snug ${titleClass}`}>
-                    {item.title}
-                  </h3>
+                  {item.title && (
+                    <h3 className={`text-h3 font-bold leading-snug ${titleClass}`}>
+                      {item.title}
+                    </h3>
+                  )}
                   <p className={`text-sm leading-relaxed mt-1 ${bodyClass}`}>
                     {item.body}
                   </p>
                 </div>
 
-                <div
-                  className={`mt-8 pt-4 border-t flex items-center justify-between ${dividerClass}`}
-                >
-                  <span
-                    className={`text-xs font-semibold uppercase tracking-wider ${footerClass}`}
+                {item.footer && (
+                  <div
+                    className={`mt-8 pt-4 border-t flex items-center justify-between ${dividerClass}`}
                   >
-                    {item.footer}
-                  </span>
-                  <span
-                    className={`w-2 h-2 rounded-full ${
-                      isDark ? "bg-accent-300" : "bg-brand-500"
-                    }`}
-                    aria-hidden="true"
-                  />
-                </div>
+                    <span
+                      className={`text-xs font-semibold uppercase tracking-wider ${footerClass}`}
+                    >
+                      {item.footer}
+                    </span>
+                    <span
+                      className={`w-2 h-2 rounded-full ${
+                        isDark ? "bg-accent-300" : "bg-brand-500"
+                      }`}
+                      aria-hidden="true"
+                    />
+                  </div>
+                )}
               </Card>
             );
           })}

@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
-import { EyebrowChip } from "@/components/ui/EyebrowChip";
 import { SectionWrapper } from "@/components/ui/SectionWrapper";
 
 export const metadata: Metadata = {
@@ -52,9 +51,7 @@ export default function TreasuryInvestmentsPage() {
         </nav>
 
         <div className="max-w-3xl">
-          <EyebrowChip dotColor="navy">Pillar 03</EyebrowChip>
-
-          <h1 className="text-display font-extrabold tracking-tight text-ink-950 mt-6 leading-tight heading-spark">
+          <h1 className="text-display font-extrabold tracking-tight text-ink-950 leading-tight heading-spark">
             Corporate treasury &amp; investments
           </h1>
 
@@ -79,11 +76,11 @@ export default function TreasuryInvestmentsPage() {
         </div>
       </SectionWrapper>
 
-      {/* 2. WHAT THIS MEANS */}
+      {/* 2. WHAT THIS MEANS — H2 is deck:113. The `Governance` eyebrow that sat
+          above it had no deck line and was deleted (D-008/D-018). */}
       <SectionWrapper background="surface" className="border-t border-line">
         <div className="max-w-3xl mb-12">
-          <EyebrowChip dotColor="teal">Governance</EyebrowChip>
-          <h2 className="text-h2 font-bold text-ink-950 mt-4 tracking-tight">
+          <h2 className="text-h2 font-bold text-ink-950 tracking-tight">
             What this means
           </h2>
         </div>
@@ -96,7 +93,10 @@ export default function TreasuryInvestmentsPage() {
               className="p-6 sm:p-8 flex flex-col justify-between"
             >
               <div>
-                <span className="text-xs font-bold text-brand-700 uppercase tracking-wider">
+                <span
+                  className="text-xs font-bold text-brand-700 uppercase tracking-wider"
+                  aria-hidden="true"
+                >
                   0{index + 1}
                 </span>
                 <h3 className="text-xl font-bold text-ink-950 mt-2">
@@ -116,9 +116,10 @@ export default function TreasuryInvestmentsPage() {
                 aria-hidden="true"
               />
               <div className="space-y-2">
-                <span className="text-xs font-bold uppercase tracking-wider text-brand-700">
-                  Legal Notice
-                </span>
+                {/* `Legal Notice` stood here. `docs/03-copy-deck.md` section 6
+                    calls this element a "Notice box" and supplies its body only
+                    (`:117`, rendered verbatim below); the label had no deck line
+                    and was deleted (R-L). */}
                 <p className="text-sm font-semibold text-ink-950 leading-relaxed">
                   This page is for information only. It is not an offer,
                   invitation or solicitation to invest, and NICBEN does not offer

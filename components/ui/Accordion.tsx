@@ -96,11 +96,9 @@ export const Accordion: React.FC<AccordionProps> = ({
                 {group.title}
               </h2>
             </div>
-            <span className="text-eyebrow font-semibold text-text-600 uppercase tracking-wider shrink-0">
-              {group.items.length === 1
-                ? "1 question"
-                : `${group.items.length} questions`}
-            </span>
+            {/* R-L: the `1 question` / `N questions` counter that sat here is
+                deleted. `docs/03-copy-deck.md` section 10 supplies the group
+                titles and the questions, no count label. */}
           </div>
 
           <div className="flex flex-col gap-3">

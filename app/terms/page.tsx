@@ -7,11 +7,16 @@ import { SectionWrapper } from "@/components/ui/SectionWrapper";
  * Legal shell only. No legal text is generated: the lawyer-supplied copy will
  * fill the prose containers once confirmed
  * (`docs/03-copy-deck.md` section 13, `[PENDING CLIENT / LAWYER]`).
+ *
+ * R-K: `/terms` has no `03-copy-deck.md` section 14 row. The title is the
+ * authorised shell H1 (`Terms of Use`, Phase 04 brief section 3.6) plus the site
+ * name, and the description is the deck's own company statement (`:13`) used
+ * verbatim — no metadata string is authored.
  */
 export const metadata: Metadata = {
   title: "Terms of Use | NICBEN",
   description:
-    "Terms of use for the NICBEN Asset Holdings & Investments website.",
+    "NICBEN Asset Holdings & Investments LLC is a privately owned company registered in Texas.",
 };
 
 const sections = [

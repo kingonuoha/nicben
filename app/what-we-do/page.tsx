@@ -95,13 +95,6 @@ export default function WhatWeDoPage() {
             {/* Content Column */}
             <div className="lg:col-span-6 flex flex-col justify-between h-full space-y-6">
               <div className="space-y-4">
-                <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-tint-100 rounded-pill">
-                  <span className="w-1.5 h-1.5 rotate-45 bg-brand-700 shrink-0" aria-hidden="true" />
-                  <span className="text-xs font-bold text-brand-700 tracking-widest uppercase">
-                    Pillar 01
-                  </span>
-                </div>
-
                 <h2 className="text-h2 font-bold text-ink-950 tracking-tight leading-snug">
                   Project Management &amp; Contracting
                 </h2>
@@ -137,13 +130,6 @@ export default function WhatWeDoPage() {
             {/* Content Column (order 2 on mobile, order 1 on desktop) */}
             <div className="lg:col-span-6 order-2 lg:order-1 flex flex-col justify-between h-full space-y-6">
               <div className="space-y-4">
-                <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-tint-100 rounded-pill">
-                  <span className="w-1.5 h-1.5 rotate-45 bg-brand-700 shrink-0" aria-hidden="true" />
-                  <span className="text-xs font-bold text-brand-700 tracking-widest uppercase">
-                    Pillar 02
-                  </span>
-                </div>
-
                 <h2 className="text-h2 font-bold text-ink-950 tracking-tight leading-snug">
                   Property Improvement &amp; Maintenance
                 </h2>
@@ -200,13 +186,6 @@ export default function WhatWeDoPage() {
             {/* Content Column */}
             <div className="lg:col-span-6 flex flex-col justify-between h-full space-y-6">
               <div className="space-y-4">
-                <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-tint-100 rounded-pill">
-                  <span className="w-1.5 h-1.5 rotate-45 bg-brand-700 shrink-0" aria-hidden="true" />
-                  <span className="text-xs font-bold text-brand-700 tracking-widest uppercase">
-                    Pillar 03
-                  </span>
-                </div>
-
                 <h2 className="text-h2 font-bold text-ink-950 tracking-tight leading-snug">
                   Corporate Treasury &amp; Investments
                 </h2>

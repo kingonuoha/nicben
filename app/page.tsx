@@ -118,10 +118,12 @@ export default function HomePage() {
             className="flex flex-col justify-between"
           >
             <div className="space-y-4">
-              <div className="flex items-center justify-between">
-                <span className="text-xs font-bold text-brand-700 tracking-wider uppercase">
-                  Pillar 01
-                </span>
+              {/* `Pillar 01` stood here. Its only source was the design mock
+                  (`docs/design/nicben_asset_holdings_investments_home/code.html:148`),
+                  and `docs/03-copy-deck.md` supplies no per-card eyebrow —
+                  D-008 forbids mock copy and permits only substitution with a
+                  cited line or deletion. Deleted (R-L). */}
+              <div className="flex items-center justify-end">
                 {/* Line icon slot per docs/04-design-system.md section 5 and
                     docs/01-sitemap-wireframes.md section 4. */}
                 <span className="w-10 h-10 rounded-full bg-tint-100 text-brand-700 flex items-center justify-center">
@@ -165,10 +167,7 @@ export default function HomePage() {
             className="flex flex-col justify-between"
           >
             <div className="space-y-4">
-              <div className="flex items-center justify-between">
-                <span className="text-xs font-bold text-brand-700 tracking-wider uppercase">
-                  Pillar 02
-                </span>
+              <div className="flex items-center justify-end">
                 <span className="w-10 h-10 rounded-full bg-surface text-brand-700 flex items-center justify-center">
                   <PillarIcon name="spanner" className="w-5 h-5" />
                 </span>
@@ -210,10 +209,7 @@ export default function HomePage() {
             className="flex flex-col justify-between"
           >
             <div className="space-y-4">
-              <div className="flex items-center justify-between">
-                <span className="text-xs font-bold text-accent-300 tracking-wider uppercase">
-                  Pillar 03
-                </span>
+              <div className="flex items-center justify-end">
                 <span className="w-10 h-10 rounded-full bg-surface/10 text-accent-300 flex items-center justify-center">
                   <PillarIcon name="treasury" className="w-5 h-5" />
                 </span>
@@ -393,7 +389,10 @@ export default function HomePage() {
               className="flex flex-col justify-between p-6 rounded-xl border border-line bg-tint-50 shadow-card hover:border-brand-500 transition-colors group"
             >
               <div>
-                <span className="font-heading font-extrabold text-2xl text-brand-700 block mb-3">
+                <span
+                  className="font-heading font-extrabold text-2xl text-brand-700 block mb-3"
+                  aria-hidden="true"
+                >
                   {step.num}
                 </span>
                 {/* Heading level h3, not h4: the process section's H2 is the only

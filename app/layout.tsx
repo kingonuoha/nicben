@@ -23,10 +23,18 @@ const caveat = Caveat({
   display: "swap",
 });
 
+/**
+ * R-K: root metadata fallback. `docs/03-copy-deck.md` section 14 supplies no
+ * site-wide default row, so the Home row is used **verbatim** (`:219`) and every
+ * route exports its own section 14 pair. The previous fallback
+ * ("Integrated project management, property improvement, and treasury management
+ * across Texas.") had no deck line and was inherited by any route that did not
+ * export metadata — it appeared on `/styleguide` and `/_not-found`.
+ */
 export const metadata: Metadata = {
-  title: "NICBEN Asset Holdings & Investments",
+  title: "NICBEN Asset Holdings & Investments, Texas",
   description:
-    "Integrated project management, property improvement, and treasury management across Texas.",
+    "Privately owned Texas LLC: project management and contracting, property improvement and maintenance, and corporate treasury and investments.",
 };
 
 export default function RootLayout({

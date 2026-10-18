@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
-import { EyebrowChip } from "@/components/ui/EyebrowChip";
 import { SectionWrapper } from "@/components/ui/SectionWrapper";
 
 export const metadata: Metadata = {
@@ -59,9 +58,7 @@ export default function ProjectManagementContractingPage() {
         </nav>
 
         <div className="max-w-3xl">
-          <EyebrowChip dotColor="teal">Pillar 01</EyebrowChip>
-
-          <h1 className="text-display font-extrabold tracking-tight text-ink-950 mt-6 leading-tight heading-spark">
+          <h1 className="text-display font-extrabold tracking-tight text-ink-950 leading-tight heading-spark">
             Project management &amp; contracting
           </h1>
 
@@ -87,11 +84,11 @@ export default function ProjectManagementContractingPage() {
         </div>
       </SectionWrapper>
 
-      {/* 2. WHAT THIS COVERS */}
+      {/* 2. WHAT THIS COVERS — H2 is deck:85 ("What this covers"). The `Scope`
+          eyebrow that sat above it had no deck line and was deleted (D-008/D-018). */}
       <SectionWrapper background="surface" className="border-t border-line">
         <div className="max-w-3xl mb-12">
-          <EyebrowChip dotColor="sky">Scope</EyebrowChip>
-          <h2 className="text-h2 font-bold text-ink-950 mt-4 tracking-tight">
+          <h2 className="text-h2 font-bold text-ink-950 tracking-tight">
             What this covers
           </h2>
         </div>
@@ -110,11 +107,11 @@ export default function ProjectManagementContractingPage() {
         </div>
       </SectionWrapper>
 
-      {/* 3. HOW A PROJECT RUNS */}
+      {/* 3. HOW A PROJECT RUNS — H2 is deck:90. The `Process` eyebrow that sat
+          above it had no deck line and was deleted (D-008/D-018). */}
       <SectionWrapper background="tint-50" className="border-t border-line">
         <div className="max-w-3xl mb-12">
-          <EyebrowChip dotColor="navy">Process</EyebrowChip>
-          <h2 className="text-h2 font-bold text-ink-950 mt-4 tracking-tight">
+          <h2 className="text-h2 font-bold text-ink-950 tracking-tight">
             How a project runs
           </h2>
         </div>

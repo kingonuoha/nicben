@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
-import { EyebrowChip } from "@/components/ui/EyebrowChip";
 import { SectionWrapper } from "@/components/ui/SectionWrapper";
 
 export const metadata: Metadata = {
@@ -65,9 +64,7 @@ export default function PropertyImprovementMaintenancePage() {
         </nav>
 
         <div className="max-w-3xl">
-          <EyebrowChip dotColor="teal">Pillar 02</EyebrowChip>
-
-          <h1 className="text-display font-extrabold tracking-tight text-ink-950 mt-6 leading-tight heading-spark">
+          <h1 className="text-display font-extrabold tracking-tight text-ink-950 leading-tight heading-spark">
             Property improvement &amp; maintenance
           </h1>
 
@@ -92,15 +89,15 @@ export default function PropertyImprovementMaintenancePage() {
         </div>
       </SectionWrapper>
 
-      {/* 2. SERVICES LIST */}
+      {/* 2. SERVICES LIST
+          The section wrapper heading (`Our trade services`) and its `Services`
+          eyebrow had no deck source: docs/03-copy-deck.md:99-104 supplies the
+          five service titles and one line each, and no wrapper heading, while
+          the wireframe (docs/01-sitemap-wireframes.md:68) lists the service
+          sections only. Both strings were deleted per D-008/D-018 rather than
+          reworded. The five card headings are promoted to <h2> so the document
+          outline has no h1 -> h3 skip; their classes are unchanged. */}
       <SectionWrapper background="surface" className="border-t border-line">
-        <div className="max-w-3xl mb-12">
-          <EyebrowChip dotColor="sky">Services</EyebrowChip>
-          <h2 className="text-h2 font-bold text-ink-950 mt-4 tracking-tight">
-            Our trade services
-          </h2>
-        </div>
-
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
           {services.map((service, index) => (
             <Card
@@ -112,9 +109,9 @@ export default function PropertyImprovementMaintenancePage() {
                 <span className="text-xs font-bold text-brand-700 uppercase tracking-wider">
                   0{index + 1}
                 </span>
-                <h3 className="text-xl font-bold text-ink-950 mt-2">
+                <h2 className="text-xl font-bold text-ink-950 mt-2">
                   {service.title}
-                </h3>
+                </h2>
                 <p className="text-text-600 text-sm mt-3 leading-relaxed">
                   {service.description}
                 </p>

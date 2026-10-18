@@ -25,10 +25,12 @@ export const LegalTocLayout: React.FC<LegalTocLayoutProps> = ({ sections }) => {
         className="lg:col-span-4 lg:sticky lg:top-28"
       >
         <div className="rounded-md bg-surface border border-line shadow-card p-6">
-          <span className="text-eyebrow font-bold text-brand-700 uppercase tracking-wider">
-            Contents
-          </span>
-          <ol className="mt-4 space-y-2.5">
+          {/* R-L: the visible `Contents` caption is deleted. `docs/03-copy-deck.md`
+              section 13 specifies "Layout with a table of contents only" — an
+              instruction, not a label — and supplies no TOC heading string, so
+              there was nothing to substitute. The nav keeps its authored
+              accessible name (`aria-label="On this page"`). */}
+          <ol className="space-y-2.5">
             {sections.map((section, index) => (
               <li key={section.id} className="flex items-baseline gap-2">
                 <span

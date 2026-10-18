@@ -1,12 +1,28 @@
 import type { Metadata } from "next";
+import { notFound } from "next/navigation";
 import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
 import { EyebrowChip } from "@/components/ui/EyebrowChip";
 import { CornerArrowButton } from "@/components/ui/CornerArrowButton";
 import { SectionWrapper } from "@/components/ui/SectionWrapper";
 
+/**
+ * Development-only route (`docs/07-build-order.md` Step 2: "a style-guide page
+ * (not linked, noindex)"). It renders specimen copy the deck cannot cite, so it
+ * is gated out of the production build entirely and is never linked from the
+ * header, footer or any page — see the R-E note in
+ * `docs/tasks/phase-03r-content-integrity/qa-report.md` section 11.1.
+ *
+ * In production the page calls `notFound()`, which terminates rendering of this
+ * segment and serves a 404 (`next/dist/docs/01-app/03-api-reference/04-functions/
+ * not-found.md`: "A page that reaches `notFound()` during prerendering can remain
+ * `○` Static and serve a `404`"). The `noindex, nofollow` directive is kept for
+ * the development case and for any deployment that serves the dev build.
+ */
 export const metadata: Metadata = {
   title: "Styleguide | NICBEN",
+  description:
+    "NICBEN Asset Holdings & Investments LLC is a privately owned company registered in Texas.",
   robots: {
     index: false,
     follow: false,
@@ -14,6 +30,10 @@ export const metadata: Metadata = {
 };
 
 export default function StyleguidePage() {
+  if (process.env.NODE_ENV === "production") {
+    notFound();
+  }
+
   return (
     <main className="min-h-screen py-12">
       <SectionWrapper background="surface" className="border-b border-line">

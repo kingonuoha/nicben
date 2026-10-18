@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { CtaBand } from "@/components/ui/CtaBand";
 import { EmptyState } from "@/components/ui/EmptyState";
-import { EyebrowChip } from "@/components/ui/EyebrowChip";
 import { SectionWrapper } from "@/components/ui/SectionWrapper";
 
 /**
@@ -13,6 +12,10 @@ import { SectionWrapper } from "@/components/ui/SectionWrapper";
 export const metadata: Metadata = {
   title: "Our projects | NICBEN",
   description: "A selection of recent work.",
+  /* R-K: `/projects` has no `03-copy-deck.md` section 14 row. The title derives
+     from the deck H1 (`:202` "Our projects") plus the site name and the
+     description is the deck's own intro line (`:203`) verbatim. The route is
+     excluded from `sitemap.xml` and unlinked until real projects exist. */
 };
 
 export default function ProjectsPage() {
@@ -43,9 +46,7 @@ export default function ProjectsPage() {
         </nav>
 
         <div className="max-w-2xl">
-          <EyebrowChip dotColor="sky">Projects</EyebrowChip>
-
-          <h1 className="text-display font-extrabold tracking-tight text-ink-950 mt-6 leading-tight heading-spark">
+          <h1 className="text-display font-extrabold tracking-tight text-ink-950 leading-tight heading-spark">
             Our projects
           </h1>
 
@@ -61,12 +62,14 @@ export default function ProjectsPage() {
           uncited strings (`SPEC:`, `SCALE:`, `PORTFOLIO UPDATE…`) are not
           published. The three-card "Operational Framework" grid below the empty
           state is omitted: the route is empty-state only (`brief.md` section
-          3.5) and a second "Pillar 01 — 03" array would conflict with D-001. */}
+          3.5) and a second "Pillar 01 — 03" array would conflict with D-001.
+          R-J: the uncited marks label `Project-based work` and the uncited
+          `noteLabel="Registered office"` are deleted; the marks row needs two
+          labels to render, so it is omitted entirely and the note renders its
+          deck:13 body alone. */}
       <SectionWrapper background="surface" className="border-t border-line">
         <EmptyState
           title="Projects will be added here soon."
-          marks={["Project-based work", "Registered in Texas"]}
-          noteLabel="Registered office"
           noteBody="NICBEN Asset Holdings &amp; Investments LLC is a privately owned limited liability company registered in Texas."
         />
       </SectionWrapper>
