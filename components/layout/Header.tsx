@@ -189,14 +189,14 @@ export const Header: React.FC = () => {
           <Image
             src={
               isDarkHeroMode
-                ? "/images/brand/nicben-logo-icon-white.png"
-                : "/images/brand/nicben-logo-icon-dark.png"
+                ? "/images/brand/nicben-logo-mark-white.png"
+                : "/images/brand/nicben-logo-mark-dark.png"
             }
             alt=""
-            width={32}
-            height={32}
+            width={34}
+            height={30}
             priority
-            className="h-8 w-8 object-contain transition-transform duration-200 group-hover:scale-105"
+            className="h-7 sm:h-8 w-auto object-contain transition-transform duration-200 group-hover:scale-105"
             aria-hidden="true"
           />
           <span
