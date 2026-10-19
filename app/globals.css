@@ -315,6 +315,39 @@ h1, h2, h3, h4, h5, h6 {
   overflow: hidden;
 }
 
+/* Contact form state transitions (`docs/05-motion-spec.md` section 4:
+   "Toasts / form success — fade and rise 8px, 250ms, ease-out"; the inline
+   validation reveal uses the fast duration). Transform and opacity only, and
+   both durations are motion tokens, so `prefers-reduced-motion: reduce` below
+   collapses them. Nothing here hides content: the element that animates in is
+   already present and readable, and `animation: none` leaves it fully visible. */
+@keyframes form-state-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.form-state-in {
+  animation: form-state-in var(--motion-dur-base) var(--motion-ease-out) both;
+}
+
+.form-error-in {
+  animation: form-state-in var(--motion-dur-fast) var(--motion-ease-out) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  /* section 5: no translate; the state change is immediate. */
+  .form-state-in,
+  .form-error-in {
+    animation: none;
+  }
+}
+
 @layer utilities {
   .text-balance {
     text-wrap: balance;

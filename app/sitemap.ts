@@ -45,6 +45,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: "/how-it-works", changeFrequency: "monthly", priority: 0.7 },
     { path: "/service-areas", changeFrequency: "monthly", priority: 0.7 },
     { path: "/faq", changeFrequency: "monthly", priority: 0.6 },
+    /*
+      `/contact` became a real route in Phase 05 (`app/contact/page.tsx`) and
+      `docs/03-copy-deck.md:228` supplies its §14 title and description, which is
+      the admission rule stated above. Added with the route rather than left out,
+      so the primary conversion page is discoverable to crawlers.
+    */
+    { path: "/contact", changeFrequency: "monthly", priority: 0.8 },
     { path: "/privacy", changeFrequency: "yearly", priority: 0.3 },
     { path: "/terms", changeFrequency: "yearly", priority: 0.3 },
   ];
