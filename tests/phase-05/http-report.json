@@ -1,0 +1,122 @@
+{
+  "base": "http://127.0.0.1:3311",
+  "turnstileMode": "skip",
+  "extra": "none",
+  "failures": 0,
+  "total": 15,
+  "requestIds": {
+    "accept": "12caa0df-c6e8-454c-abfd-6e050a33342a",
+    "honeypot": "91e8c3fd-940e-493d-8726-5bafd518d7ee",
+    "echoProbe": "1b14d2fd-3d4d-40fb-8501-03448f809f07",
+    "malformed": "cad82fb5-e6e5-4b13-ae27-4ff1d34cc0da",
+    "rateLimitedAccepted": "6dbd7f11-869e-4127-a3f4-b6958182252d",
+    "rateLimited": "f3fcab49-a0d2-4ea5-be39-1a6a0476e9a3"
+  },
+  "results": [
+    {
+      "name": "valid multipart submission is claimed as received",
+      "status": "PASS",
+      "httpStatus": 200,
+      "expected": 200,
+      "detail": "ok=true requestId=12caa0df…"
+    },
+    {
+      "name": "success body carries no submitted or stored value",
+      "status": "PASS",
+      "httpStatus": 200,
+      "expected": 200,
+      "detail": "keys = [ok, requestId]"
+    },
+    {
+      "name": "missing name → 400 + approved name message",
+      "status": "PASS",
+      "httpStatus": 400,
+      "expected": 400,
+      "detail": "\"Please enter your name.\""
+    },
+    {
+      "name": "invalid email → 400 + approved email message",
+      "status": "PASS",
+      "httpStatus": 400,
+      "expected": 400,
+      "detail": "\"Please enter a valid email address.\""
+    },
+    {
+      "name": "no enquiry type → 400 + approved enquiry-type message",
+      "status": "PASS",
+      "httpStatus": 400,
+      "expected": 400,
+      "detail": "\"Please choose what your enquiry is about.\""
+    },
+    {
+      "name": "message under 20 characters → 400 + approved minimum message",
+      "status": "PASS",
+      "httpStatus": 400,
+      "expected": 400,
+      "detail": "\"Please tell us a little more (at least 20 characters).\""
+    },
+    {
+      "name": "oversized attachment (5 MiB + 1 byte) → 400 + approved file message",
+      "status": "PASS",
+      "httpStatus": 400,
+      "expected": 400,
+      "detail": "\"That file is too large or not a supported type.\""
+    },
+    {
+      "name": "forged-type attachment → 400 + approved file message",
+      "status": "PASS",
+      "httpStatus": 400,
+      "expected": 400,
+      "detail": "\"That file is too large or not a supported type.\""
+    },
+    {
+      "name": "honeypot filled → indistinguishable success, nothing stored",
+      "status": "PASS",
+      "httpStatus": 200,
+      "expected": 200,
+      "detail": "ok=true requestId=91e8c3fd… (storage decided in the server log)"
+    },
+    {
+      "name": "no submitted value is echoed in the response body",
+      "status": "PASS",
+      "httpStatus": 200,
+      "expected": 200,
+      "detail": "sentinel absent (62 bytes returned)"
+    },
+    {
+      "name": "non-string payload without the client form → 400, nothing echoed",
+      "status": "PASS",
+      "httpStatus": 400,
+      "expected": 400,
+      "detail": "formError=null with 5 field(s) attributed: name, email, enquiryType, message, consent"
+    },
+    {
+      "name": "unsupported content type → 400",
+      "status": "PASS",
+      "httpStatus": 400,
+      "expected": 400,
+      "detail": "\"Something went wrong. Please try again or email us directly.\""
+    },
+    {
+      "name": "cross-origin browser request → 403 (06 §33)",
+      "status": "PASS",
+      "httpStatus": 403,
+      "expected": 403,
+      "detail": "Origin: https://evil.example rejected"
+    },
+    {
+      "name": "declared body over the ceiling → 413 without a multipart parse",
+      "status": "PASS",
+      "httpStatus": 413,
+      "expected": 413,
+      "detail": "28311552 bytes → 413 \"Something went wrong. Please try again or email us directly.\""
+    },
+    {
+      "name": "four submissions from one address → 429 on the fourth, with Retry-After",
+      "status": "PASS",
+      "httpStatus": "200,200,200,429",
+      "expected": "200,200,200,429",
+      "detail": "statuses [200, 200, 200, 429] retry-after=200 message=\"Something went wrong. Please try again or email us directly.\""
+    }
+  ]
+}

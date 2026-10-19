@@ -140,12 +140,12 @@
     {
       "name": "storage keys are generated, date-sharded and unique",
       "status": "PASS",
-      "detail": "enquiries/2026/03/3e5ea08e-3149-4f23-8bde-47ce131b2ccf.png · unique per upload · extension from the sniffed type"
+      "detail": "enquiries/2026/03/df1ada9d-ee13-435f-9430-edea83915a29.png · unique per upload · extension from the sniffed type"
     },
     {
       "name": "a valid PNG is accepted and renamed",
       "status": "PASS",
-      "detail": "IMG_2034.PNG → enquiries/2026/10/41d0ea24-4057-42d8-b318-127055523a7d.png"
+      "detail": "IMG_2034.PNG → enquiries/2026/10/e7aa31ed-e16d-4d72-be24-631d584bfb31.png"
     },
     {
       "name": "an oversized file is rejected before its bytes are read",
@@ -215,7 +215,7 @@
     {
       "name": "the port round-trips an enquiry through the dev adapter",
       "status": "PASS",
-      "detail": "id 623a3814… status \"new\""
+      "detail": "id 7906a7d5… status \"new\""
     },
     {
       "name": "status changes and notes are recorded",
