@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { Button } from "@/components/ui/Button";
 import { SectionWrapper } from "@/components/ui/SectionWrapper";
 import { ShapePanel } from "@/components/ui/ShapePanel";
@@ -120,10 +121,13 @@ export default function WhatWeDoPage() {
             {/* Visual Column — slides in from left */}
             <div className="lg:col-span-6">
               <Reveal from="left" speed="medium" threshold={0.2} margin="0px 0px -12% 0px" className="relative w-full rounded-xl overflow-hidden">
-                <div className="overflow-hidden rounded-xl transition-transform duration-500 ease-out group-hover:scale-[1.02] motion-reduce:group-hover:scale-100">
-                  <ShapePanel
-                    className="w-full h-[320px] sm:h-[400px] shadow-sm"
-                    motif="blueprint"
+                <div className="relative w-full h-[320px] sm:h-[400px] overflow-hidden rounded-xl bg-tint-100 border border-line">
+                  <Image
+                    src="/images/content/pillar-project-management.jpg"
+                    alt="Technicians installing commercial HVAC and overhead structural framework"
+                    fill
+                    sizes="(max-width: 1024px) 100vw, 550px"
+                    className="object-cover transition-transform duration-500 ease-out group-hover:scale-[1.03] motion-reduce:group-hover:scale-100"
                   />
                 </div>
                 <Chamfer corner="tr" />
@@ -208,10 +212,13 @@ export default function WhatWeDoPage() {
             {/* Visual Column — slides in from right */}
             <div className="lg:col-span-6 order-1 lg:order-2">
               <Reveal from="right" speed="medium" threshold={0.2} margin="0px 0px -12% 0px" className="relative w-full rounded-xl overflow-hidden">
-                <div className="overflow-hidden rounded-xl transition-transform duration-500 ease-out group-hover:scale-[1.02] motion-reduce:group-hover:scale-100">
-                  <ShapePanel
-                    className="w-full h-[320px] sm:h-[400px] shadow-sm"
-                    motif="drafting"
+                <div className="relative w-full h-[320px] sm:h-[400px] overflow-hidden rounded-xl bg-tint-100 border border-line">
+                  <Image
+                    src="/images/content/pillar-property-improvement.jpg"
+                    alt="Specialist contractor installing modern architectural panels and finishes"
+                    fill
+                    sizes="(max-width: 1024px) 100vw, 550px"
+                    className="object-cover transition-transform duration-500 ease-out group-hover:scale-[1.03] motion-reduce:group-hover:scale-100"
                   />
                 </div>
                 <Chamfer corner="tl" />
@@ -224,10 +231,13 @@ export default function WhatWeDoPage() {
             {/* Visual Column — slides in from left */}
             <div className="lg:col-span-6">
               <Reveal from="left" speed="medium" threshold={0.2} margin="0px 0px -12% 0px" className="relative w-full rounded-xl overflow-hidden">
-                <div className="overflow-hidden rounded-xl transition-transform duration-500 ease-out group-hover:scale-[1.02] motion-reduce:group-hover:scale-100">
-                  <ShapePanel
-                    className="w-full h-[320px] sm:h-[400px] shadow-sm"
-                    motif="arcs"
+                <div className="relative w-full h-[320px] sm:h-[400px] overflow-hidden rounded-xl bg-tint-100 border border-line">
+                  <Image
+                    src="/images/content/pillar-treasury-facade.jpg"
+                    alt="Modern corporate architectural glass and stone building facade"
+                    fill
+                    sizes="(max-width: 1024px) 100vw, 550px"
+                    className="object-cover transition-transform duration-500 ease-out group-hover:scale-[1.03] motion-reduce:group-hover:scale-100"
                   />
                 </div>
                 <Chamfer corner="tr" />

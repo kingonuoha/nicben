@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
 import { CornerArrowButton } from "@/components/ui/CornerArrowButton";
@@ -204,13 +205,16 @@ export default function AboutPage() {
 
           <div className="lg:col-span-5 relative">
             <Reveal from="right" speed="medium" threshold={0.2} margin="0px 0px -12% 0px" className="relative group">
-              <div className="relative overflow-hidden rounded-xl">
-                <ShapePanel
-                  className="w-full h-96 shadow-card transition-transform duration-500 group-hover:scale-[1.02] motion-reduce:group-hover:scale-100"
-                  motif="drafting"
+              <div className="relative overflow-hidden rounded-xl h-96 shadow-card bg-tint-100 border border-line">
+                <Image
+                  src="/images/content/about-operations-consultation.jpg"
+                  alt="NICBEN engineers consulting on project operations at client location"
+                  fill
+                  sizes="(max-width: 1024px) 100vw, 480px"
+                  className="object-cover transition-transform duration-500 group-hover:scale-[1.03] motion-reduce:group-hover:scale-100"
                 />
                 <div
-                  className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-ink-950/80 to-transparent rounded-b-xl pointer-events-none"
+                  className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-ink-950/80 to-transparent pointer-events-none"
                   aria-hidden="true"
                 />
                 <div className="absolute bottom-4 left-4 right-4 rounded-md bg-surface/95 backdrop-blur-md border border-line shadow-float p-4 flex items-center justify-between gap-3">
