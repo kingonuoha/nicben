@@ -1,5 +1,6 @@
 import React from "react";
 import Link from "next/link";
+import Image from "next/image";
 
 export const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear();
@@ -13,13 +14,15 @@ export const Footer: React.FC = () => {
             <Link
               href="/"
               className="inline-flex items-center gap-2 text-surface font-bold text-xl tracking-tight"
+              aria-label="NICBEN Home"
             >
-              <span className="w-8 h-8 rounded-lg bg-surface text-ink-950 flex items-center justify-center font-heading font-extrabold text-sm">
-                NB
-              </span>
-              <span className="font-heading font-extrabold text-surface">
-                NICBEN
-              </span>
+              <Image
+                src="/images/brand/nicben-logo-horizontal-white.png"
+                alt="NICBEN Asset Holdings & Investments"
+                width={170}
+                height={46}
+                className="h-9 w-auto object-contain"
+              />
             </Link>
             <p className="text-text-on-dark/80 text-sm max-w-sm leading-relaxed">
               NICBEN Asset Holdings & Investments LLC is a privately owned company registered in Texas.

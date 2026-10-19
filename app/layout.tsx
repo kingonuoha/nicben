@@ -35,6 +35,34 @@ export const metadata: Metadata = {
   title: "NICBEN Asset Holdings & Investments, Texas",
   description:
     "Privately owned Texas LLC: project management and contracting, property improvement and maintenance, and corporate treasury and investments.",
+  metadataBase: new URL("https://nicben.com"),
+  icons: {
+    icon: "/images/brand/nicben-logo-icon-dark.png",
+    apple: "/images/brand/nicben-logo-icon-dark.png",
+  },
+  openGraph: {
+    title: "NICBEN Asset Holdings & Investments, Texas",
+    description:
+      "Privately owned Texas LLC: project management and contracting, property improvement and maintenance, and corporate treasury and investments.",
+    siteName: "NICBEN Asset Holdings & Investments",
+    images: [
+      {
+        url: "/images/brand/nicben-meta-banner.jpg",
+        width: 1200,
+        height: 630,
+        alt: "NICBEN Asset Holdings & Investments LLC",
+      },
+    ],
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "NICBEN Asset Holdings & Investments, Texas",
+    description:
+      "Privately owned Texas LLC: project management and contracting, property improvement and maintenance, and corporate treasury and investments.",
+    images: ["/images/brand/nicben-meta-banner.jpg"],
+  },
 };
 
 export default function RootLayout({

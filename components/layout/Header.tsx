@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { Button } from "@/components/ui/Button";
 
@@ -182,24 +183,21 @@ export const Header: React.FC = () => {
         {/* Brand Logo / Wordmark */}
         <Link
           href="/"
-          className="flex items-center gap-2 font-bold text-lg sm:text-xl tracking-tight focus-visible:outline focus-visible:outline-2 focus-visible:outline-brand-700 rounded-md"
+          className="flex items-center gap-2 focus-visible:outline focus-visible:outline-2 focus-visible:outline-brand-700 rounded-md py-1"
+          aria-label="NICBEN Home"
         >
-          <span
-            className={`w-8 h-8 rounded-lg flex items-center justify-center font-heading font-extrabold text-sm tracking-wider ${
+          <Image
+            src={
               isDarkHeroMode
-                ? "bg-surface text-ink-950"
-                : "bg-ink-950 text-surface"
-            }`}
-          >
-            NB
-          </span>
-          <span
-            className={`font-heading font-extrabold ${
-              isDarkHeroMode ? "text-surface" : "text-ink-950"
-            }`}
-          >
-            NICBEN
-          </span>
+                ? "/images/brand/nicben-logo-horizontal-white.png"
+                : "/images/brand/nicben-logo-horizontal-dark.png"
+            }
+            alt="NICBEN Asset Holdings & Investments"
+            width={160}
+            height={44}
+            priority
+            className="h-8 sm:h-9 w-auto object-contain"
+          />
         </Link>
 
         {/* Desktop Navigation */}
