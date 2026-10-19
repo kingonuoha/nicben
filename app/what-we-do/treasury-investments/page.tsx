@@ -7,9 +7,23 @@ import { Reveal } from "@/components/motion/Reveal";
 import { Stagger, StaggerItem } from "@/components/motion/Stagger";
 
 export const metadata: Metadata = {
-  title: "Corporate Treasury & Investments | NICBEN",
+  title: "Corporate Treasury & Investments",
   description:
     "NICBEN manages its own corporate treasury and investments using company-owned funds, for the company's benefit only.",
+  openGraph: {
+    title: "Corporate Treasury & Investments | NICBEN",
+    description:
+      "NICBEN manages its own corporate treasury and investments using company-owned funds, for the company's benefit only.",
+    url: "https://nicben.com/what-we-do/treasury-investments",
+    images: [
+      {
+        url: "/images/brand/nicben-meta-banner.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Corporate Treasury & Investments — NICBEN",
+      },
+    ],
+  },
 };
 
 export default function TreasuryInvestmentsPage() {

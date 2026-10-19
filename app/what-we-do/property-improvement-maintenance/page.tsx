@@ -7,9 +7,23 @@ import { Reveal } from "@/components/motion/Reveal";
 import { Stagger, StaggerItem } from "@/components/motion/Stagger";
 
 export const metadata: Metadata = {
-  title: "Property Improvement & Maintenance | NICBEN",
+  title: "Property Improvement & Maintenance",
   description:
     "Improvement, renovation, plumbing and maintenance for residential and commercial properties.",
+  openGraph: {
+    title: "Property Improvement & Maintenance | NICBEN",
+    description:
+      "Improvement, renovation, plumbing and maintenance for residential and commercial properties.",
+    url: "https://nicben.com/what-we-do/property-improvement-maintenance",
+    images: [
+      {
+        url: "/images/brand/nicben-meta-banner.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Property Improvement & Maintenance — NICBEN",
+      },
+    ],
+  },
 };
 
 export default function PropertyImprovementMaintenancePage() {

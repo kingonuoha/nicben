@@ -21,6 +21,19 @@ import { ContactForm } from "./ContactForm";
 export const metadata: Metadata = {
   title: "Contact NICBEN",
   description: "Send an enquiry or contact NICBEN by email or phone.",
+  openGraph: {
+    title: "Contact NICBEN",
+    description: "Send an enquiry or contact NICBEN by email or phone.",
+    url: "https://nicben.com/contact",
+    images: [
+      {
+        url: "/images/brand/nicben-meta-banner.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Contact NICBEN Asset Holdings & Investments LLC",
+      },
+    ],
+  },
 };
 
 interface ContactPageProps {

@@ -7,9 +7,23 @@ import { SectionWrapper } from "@/components/ui/SectionWrapper";
 import { Reveal } from "@/components/motion/Reveal";
 
 export const metadata: Metadata = {
-  title: "FAQ | NICBEN",
+  title: "FAQ",
   description:
     "Answers about what NICBEN does, how projects start, and how the company operates.",
+  openGraph: {
+    title: "FAQ | NICBEN",
+    description:
+      "Answers about what NICBEN does, how projects start, and how the company operates.",
+    url: "https://nicben.com/faq",
+    images: [
+      {
+        url: "/images/brand/nicben-meta-banner.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Frequently Asked Questions — NICBEN",
+      },
+    ],
+  },
 };
 
 const jumpLinks = [

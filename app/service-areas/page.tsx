@@ -11,9 +11,23 @@ import { SectionHeading } from "@/components/motion/SectionHeading";
 import { Stagger, StaggerItem } from "@/components/motion/Stagger";
 
 export const metadata: Metadata = {
-  title: "Where We Work | NICBEN",
+  title: "Where We Work",
   description:
     "Registered in Texas, serving clients in various U.S. states based on project requests.",
+  openGraph: {
+    title: "Where We Work | NICBEN",
+    description:
+      "Registered in Texas, serving clients in various U.S. states based on project requests.",
+    url: "https://nicben.com/service-areas",
+    images: [
+      {
+        url: "/images/brand/nicben-meta-banner.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Where We Work — NICBEN Asset Holdings & Investments LLC",
+      },
+    ],
+  },
 };
 
 const heroFacts = [

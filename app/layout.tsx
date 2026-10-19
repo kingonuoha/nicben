@@ -32,25 +32,36 @@ const caveat = Caveat({
  * export metadata — it appeared on `/styleguide` and `/_not-found`.
  */
 export const metadata: Metadata = {
-  title: "NICBEN Asset Holdings & Investments, Texas",
+  title: {
+    default: "NICBEN Asset Holdings & Investments, Texas",
+    template: "%s | NICBEN",
+  },
   description:
     "Privately owned Texas LLC: project management and contracting, property improvement and maintenance, and corporate treasury and investments.",
   metadataBase: new URL("https://nicben.com"),
   icons: {
-    icon: "/images/brand/nicben-logo-icon-dark.png",
-    apple: "/images/brand/nicben-logo-icon-dark.png",
+    icon: [
+      { url: "/favicon.ico" },
+      { url: "/icon.png", type: "image/png" },
+      { url: "/images/brand/nicben-logo-mark-dark.png", type: "image/png" },
+    ],
+    apple: [
+      { url: "/apple-icon.png" },
+      { url: "/images/brand/nicben-logo-mark-dark.png" },
+    ],
   },
   openGraph: {
     title: "NICBEN Asset Holdings & Investments, Texas",
     description:
       "Privately owned Texas LLC: project management and contracting, property improvement and maintenance, and corporate treasury and investments.",
-    siteName: "NICBEN Asset Holdings & Investments",
+    siteName: "NICBEN Asset Holdings & Investments LLC",
+    url: "https://nicben.com",
     images: [
       {
         url: "/images/brand/nicben-meta-banner.jpg",
         width: 1200,
         height: 630,
-        alt: "NICBEN Asset Holdings & Investments LLC",
+        alt: "NICBEN Asset Holdings & Investments LLC — Texas LLC",
       },
     ],
     locale: "en_US",

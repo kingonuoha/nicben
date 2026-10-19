@@ -21,6 +21,20 @@ export const metadata: Metadata = {
   title: "NICBEN Asset Holdings & Investments, Texas",
   description:
     "Privately owned Texas LLC: project management and contracting, property improvement and maintenance, and corporate treasury and investments.",
+  openGraph: {
+    title: "NICBEN Asset Holdings & Investments, Texas",
+    description:
+      "Privately owned Texas LLC: project management and contracting, property improvement and maintenance, and corporate treasury and investments.",
+    url: "https://nicben.com",
+    images: [
+      {
+        url: "/images/brand/nicben-meta-banner.jpg",
+        width: 1200,
+        height: 630,
+        alt: "NICBEN Asset Holdings & Investments LLC",
+      },
+    ],
+  },
 };
 
 /**

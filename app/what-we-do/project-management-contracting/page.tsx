@@ -7,9 +7,23 @@ import { Reveal } from "@/components/motion/Reveal";
 import { Stagger, StaggerItem } from "@/components/motion/Stagger";
 
 export const metadata: Metadata = {
-  title: "Project Management & Contracting | NICBEN",
+  title: "Project Management & Contracting",
   description:
     "We coordinate construction-related projects with qualified contractors and technicians, working at your location.",
+  openGraph: {
+    title: "Project Management & Contracting | NICBEN",
+    description:
+      "We coordinate construction-related projects with qualified contractors and technicians, working at your location.",
+    url: "https://nicben.com/what-we-do/project-management-contracting",
+    images: [
+      {
+        url: "/images/brand/nicben-meta-banner.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Project Management & Contracting — NICBEN",
+      },
+    ],
+  },
 };
 
 export default function ProjectManagementContractingPage() {

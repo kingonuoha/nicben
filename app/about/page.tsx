@@ -17,6 +17,20 @@ export const metadata: Metadata = {
   title: "About NICBEN",
   description:
     "A privately owned Texas limited liability company working on a project basis across various U.S. states.",
+  openGraph: {
+    title: "About NICBEN",
+    description:
+      "A privately owned Texas limited liability company working on a project basis across various U.S. states.",
+    url: "https://nicben.com/about",
+    images: [
+      {
+        url: "/images/brand/nicben-meta-banner.jpg",
+        width: 1200,
+        height: 630,
+        alt: "About NICBEN Asset Holdings & Investments LLC",
+      },
+    ],
+  },
 };
 
 const pillars = [

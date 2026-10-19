@@ -6,9 +6,23 @@ import { ShapePanel } from "@/components/ui/ShapePanel";
 import { Reveal } from "@/components/motion/Reveal";
 
 export const metadata: Metadata = {
-  title: "What We Do | NICBEN",
+  title: "What We Do",
   description:
     "Three areas of work: project management and contracting, property improvement and maintenance, and corporate treasury and investments.",
+  openGraph: {
+    title: "What We Do | NICBEN",
+    description:
+      "Three areas of work: project management and contracting, property improvement and maintenance, and corporate treasury and investments.",
+    url: "https://nicben.com/what-we-do",
+    images: [
+      {
+        url: "/images/brand/nicben-meta-banner.jpg",
+        width: 1200,
+        height: 630,
+        alt: "What We Do — NICBEN Asset Holdings & Investments LLC",
+      },
+    ],
+  },
 };
 
 type PillarIconName = "drafting" | "spanner" | "treasury";

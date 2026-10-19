@@ -10,9 +10,23 @@ import { SectionHeading } from "@/components/motion/SectionHeading";
 import { Stagger, StaggerItem } from "@/components/motion/Stagger";
 
 export const metadata: Metadata = {
-  title: "How It Works | NICBEN",
+  title: "How It Works",
   description:
     "From enquiry to completion: how NICBEN coordinates construction and property projects.",
+  openGraph: {
+    title: "How It Works | NICBEN",
+    description:
+      "From enquiry to completion: how NICBEN coordinates construction and property projects.",
+    url: "https://nicben.com/how-it-works",
+    images: [
+      {
+        url: "/images/brand/nicben-meta-banner.jpg",
+        width: 1200,
+        height: 630,
+        alt: "How It Works — NICBEN Asset Holdings & Investments LLC",
+      },
+    ],
+  },
 };
 
 const steps = [
