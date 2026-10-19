@@ -116,17 +116,17 @@ export const Header: React.FC = () => {
         {/* Desktop Navigation */}
         <nav
           className={`hidden md:flex items-center gap-1 lg:gap-2 text-sm font-medium ${
-            isDarkHeroMode ? "text-surface/85" : "text-text-600"
+            isDarkHeroMode ? "text-surface" : "text-text-600"
           }`}
         >
           <Link
             href="/"
             className={`px-3 py-1.5 rounded-pill transition-colors ${
               isDarkHeroMode
-                ? "hover:text-surface hover:bg-surface/15 text-surface font-semibold"
+                ? "text-surface font-semibold hover:bg-surface/15"
                 : pathname === "/"
                 ? "text-ink-950 font-semibold"
-                : "hover:text-ink-950 hover:bg-tint-100/60"
+                : "text-text-600 hover:text-ink-950 hover:bg-tint-100/60"
             }`}
           >
             Home
@@ -141,14 +141,12 @@ export const Header: React.FC = () => {
               aria-expanded={dropdownOpen}
               className={`flex items-center gap-1 px-3 py-1.5 rounded-pill transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-brand-700 ${
                 isDarkHeroMode
-                  ? "hover:text-surface hover:bg-surface/15"
-                  : "hover:text-ink-950 hover:bg-tint-100/60"
-              } ${
-                pathname.startsWith("/what-we-do")
-                  ? isDarkHeroMode
-                    ? "text-surface font-semibold"
-                    : "text-ink-950 font-semibold"
-                  : ""
+                  ? pathname.startsWith("/what-we-do")
+                    ? "text-surface font-semibold bg-surface/15"
+                    : "text-surface/90 hover:text-surface hover:bg-surface/15"
+                  : pathname.startsWith("/what-we-do")
+                  ? "text-ink-950 font-semibold bg-tint-100/60"
+                  : "text-text-600 hover:text-ink-950 hover:bg-tint-100/60"
               }`}
             >
               <span>What We Do</span>
@@ -214,14 +212,12 @@ export const Header: React.FC = () => {
             href="/about"
             className={`px-3 py-1.5 rounded-pill transition-colors ${
               isDarkHeroMode
-                ? "hover:text-surface hover:bg-surface/15"
-                : "hover:text-ink-950 hover:bg-tint-100/60"
-            } ${
-              pathname === "/about"
-                ? isDarkHeroMode
-                  ? "text-surface font-semibold"
-                  : "text-ink-950 font-semibold"
-                : ""
+                ? (pathname as string) === "/about"
+                  ? "text-surface font-semibold bg-surface/15"
+                  : "text-surface/90 hover:text-surface hover:bg-surface/15"
+                : (pathname as string) === "/about"
+                ? "text-ink-950 font-semibold bg-tint-100/60"
+                : "text-text-600 hover:text-ink-950 hover:bg-tint-100/60"
             }`}
           >
             About
@@ -231,14 +227,12 @@ export const Header: React.FC = () => {
             href="/contact"
             className={`px-3 py-1.5 rounded-pill transition-colors ${
               isDarkHeroMode
-                ? "hover:text-surface hover:bg-surface/15"
-                : "hover:text-ink-950 hover:bg-tint-100/60"
-            } ${
-              pathname === "/contact"
-                ? isDarkHeroMode
-                  ? "text-surface font-semibold"
-                  : "text-ink-950 font-semibold"
-                : ""
+                ? (pathname as string) === "/contact"
+                  ? "text-surface font-semibold bg-surface/15"
+                  : "text-surface/90 hover:text-surface hover:bg-surface/15"
+                : (pathname as string) === "/contact"
+                ? "text-ink-950 font-semibold bg-tint-100/60"
+                : "text-text-600 hover:text-ink-950 hover:bg-tint-100/60"
             }`}
           >
             Contact
