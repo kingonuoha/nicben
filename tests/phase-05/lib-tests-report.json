@@ -1,0 +1,266 @@
+{
+  "total": 52,
+  "failures": 0,
+  "results": [
+    {
+      "name": "all six approved error messages match the deck, in order",
+      "status": "PASS",
+      "detail": "6 messages, character-for-character"
+    },
+    {
+      "name": "every error key resolves to an approved message",
+      "status": "PASS",
+      "detail": "keys: name, email, enquiryType, message, attachment, generic"
+    },
+    {
+      "name": "enquiry-type options are the three deck labels",
+      "status": "PASS",
+      "detail": "Project management and contracting => project-management-contracting | Property improvement and maintenance => property-improvement-maintenance | General or business enquiry => general-business"
+    },
+    {
+      "name": "enquiry-type options carry exactly three values (D-002: no investment option)",
+      "status": "PASS",
+      "detail": "no value or label matches an investment-shaped term"
+    },
+    {
+      "name": "a well-formed submission validates and is sanitised",
+      "status": "PASS",
+      "detail": "{\"name\":\"Test Sender\",\"email\":\"sender@example.com\",\"enquiryType\":\"general-business\"}"
+    },
+    {
+      "name": "missing name → approved name message",
+      "status": "PASS",
+      "detail": "Please enter your name."
+    },
+    {
+      "name": "whitespace-only name is not a name",
+      "status": "PASS",
+      "detail": "control characters and spaces stripped before the minimum is applied"
+    },
+    {
+      "name": "invalid email → approved email message",
+      "status": "PASS",
+      "detail": "Please enter a valid email address."
+    },
+    {
+      "name": "missing enquiry type → approved enquiry-type message",
+      "status": "PASS",
+      "detail": "Please choose what your enquiry is about."
+    },
+    {
+      "name": "invented enquiry type is rejected, not coerced",
+      "status": "PASS",
+      "detail": "\"investment-opportunity\" rejected with the approved message"
+    },
+    {
+      "name": "message of 19 characters → approved minimum message",
+      "status": "PASS",
+      "detail": "19 chars rejected; the 20th is the boundary (see next case)"
+    },
+    {
+      "name": "message of exactly 20 characters passes",
+      "status": "PASS",
+      "detail": "min(20) is inclusive"
+    },
+    {
+      "name": "whitespace padding cannot satisfy the 20-character minimum",
+      "status": "PASS",
+      "detail": "sanitisation runs before the minimum is measured"
+    },
+    {
+      "name": "absent consent is rejected",
+      "status": "PASS",
+      "detail": "no approved consent string exists in the deck; the generic message is reused (reported)"
+    },
+    {
+      "name": "over-long message falls back to the generic message, never an invented one",
+      "status": "PASS",
+      "detail": "capped at 5000 characters"
+    },
+    {
+      "name": "validation failure payload contains no submitted value",
+      "status": "PASS",
+      "detail": "sentinel absent from the serialised failure"
+    },
+    {
+      "name": "the exported Zod schema is the one used, and it enforces min 20",
+      "status": "PASS",
+      "detail": "issue code=too_small minimum=20"
+    },
+    {
+      "name": "FormData is read by the schema's field names",
+      "status": "PASS",
+      "detail": "consent parsed from the checkbox value \"on\""
+    },
+    {
+      "name": "honeypot is detected only when populated",
+      "status": "PASS",
+      "detail": "field name \"companyWebsite\""
+    },
+    {
+      "name": "control, bidi and zero-width characters are removed",
+      "status": "PASS",
+      "detail": "\"abcde\""
+    },
+    {
+      "name": "multi-line sanitisation preserves paragraphs and collapses runs",
+      "status": "PASS",
+      "detail": "\"one\\n\\ntwo\\n\\nthree\""
+    },
+    {
+      "name": "phone normalisation keeps dialable characters and drops non-digits",
+      "status": "PASS",
+      "detail": "digits retained; a digit-free value becomes null"
+    },
+    {
+      "name": "uploaded filename paths cannot survive into a display name",
+      "status": "PASS",
+      "detail": "passwd.png · photo.jpg"
+    },
+    {
+      "name": "HTML escaping covers all five metacharacters",
+      "status": "PASS",
+      "detail": "&lt;img src=x onerror=1&gt;"
+    },
+    {
+      "name": "network-address pseudonym is stable, truncated and domain-separated",
+      "status": "PASS",
+      "detail": "2fec5401b1efbaa94f97da2aa2327b43 (32 hex chars)"
+    },
+    {
+      "name": "client address is taken from the first forwarded hop",
+      "status": "PASS",
+      "detail": "x-forwarded-for first entry wins; x-real-ip is the fallback"
+    },
+    {
+      "name": "magic bytes decide the type",
+      "status": "PASS",
+      "detail": "PNG/JPEG/PDF accepted by signature; GIF and junk rejected"
+    },
+    {
+      "name": "storage keys are generated, date-sharded and unique",
+      "status": "PASS",
+      "detail": "enquiries/2026/03/3e5ea08e-3149-4f23-8bde-47ce131b2ccf.png · unique per upload · extension from the sniffed type"
+    },
+    {
+      "name": "a valid PNG is accepted and renamed",
+      "status": "PASS",
+      "detail": "IMG_2034.PNG → enquiries/2026/10/41d0ea24-4057-42d8-b318-127055523a7d.png"
+    },
+    {
+      "name": "an oversized file is rejected before its bytes are read",
+      "status": "PASS",
+      "detail": "5242881 bytes > 5242880 → reason \"too-large\""
+    },
+    {
+      "name": "a GIF renamed .png with a forged MIME is rejected",
+      "status": "PASS",
+      "detail": "forged type caught by magic bytes → reason \"unsupported-type\""
+    },
+    {
+      "name": "a disallowed extension is rejected even with allowed bytes",
+      "status": "PASS",
+      "detail": "reason \"unsupported-type\""
+    },
+    {
+      "name": "a mismatched declared type is rejected even when the bytes are allowed",
+      "status": "PASS",
+      "detail": "reason \"unsupported-type\""
+    },
+    {
+      "name": "more files than the cap is rejected",
+      "status": "PASS",
+      "detail": "reason \"too-many-files\""
+    },
+    {
+      "name": "no files is a valid, empty result",
+      "status": "PASS",
+      "detail": "attachments are optional"
+    },
+    {
+      "name": "token bucket allows the configured burst and then refuses",
+      "status": "PASS",
+      "detail": "capacity 3 per 10 min; retry-after 200s"
+    },
+    {
+      "name": "buckets refill over the window",
+      "status": "PASS",
+      "detail": "3 allowed → refused → allowed again after one full window"
+    },
+    {
+      "name": "buckets are per key",
+      "status": "PASS",
+      "detail": "an exhausted bucket does not affect another key"
+    },
+    {
+      "name": "the email escapes every interpolated value",
+      "status": "PASS",
+      "detail": "no raw sender markup in the HTML part"
+    },
+    {
+      "name": "the subject contains no sender-supplied value",
+      "status": "PASS",
+      "detail": "New website enquiry: Property improvement and maintenance"
+    },
+    {
+      "name": "the email body uses the deck's own field labels",
+      "status": "PASS",
+      "detail": "six deck §11 labels present"
+    },
+    {
+      "name": "attachments are described by key, never by a public URL",
+      "status": "PASS",
+      "detail": "no http(s) reference anywhere in the body"
+    },
+    {
+      "name": "the port round-trips an enquiry through the dev adapter",
+      "status": "PASS",
+      "detail": "id 623a3814… status \"new\""
+    },
+    {
+      "name": "status changes and notes are recorded",
+      "status": "PASS",
+      "detail": "status contacted, 2 notes"
+    },
+    {
+      "name": "the notification flag is settable and readable (D-021)",
+      "status": "PASS",
+      "detail": "flag persisted on the stored record"
+    },
+    {
+      "name": "unknown ids return null rather than throwing",
+      "status": "PASS",
+      "detail": "four methods, four nulls"
+    },
+    {
+      "name": "listEnquiries filters, pages and counts",
+      "status": "PASS",
+      "detail": "total 5, page 1 2, page 2 2, filtered 4"
+    },
+    {
+      "name": "adapter selection follows MONGODB_URI (D-019)",
+      "status": "PASS",
+      "detail": "absent → dev, present → mongo (no connection attempted)"
+    },
+    {
+      "name": "no secret in development → skipped with ok:true",
+      "status": "PASS",
+      "detail": "ok:true, skipped:true"
+    },
+    {
+      "name": "no secret in production → rejected (fail closed)",
+      "status": "PASS",
+      "detail": "ok:false, reason \"not-configured\""
+    },
+    {
+      "name": "a secret with no token → rejected",
+      "status": "PASS",
+      "detail": "ok:false, reason \"missing-token\""
+    },
+    {
+      "name": "the HTTP contract is stable and documents its own statuses",
+      "status": "PASS",
+      "detail": "/api/enquiries → 200/400/403/413/429/500"
+    }
+  ]
+}
