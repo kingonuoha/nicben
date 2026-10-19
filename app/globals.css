@@ -348,6 +348,35 @@ h1, h2, h3, h4, h5, h6 {
   }
 }
 
+/* ---------------------------------------------------------------------------
+   Hidden admin portal shell (Phase 06).
+
+   `app/layout.tsx` renders the public pill header, the footer and the 80px
+   header clearance for every route in the application. The portal at `/admin`
+   must show none of that: it has its own console chrome, and the public footer's
+   navigation has no business inside it.
+
+   The alternative — moving every public page into a `(public)` route group so the
+   header and footer live in a group layout — is a public-site restructure and out
+   of this phase's scope (`docs/tasks/phase-06-hidden-admin-portal/admin-task.md`
+   §10 forbids touching the public pages). `display: none` is used rather than
+   `visibility` or an overlay because it removes the elements from the
+   accessibility tree and from the tab order as well as from paint, so a keyboard
+   or screen-reader walk through the portal reaches portal content only.
+
+   This is presentation. It is **not** an access control: `docs/06-tech-and-security-spec.md`
+   §27 requires the server-side session check, which every portal route performs
+   (`app/admin/(protected)/layout.tsx` + each page).
+--------------------------------------------------------------------------- */
+body:has([data-admin-shell]) > header,
+body:has([data-admin-shell]) > footer {
+  display: none;
+}
+
+body:has([data-admin-shell]) > #main-content {
+  padding-top: 0;
+}
+
 @layer utilities {
   .text-balance {
     text-wrap: balance;
