@@ -4,6 +4,7 @@ import { Accordion } from "@/components/ui/Accordion";
 import { CtaBand } from "@/components/ui/CtaBand";
 import { EyebrowChip } from "@/components/ui/EyebrowChip";
 import { SectionWrapper } from "@/components/ui/SectionWrapper";
+import { Reveal } from "@/components/motion/Reveal";
 
 export const metadata: Metadata = {
   title: "FAQ | NICBEN",
@@ -78,9 +79,6 @@ const groups = [
               aria-hidden="true"
             />
             <div className="space-y-1.5">
-              {/* R-L: the `Informational only` label was deleted — no deck line
-                  supplies an eyebrow for the notice box, and deck:117 already
-                  opens with "This page is for information only." */}
               <p className="text-sm font-semibold text-ink-950 leading-relaxed">
                 This page is for information only. It is not an offer, invitation
                 or solicitation to invest, and NICBEN does not offer investment
@@ -109,19 +107,13 @@ const groups = [
 export default function FaqPage() {
   return (
     <main className="min-h-screen">
-      {/* 1. HERO
-          Header clearance is global (`app/layout.tsx`), so this hero keeps the
-          standard pt-8 sm:pt-12 section rhythm. */}
+      {/* 1. HERO */}
       <SectionWrapper
         background="tint-50"
         className="relative overflow-hidden pt-8 sm:pt-12 pb-16 lg:pb-20"
       >
-        {/* Architectural grid backdrop from the design screen, rendered from the
-            shared token texture. `.texture-grid` already bakes the documented
-            ~4% alpha (`docs/04-design-system.md` section 5), so no caller-side
-            `opacity-*` is applied — stacking one double-dimmed it to 0.2%. */}
         <div
-          className="absolute inset-0 texture-grid pointer-events-none"
+          className="absolute inset-0 texture-grid pointer-events-none opacity-75 motion-safe:animate-pulse"
           aria-hidden="true"
         />
 
@@ -144,76 +136,74 @@ export default function FaqPage() {
 
         <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-end">
           <div className="lg:col-span-8">
-            <EyebrowChip dotColor="sky" className="mb-6">
-              FAQ
-            </EyebrowChip>
+            <Reveal from="bottom" speed="base">
+              <EyebrowChip dotColor="sky" className="mb-6">
+                FAQ
+              </EyebrowChip>
 
-            <h1 className="text-display font-extrabold tracking-tight text-ink-950 leading-tight heading-spark">
-              FAQ
-            </h1>
-            <p className="mt-6 text-lg sm:text-xl text-text-600 leading-relaxed font-normal max-w-2xl">
-              Answers about what NICBEN does, how projects start, and how the
-              company operates.
-            </p>
+              <h1 className="text-display font-extrabold tracking-tight text-ink-950 leading-tight heading-spark">
+                FAQ
+              </h1>
+            </Reveal>
+
+            <Reveal from="bottom" speed="base" delay={120}>
+              <p className="mt-6 text-lg sm:text-xl text-text-600 leading-relaxed font-normal max-w-2xl">
+                Answers about what NICBEN does, how projects start, and how the
+                company operates.
+              </p>
+            </Reveal>
           </div>
 
-          <div className="lg:col-span-4 rounded-lg bg-surface border border-line shadow-card p-6 flex flex-col gap-4">
-            <div className="flex items-center justify-between gap-3">
-              <span className="text-xs font-semibold uppercase tracking-wider text-brand-700">
-                Registered in Texas
-              </span>
-              <span className="text-brand-700" aria-hidden="true">
-                <svg
-                  className="w-5 h-5"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth="1.5"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M9 12.75L11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 01-1.043 3.296 3.745 3.745 0 01-3.296 1.043A3.745 3.745 0 0112 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 01-3.296-1.043 3.745 3.745 0 01-1.043-3.296A3.745 3.745 0 013 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 011.043-3.296 3.746 3.746 0 013.296-1.043A3.746 3.746 0 0112 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 013.296 1.043 3.746 3.746 0 011.043 3.296A3.745 3.745 0 0121 12z"
+          <div className="lg:col-span-4">
+            <Reveal from="right" speed="medium" delay={150}>
+              <div className="group card-lift rounded-lg bg-surface border border-line hover:border-brand-500 shadow-card p-6 flex flex-col gap-4 transition-all duration-200">
+                <div className="flex items-center justify-between gap-3">
+                  <span className="text-xs font-semibold uppercase tracking-wider text-brand-700">
+                    Registered in Texas
+                  </span>
+                  <span className="text-brand-700 transition-transform duration-200 group-hover:scale-110 motion-reduce:group-hover:scale-100" aria-hidden="true">
+                    <svg
+                      className="w-5 h-5"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      strokeWidth="1.5"
+                      stroke="currentColor"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M9 12.75L11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 01-1.043 3.296 3.745 3.745 0 01-3.296 1.043A3.745 3.745 0 0112 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 01-3.296-1.043 3.745 3.745 0 01-1.043-3.296A3.745 3.745 0 013 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 011.043-3.296 3.746 3.746 0 013.296-1.043A3.746 3.746 0 0112 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 013.296 1.043 3.746 3.746 0 011.043 3.296A3.745 3.745 0 0121 12z"
+                      />
+                    </svg>
+                  </span>
+                </div>
+                <div>
+                  <p className="font-heading text-base font-bold text-ink-950">
+                    NICBEN Asset Holdings &amp; Investments LLC
+                  </p>
+                  <p className="text-sm text-text-600 mt-1">
+                    Privately owned limited liability company.
+                  </p>
+                </div>
+                <div className="pt-2 border-t border-line flex items-center gap-2 text-xs text-text-600">
+                  <span
+                    className="w-2 h-2 rounded-full bg-brand-500"
+                    aria-hidden="true"
                   />
-                </svg>
-              </span>
-            </div>
-            <div>
-              <p className="font-heading text-base font-bold text-ink-950">
-                NICBEN Asset Holdings &amp; Investments LLC
-              </p>
-              <p className="text-sm text-text-600 mt-1">
-                Privately owned limited liability company.
-              </p>
-            </div>
-            <div className="pt-2 border-t border-line flex items-center gap-2 text-xs text-text-600">
-              <span
-                className="w-2 h-2 rounded-full bg-brand-500"
-                aria-hidden="true"
-              />
-              {/* R-L: `Project-based work` → deck:44 fragment `Project-based`. */}
-              Project-based
-            </div>
+                  Project-based
+                </div>
+              </div>
+            </Reveal>
           </div>
         </div>
       </SectionWrapper>
 
-      {/* 2. GROUPS
-          The uncited "quick facts" strip that stood here is deleted in full.
-          docs/03-copy-deck.md supplies no facts strip for `/faq`, and
-          docs/01-sitemap-wireframes.md:103-105 defines the page as grouped
-          accordions plus a contact CTA. Its `No external investment
-          solicitation` detail was an unapproved investment-boundary assertion
-          (D-002 class), and the other four strings had no deck line either. */}
+      {/* 2. GROUPS */}
       <SectionWrapper background="tint-50" className="border-t border-line">
         <div className="mb-12">
           <EyebrowChip dotColor="teal">FAQ</EyebrowChip>
           <nav aria-label="FAQ topics" className="mt-6">
             <ul className="flex flex-wrap items-center gap-2 rounded-md bg-surface border border-line p-2 w-fit max-w-full shadow-card">
-              {/* R-L: the leading `All questions` chip was deleted — no deck line
-                  supplies it, and its target (`#faq-group-about`) was already
-                  carried by the cited `About the company` (deck:160) chip
-                  directly beneath it. */}
               {jumpLinks.map((link) => (
                 <li key={link.href}>
                   <a
@@ -231,7 +221,7 @@ export default function FaqPage() {
         <Accordion groups={groups} defaultOpenId="faq-1" />
       </SectionWrapper>
 
-      {/* 4. CTA BAND */}
+      {/* 3. CTA BAND */}
       <CtaBand />
     </main>
   );

@@ -34,7 +34,7 @@ export const EmptyState: React.FC<EmptyStateProps> = ({
   noteBody,
 }) => {
   return (
-    <div className="relative overflow-hidden rounded-lg bg-tint-50 border border-line shadow-card px-6 py-14 sm:px-10 sm:py-20 flex flex-col items-center text-center">
+    <div className="group card-lift relative overflow-hidden rounded-lg bg-tint-50 border border-line hover:border-brand-500 shadow-card px-6 py-14 sm:px-10 sm:py-20 flex flex-col items-center text-center transition-all duration-300">
       <div
         className="absolute inset-0 opacity-5 texture-dots pointer-events-none"
         aria-hidden="true"
@@ -57,7 +57,7 @@ export const EmptyState: React.FC<EmptyStateProps> = ({
       )}
 
       <div className="relative z-10 mb-8" aria-hidden="true">
-        <div className="relative w-24 h-24 sm:w-28 sm:h-28 rounded-lg bg-surface border border-line flex items-center justify-center shadow-card">
+        <div className="relative w-24 h-24 sm:w-28 sm:h-28 rounded-lg bg-surface border border-line flex items-center justify-center shadow-card transition-transform duration-300 group-hover:scale-105 motion-reduce:group-hover:scale-100">
           <span className="absolute top-2 left-2 text-brand-500 text-sm">
             +
           </span>

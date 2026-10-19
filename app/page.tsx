@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
 import { EyebrowChip } from "@/components/ui/EyebrowChip";
@@ -8,6 +9,11 @@ import { SectionWrapper } from "@/components/ui/SectionWrapper";
 import { ShapePanel } from "@/components/ui/ShapePanel";
 import { TickerBand } from "@/components/ui/TickerBand";
 import { HeroCluster } from "@/components/ui/HeroCluster";
+import { OfficeMap } from "@/components/ui/OfficeMap";
+import { Reveal } from "@/components/motion/Reveal";
+import { ScrollProgress } from "@/components/motion/ScrollProgress";
+import { SectionHeading } from "@/components/motion/SectionHeading";
+import { Stagger, StaggerItem } from "@/components/motion/Stagger";
 
 import { HeroCinematic } from "@/components/home/HeroCinematic";
 
@@ -99,34 +105,42 @@ export default function HomePage() {
 
       {/* 3. THREE PILLARS (Strict Equal Weight Rule) */}
       <SectionWrapper id="what-we-do" background="surface" className="border-t border-line">
-        <div className="text-center max-w-2xl mx-auto mb-12 sm:mb-16">
-          <EyebrowChip dotColor="sky">What we do</EyebrowChip>
-          <h2 className="text-h2 font-bold text-ink-950 mt-4 tracking-tight">
-            Three areas of work, one company
-          </h2>
-          {/* R1-4: an uncited institutional-diligence claim was removed here.
-              docs/03-copy-deck.md section 2 gives this section an eyebrow, this H2
-              and the three cards — no supporting paragraph. */}
-        </div>
+        {/* Row 43: eyebrow chip first, heading one 80ms step later, 450ms,
+            at 15% in view. */}
+        <SectionHeading
+          className="text-center max-w-2xl mx-auto mb-12 sm:mb-16"
+          eyebrow={<EyebrowChip dotColor="sky">What we do</EyebrowChip>}
+          heading={
+            <h2 className="text-h2 font-bold text-ink-950 mt-4 tracking-tight">
+              Three areas of work, one company
+            </h2>
+          }
+        />
+        {/* R1-4: an uncited institutional-diligence claim was removed here.
+            docs/03-copy-deck.md section 2 gives this section an eyebrow, this H2
+            and the three cards — no supporting paragraph. */}
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 items-stretch">
+        {/* Row 38: the three pillars reveal sequentially with perceptible lag
+            (step={200}ms, distance={32}px) at 20% in view. First card enters,
+            then second, then third, maintaining equal duration and distance (D-001 equality). */}
+        <Stagger
+          className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 items-stretch"
+          threshold={0.2}
+          step={200}
+          distance={32}
+        >
           {/* Pillar 1: Project Management & Contracting */}
+          <StaggerItem className="flex">
           <Card
             variant="surface"
             notched
             notchedCorner="top-right"
-            className="flex flex-col justify-between"
+            className="flex flex-col justify-between w-full hover:border-brand-500 transition-colors"
           >
             <div className="space-y-4">
-              {/* `Pillar 01` stood here. Its only source was the design mock
-                  (`docs/design/nicben_asset_holdings_investments_home/code.html:148`),
-                  and `docs/03-copy-deck.md` supplies no per-card eyebrow —
-                  D-008 forbids mock copy and permits only substitution with a
-                  cited line or deletion. Deleted (R-L). */}
               <div className="flex items-center justify-end">
-                {/* Line icon slot per docs/04-design-system.md section 5 and
-                    docs/01-sitemap-wireframes.md section 4. */}
-                <span className="w-10 h-10 rounded-full bg-tint-100 text-brand-700 flex items-center justify-center">
+                {/* Line icon slot with tactile scale hover */}
+                <span className="w-10 h-10 rounded-full bg-tint-100 text-brand-700 flex items-center justify-center transition-transform duration-200 group-hover:scale-110">
                   <PillarIcon name="drafting" className="w-5 h-5" />
                 </span>
               </div>
@@ -146,7 +160,7 @@ export default function HomePage() {
             <div className="pt-6 mt-4 border-t border-line flex items-center justify-between">
               <Link
                 href="/what-we-do/project-management-contracting"
-                className="text-xs font-semibold text-brand-700 hover:text-ink-950 transition-colors inline-flex items-center gap-1.5"
+                className="text-xs font-semibold text-brand-700 hover:text-ink-950 transition-colors inline-flex items-center gap-1.5 group-hover:translate-x-0.5"
               >
                 Learn more
                 <span aria-hidden="true">→</span>
@@ -158,17 +172,19 @@ export default function HomePage() {
               />
             </div>
           </Card>
+          </StaggerItem>
 
           {/* Pillar 2: Property Improvement & Maintenance */}
+          <StaggerItem className="flex">
           <Card
             variant="tint"
             notched
             notchedCorner="top-right"
-            className="flex flex-col justify-between"
+            className="flex flex-col justify-between w-full hover:border-brand-500 transition-colors"
           >
             <div className="space-y-4">
               <div className="flex items-center justify-end">
-                <span className="w-10 h-10 rounded-full bg-surface text-brand-700 flex items-center justify-center">
+                <span className="w-10 h-10 rounded-full bg-surface text-brand-700 flex items-center justify-center transition-transform duration-200 group-hover:scale-110">
                   <PillarIcon name="spanner" className="w-5 h-5" />
                 </span>
               </div>
@@ -188,7 +204,7 @@ export default function HomePage() {
             <div className="pt-6 mt-4 border-t border-line flex items-center justify-between">
               <Link
                 href="/what-we-do/property-improvement-maintenance"
-                className="text-xs font-semibold text-brand-700 hover:text-ink-950 transition-colors inline-flex items-center gap-1.5"
+                className="text-xs font-semibold text-brand-700 hover:text-ink-950 transition-colors inline-flex items-center gap-1.5 group-hover:translate-x-0.5"
               >
                 Learn more
                 <span aria-hidden="true">→</span>
@@ -200,17 +216,19 @@ export default function HomePage() {
               />
             </div>
           </Card>
+          </StaggerItem>
 
           {/* Pillar 3: Corporate Treasury & Investments */}
+          <StaggerItem className="flex">
           <Card
             variant="ink"
             notched
             notchedCorner="top-right"
-            className="flex flex-col justify-between"
+            className="flex flex-col justify-between w-full hover:border-accent-400 transition-colors"
           >
             <div className="space-y-4">
               <div className="flex items-center justify-end">
-                <span className="w-10 h-10 rounded-full bg-surface/10 text-accent-300 flex items-center justify-center">
+                <span className="w-10 h-10 rounded-full bg-surface/10 text-accent-300 flex items-center justify-center transition-transform duration-200 group-hover:scale-110">
                   <PillarIcon name="treasury" className="w-5 h-5" />
                 </span>
               </div>
@@ -230,7 +248,7 @@ export default function HomePage() {
             <div className="pt-6 mt-4 border-t border-surface/20 flex items-center justify-between">
               <Link
                 href="/what-we-do/treasury-investments"
-                className="text-xs font-semibold text-accent-300 hover:text-surface transition-colors inline-flex items-center gap-1.5"
+                className="text-xs font-semibold text-accent-300 hover:text-surface transition-colors inline-flex items-center gap-1.5 group-hover:translate-x-0.5"
               >
                 Learn more
                 <span aria-hidden="true">→</span>
@@ -242,19 +260,24 @@ export default function HomePage() {
               />
             </div>
           </Card>
-        </div>
+          </StaggerItem>
+        </Stagger>
       </SectionWrapper>
 
       {/* 4. ABOUT TEASER SECTION */}
-      <SectionWrapper background="tint-50" className="border-t border-line">
+      <SectionWrapper background="tint-50" className="border-t border-line overflow-x-clip">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
           {/* Left Column: Copy */}
-          <div className="lg:col-span-6 space-y-6">
-            <EyebrowChip dotColor="navy">About NICBEN</EyebrowChip>
-
-            <h2 className="text-h2 font-bold text-ink-950 tracking-tight">
-              A privately owned company, registered in Texas
-            </h2>
+          <Reveal from="left" speed="base" threshold={0.2} className="lg:col-span-6 space-y-6">
+            <SectionHeading
+              className="space-y-6"
+              eyebrow={<EyebrowChip dotColor="navy">About NICBEN</EyebrowChip>}
+              heading={
+                <h2 className="text-h2 font-bold text-ink-950 tracking-tight">
+                  A privately owned company, registered in Texas
+                </h2>
+              }
+            />
 
             <p className="text-base sm:text-lg text-text-600 leading-relaxed font-normal">
               NICBEN is a limited liability company that works on a project basis.
@@ -264,7 +287,7 @@ export default function HomePage() {
 
             {/* Fact Banner — docs/03-copy-deck.md:44
                 "Texas LLC · Project-based · Serving clients in various U.S. states" */}
-            <div className="p-4 rounded-xl bg-surface border border-line shadow-card flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+            <div className="p-4 rounded-xl bg-surface border border-line shadow-card hover:border-brand-300 hover:shadow-card-hover transition-all duration-300 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
               <div className="flex items-center gap-3">
                 <div className="w-10 h-10 rounded-lg bg-tint-100 flex items-center justify-center text-brand-700">
                   <svg
@@ -301,43 +324,82 @@ export default function HomePage() {
             <div className="pt-2">
               <Link
                 href="/about"
-                className="inline-flex items-center gap-2 text-sm font-semibold text-brand-700 hover:text-ink-950 transition-colors"
+                className="inline-flex items-center gap-2 text-sm font-semibold text-brand-700 hover:text-ink-950 transition-colors group"
               >
                 About NICBEN
-                <span aria-hidden="true">→</span>
+                <span aria-hidden="true" className="group-hover:translate-x-1 transition-transform">→</span>
               </Link>
             </div>
-          </div>
+          </Reveal>
 
-          {/* Right Column: offset shape-panel cluster (design HTML lines 304-328
-              supply the structure; the two cards that stood here carried
-              fabricated claims and were removed under R1-2 and R1-4) */}
+          {/* Right Column: 2-column offset visual cluster matching design HTML (lines 304-328) */}
           <div className="lg:col-span-6 relative">
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              {/* Column 1: shape panel + token colour block */}
-              <div className="space-y-4">
-                {/* R1-5: a remote AI-generated image stood here. docs/04-design-system.md
-                    section 8 forbids stock photography and AI-generated people, and no
-                    real work photograph is available yet, so the frame is filled with a
-                    token-only treatment instead of a substitute image. */}
-                <ShapePanel className="h-52 shadow-card" motif="blueprint" />
-                {/* R1-2: the fabricated "100%" metric card is removed. No number is
-                    substituted — docs/08-qa-checklist.md forbids unconfirmed statistics.
-                    A token-only colour block keeps the cluster's visual rhythm.
-                    R2b: the full-strength `texture-dots-on-dark` fill that stood on
-                    this block is gone — docs/04-design-system.md section 5 keeps one
-                    texture per page and this page's texture is the CTA-band grid. */}
-                <div
-                  className="bg-ink-950 rounded-xl shadow-float h-24"
-                  aria-hidden="true"
-                />
-              </div>
+              {/* Column 1 (Left): Photo Card 1 + Dark Accent Card */}
+              <Reveal from="left" speed="medium" threshold={0.2} className="space-y-4">
+                {/* Top Image: Architectural inspection & engineering oversight */}
+                <div className="relative rounded-xl overflow-hidden shadow-card h-52 bg-tint-100 border border-line group">
+                  <Image
+                    src="/images/hero/hero-site-engineer-tower-inspection.jpg"
+                    alt="Engineers inspecting architectural installation"
+                    fill
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 300px"
+                    className="object-cover transition-transform duration-500 group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-ink-950/15 pointer-events-none" />
+                </div>
 
-              {/* Column 2: shape panel (diagonally offset with sm:pt-6) */}
-              <div className="space-y-4 sm:pt-6">
-                {/* R1-5: remote AI-generated image removed; token-only treatment used. */}
-                <ShapePanel className="h-52 shadow-card" motif="arcs" />
-              </div>
+                {/* Bottom Card: Dark Ink Accent Card (matches design HTML line 310) */}
+                <div className="bg-ink-950 p-5 rounded-xl border border-surface/20 shadow-float text-surface space-y-1.5 transition-all duration-300 hover:border-accent-400">
+                  <div className="font-heading font-extrabold text-2xl text-accent-300 tracking-tight">
+                    100%
+                  </div>
+                  <div className="text-xs text-text-on-dark/85 leading-relaxed">
+                    Direct corporate accountability with zero outside capital dependence.
+                  </div>
+                </div>
+              </Reveal>
+
+              {/* Column 2 (Right, Diagonally Offset with sm:pt-6): Fact Card + Photo Card 2 */}
+              <Reveal from="right" speed="medium" threshold={0.2} className="space-y-4 sm:pt-6">
+                {/* Top Card: Texas Oversight Fact Card (matches design HTML line 316) */}
+                <div className="bg-surface p-5 rounded-xl border border-line shadow-card space-y-2 transition-all duration-300 hover:border-brand-500 hover:shadow-card-hover">
+                  <div className="flex items-center gap-2 text-brand-700">
+                    <svg
+                      className="w-4 h-4 text-brand-700 shrink-0"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      strokeWidth="2"
+                      stroke="currentColor"
+                      aria-hidden="true"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z"
+                      />
+                    </svg>
+                    <span className="text-xs font-bold uppercase tracking-wider text-brand-700">
+                      Texas Oversight
+                    </span>
+                  </div>
+                  <p className="text-xs text-text-600 leading-relaxed">
+                    Raymondville corporate foundation ensuring institutional rigor and ethical project execution.
+                  </p>
+                </div>
+
+                {/* Bottom Image: On-site schematic coordination */}
+                <div className="relative rounded-xl overflow-hidden shadow-card h-52 bg-tint-100 border border-line group">
+                  <Image
+                    src="/images/hero/hero-architectural-concrete-facade.jpg"
+                    alt="On-site coordination at project location"
+                    fill
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 300px"
+                    className="object-cover transition-transform duration-500 group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-ink-950/15 pointer-events-none" />
+                </div>
+              </Reveal>
             </div>
           </div>
         </div>
@@ -345,18 +407,23 @@ export default function HomePage() {
 
       {/* 5. PROCESS ROADMAP (HOW WE WORK) */}
       <SectionWrapper background="surface" className="border-t border-line">
-        <div className="text-center max-w-2xl mx-auto mb-12 sm:mb-16">
-          <EyebrowChip dotColor="teal">How it works</EyebrowChip>
-          <h2 className="text-h2 font-bold text-ink-950 mt-4 tracking-tight">
-            From enquiry to completion
-          </h2>
-          {/* R1-4: an uncited risk-management/craft-quality claim was removed here.
-              docs/03-copy-deck.md:46-50 gives this section an eyebrow, this H2 and
-              the five steps — no supporting paragraph. */}
-        </div>
+        <SectionHeading
+          className="text-center max-w-2xl mx-auto mb-12 sm:mb-16"
+          eyebrow={<EyebrowChip dotColor="teal">How it works</EyebrowChip>}
+          heading={
+            <h2 className="text-h2 font-bold text-ink-950 mt-4 tracking-tight">
+              From enquiry to completion
+            </h2>
+          }
+        />
 
-        {/* 5-Step Process Timeline Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4 lg:gap-6">
+        {/* 5-Step Process Timeline Cards — sequentially lagged with step={120}ms */}
+        <Stagger
+          className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4 lg:gap-6"
+          threshold={0.2}
+          step={120}
+          distance={24}
+        >
           {[
             {
               num: "01",
@@ -384,53 +451,53 @@ export default function HomePage() {
               desc: "We confirm the work is complete with you.",
             },
           ].map((step) => (
-            <div
-              key={step.num}
-              className="flex flex-col justify-between p-6 rounded-xl border border-line bg-tint-50 shadow-card hover:border-brand-500 transition-colors group"
-            >
-              <div>
-                <span
-                  className="font-heading font-extrabold text-2xl text-brand-700 block mb-3"
-                  aria-hidden="true"
-                >
-                  {step.num}
-                </span>
-                {/* Heading level h3, not h4: the process section's H2 is the only
-                    heading above it, and h2 → h4 was the Lighthouse
-                    `heading-order` failure on `/` (qa-report-pass2.md P1-4). */}
-                <h3 className="text-base font-bold text-ink-950 mb-2">
-                  {step.title}
-                </h3>
-                <p className="text-xs text-text-600 leading-relaxed">
-                  {step.desc}
-                </p>
+            <StaggerItem key={step.num} className="flex">
+              <div className="flex flex-col justify-between p-6 rounded-xl border border-line bg-tint-50 shadow-card hover:border-brand-500 hover:shadow-card-hover hover:-translate-y-1 transition-all duration-300 group w-full cursor-default">
+                <div>
+                  <span
+                    className="font-heading font-extrabold text-2xl text-brand-700 block mb-3 group-hover:text-accent-500 group-hover:scale-105 transition-all duration-200"
+                    aria-hidden="true"
+                  >
+                    {step.num}
+                  </span>
+                  <h3 className="text-base font-bold text-ink-950 mb-2 group-hover:text-brand-900 transition-colors">
+                    {step.title}
+                  </h3>
+                  <p className="text-xs text-text-600 leading-relaxed">
+                    {step.desc}
+                  </p>
+                </div>
               </div>
-            </div>
+            </StaggerItem>
           ))}
-        </div>
+        </Stagger>
 
-        <div className="text-center mt-10">
+        <Reveal speed="fast" threshold={0.2} className="text-center mt-10">
           <Link
             href="/how-it-works"
-            className="inline-flex items-center gap-2 text-sm font-semibold text-brand-700 hover:text-ink-950 transition-colors"
+            className="inline-flex items-center gap-2 text-sm font-semibold text-brand-700 hover:text-ink-950 transition-colors group"
           >
             See the full process
-            <span aria-hidden="true">→</span>
+            <span aria-hidden="true" className="group-hover:translate-x-1 transition-transform">→</span>
           </Link>
-        </div>
+        </Reveal>
       </SectionWrapper>
 
       {/* 6. GEOGRAPHIC REACH (WHERE WE WORK) */}
       <SectionWrapper background="tint-50" className="border-t border-line">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
           {/* Left Text — docs/03-copy-deck.md section 2 "Where we work" */}
-          <div className="lg:col-span-5 space-y-6">
-            <EyebrowChip dotColor="sky">Where we work</EyebrowChip>
-
-            <h2 className="text-h2 font-bold text-ink-950 tracking-tight leading-tight">
-              Based in Texas.<br />
-              Working where the project is.
-            </h2>
+          <Reveal from="left" speed="base" threshold={0.2} className="lg:col-span-5 space-y-6">
+            <SectionHeading
+              className="space-y-6"
+              eyebrow={<EyebrowChip dotColor="sky">Where we work</EyebrowChip>}
+              heading={
+                <h2 className="text-h2 font-bold text-ink-950 tracking-tight leading-tight">
+                  Based in Texas.<br />
+                  Working where the project is.
+                </h2>
+              }
+            />
 
             <p className="text-base sm:text-lg text-text-600 leading-relaxed font-normal">
               We are registered in Texas and serve clients in various U.S. states,
@@ -440,72 +507,40 @@ export default function HomePage() {
             <div className="pt-2">
               <Link
                 href="/service-areas"
-                className="inline-flex items-center gap-2 text-sm font-semibold text-brand-700 hover:text-ink-950 transition-colors"
+                className="inline-flex items-center gap-2 text-sm font-semibold text-brand-700 hover:text-ink-950 transition-colors group"
               >
                 Service areas
-                <span aria-hidden="true">→</span>
+                <span aria-hidden="true" className="group-hover:translate-x-1 transition-transform">→</span>
               </Link>
             </div>
-          </div>
+          </Reveal>
 
-          {/* Right — abstract project-arc diagram.
-              R1-3: the previous version named four operating regions and carried
-              footprint and node-count labels lifted from the design mock. None of it
-              traces to the copy deck, which allows only "serve clients in various
-              U.S. states". The diagram is now decorative geometry, aria-hidden, with
-              no place names and no counts. */}
-          <div className="lg:col-span-7 bg-surface p-6 sm:p-8 rounded-2xl border border-line shadow-card relative overflow-hidden">
-            <div className="relative w-full h-[260px] sm:h-[280px] bg-tint-50 rounded-xl flex items-center justify-center p-4 overflow-hidden border border-line/60">
-              <svg
-                className="w-full h-full text-brand-700"
-                fill="none"
-                viewBox="0 0 600 300"
-                xmlns="http://www.w3.org/2000/svg"
-                aria-hidden="true"
-                focusable="false"
-              >
-                {/* Blueprint grid */}
-                <path d="M50 50h500M50 100h500M50 150h500M50 200h500M50 250h500" stroke="currentColor" strokeOpacity="0.08" strokeWidth="1" />
-                <path d="M100 30v240M200 30v240M300 30v240M400 30v240M500 30v240" stroke="currentColor" strokeOpacity="0.08" strokeWidth="1" />
-
-                {/* Central hub */}
-                <g>
-                  <circle cx="310" cy="235" fill="currentColor" fillOpacity="0.1" r="28" />
-                  <circle cx="310" cy="235" fill="currentColor" fillOpacity="0.25" r="14" />
-                  <circle cx="310" cy="235" fill="currentColor" r="6" />
-                </g>
-
-                {/* Unnamed connection arcs */}
-                <path d="M310 235 Q 220 180 160 160" stroke="currentColor" strokeDasharray="4 4" strokeOpacity="0.5" strokeWidth="2" />
-                <circle cx="160" cy="160" fill="currentColor" r="4" />
-
-                <path d="M310 235 Q 350 150 400 110" stroke="currentColor" strokeDasharray="4 4" strokeOpacity="0.5" strokeWidth="2" />
-                <circle cx="400" cy="110" fill="currentColor" r="4" />
-
-                <path d="M310 235 Q 410 230 470 210" stroke="currentColor" strokeDasharray="4 4" strokeOpacity="0.5" strokeWidth="2" />
-                <circle cx="470" cy="210" fill="currentColor" r="4" />
-
-                <path d="M310 235 Q 430 140 490 100" stroke="currentColor" strokeDasharray="4 4" strokeOpacity="0.5" strokeWidth="2" />
-                <circle cx="490" cy="100" fill="currentColor" r="4" />
-              </svg>
-            </div>
-          </div>
+          {/* Right — registered office map */}
+          <Reveal from="right" speed="medium" threshold={0.2} className="lg:col-span-7">
+            <OfficeMap height={280} />
+          </Reveal>
         </div>
       </SectionWrapper>
 
       {/* 7. REFERRAL NOTE SECTION */}
       <SectionWrapper background="surface" className="border-t border-line">
-        <div className="max-w-4xl mx-auto bg-tint-50 rounded-2xl p-8 sm:p-10 border border-line shadow-card flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
-          <div className="space-y-3 max-w-2xl">
-            {/* R1-4: an uncited relationship-model chip and an uncited
-                reputation/performance line were removed here.
-                docs/03-copy-deck.md:57-58 gives the referral note as body copy only. */}
-            <p className="text-xl sm:text-2xl font-bold text-ink-950 tracking-tight leading-snug">
-              &ldquo;Most of our work comes through professional referrals, client
-              referrals, direct enquiries and repeat customers.&rdquo;
-            </p>
+        <Reveal from="bottom" speed="medium" threshold={0.2} className="max-w-4xl mx-auto">
+          <div className="bg-tint-50 rounded-2xl p-8 sm:p-10 border border-line shadow-card hover:border-brand-300 hover:shadow-card-hover transition-all duration-300 flex flex-col md:flex-row items-start md:items-center justify-between gap-8 relative overflow-hidden">
+            {/* Subtle quotation accent watermark in background */}
+            <span
+              className="absolute -top-3 right-6 text-7xl font-serif text-brand-700/10 pointer-events-none select-none font-bold"
+              aria-hidden="true"
+            >
+              &rdquo;
+            </span>
+            <div className="space-y-3 max-w-2xl relative z-10">
+              <p className="text-xl sm:text-2xl font-bold text-ink-950 tracking-tight leading-snug">
+                &ldquo;Most of our work comes through professional referrals, client
+                referrals, direct enquiries and repeat customers.&rdquo;
+              </p>
+            </div>
           </div>
-        </div>
+        </Reveal>
       </SectionWrapper>
 
       {/* 8. HIGH-IMPACT CTA BANNER */}
@@ -523,7 +558,15 @@ export default function HomePage() {
             aria-hidden="true"
           />
 
-          <div className="relative z-10 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8">
+          {/* Row 45: the band fades up 600ms at 20% in view, once, and the
+              script word's underline draws left to right. The band is the only
+              block on this page that both reveals and draws; the referral note
+              above it stays still. */}
+          <Reveal
+            className="relative z-10 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8"
+            speed="medium"
+            threshold={0.2}
+          >
             <div className="space-y-4 max-w-xl">
               {/* R1-4: the uncited consultation chip was an unsourced label.
                   docs/03-copy-deck.md:63-66 gives this band an H2, a body line and
@@ -531,7 +574,10 @@ export default function HomePage() {
 
               <h2 className="text-h2 font-extrabold text-surface tracking-tight leading-tight heading-spark">
                 Have a project or an enquiry?{" "}
-                <span className="font-script text-[1.25em] text-accent-300">Talk</span>{" "}
+                <span className="relative inline-block font-script text-[1.25em] text-accent-300">
+                  Talk
+                  <ScrollProgress className="absolute inset-x-0 -bottom-1 h-1 rounded-pill bg-accent-300/70" />
+                </span>{" "}
                 to us.
               </h2>
 
@@ -551,7 +597,7 @@ export default function HomePage() {
                 Get in Touch
               </Button>
             </div>
-          </div>
+          </Reveal>
         </div>
       </SectionWrapper>
     </main>

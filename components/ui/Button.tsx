@@ -24,7 +24,7 @@ export const Button: React.FC<ButtonProps> = ({
   ...props
 }) => {
   const baseStyles =
-    "inline-flex items-center justify-center font-medium rounded-pill transition-all duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-700 disabled:opacity-50 disabled:cursor-not-allowed group";
+    "inline-flex items-center justify-center font-medium rounded-pill transition-all duration-200 active:scale-[0.98] motion-reduce:active:scale-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-700 disabled:opacity-50 disabled:cursor-not-allowed group";
 
   const sizeStyles = {
     sm: "text-xs px-3.5 py-1.5 gap-1.5",
@@ -45,7 +45,7 @@ export const Button: React.FC<ButtonProps> = ({
 
   const arrowCircle = withArrow ? (
     <span
-      className={`inline-flex items-center justify-center rounded-full transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 ${
+      className={`inline-flex items-center justify-center rounded-full transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-active:translate-x-1 group-active:-translate-y-1 motion-reduce:group-hover:translate-x-0 motion-reduce:group-hover:translate-y-0 ${
         size === "sm" ? "w-4 h-4 ml-0.5" : size === "lg" ? "w-6 h-6 ml-1" : "w-5 h-5 ml-1"
       } ${
         variant === "primary"

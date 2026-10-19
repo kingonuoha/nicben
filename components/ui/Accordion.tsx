@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
+import { Stagger, StaggerItem } from "@/components/motion/Stagger";
 
 export interface AccordionItem {
   /** Stable id used to build the trigger/panel relationship. */
@@ -54,18 +55,12 @@ function usePrefersReducedMotion(): boolean {
  * `aria-expanded` + `aria-controls`; Enter and Space toggle natively. Every
  * panel is `role="region"` labelled by its own trigger, and a collapsed panel is
  * `inert`, so its hidden content can never be reached by Tab or announced by a
- * screen reader. Focus rings use `--color-brand-700` (the highest-contrast
- * palette colour on a white card) at 2px, inset so the card's rounded clip
- * cannot cut it.
+ * screen reader.
  *
- * Motion: height is animated with the `accordion-panel` utility (grid-rows plus
- * opacity, both transform-free), so opening never shifts anything outside the
- * panel and the answer is never clipped mid-transition. Timing comes from
- * `--motion-dur-base`, which `prefers-reduced-motion: reduce` collapses to 1ms;
- * in that mode the inline `transition: none` makes every open/close instant
- * regardless of the token, per `docs/05-motion-spec.md` section 5.
- *
- * Interaction: one item open at a time, consistently, everywhere.
+ * Motion:
+ * - Staggered entrance for FAQ question cards (step={100}ms).
+ * - Smooth height transition with chevron rotating 90° on toggle.
+ * - Under prefers-reduced-motion: reduce, transforms and transitions are disabled.
  */
 export const Accordion: React.FC<AccordionProps> = ({
   groups,
@@ -96,79 +91,77 @@ export const Accordion: React.FC<AccordionProps> = ({
                 {group.title}
               </h2>
             </div>
-            {/* R-L: the `1 question` / `N questions` counter that sat here is
-                deleted. `docs/03-copy-deck.md` section 10 supplies the group
-                titles and the questions, no count label. */}
           </div>
 
-          <div className="flex flex-col gap-3">
+          <Stagger className="flex flex-col gap-3" step={100} threshold={0.2} margin="0px 0px -12% 0px">
             {group.items.map((item) => {
               const isOpen = openId === item.id;
               const triggerId = `${item.id}-trigger`;
               const panelId = `${item.id}-panel`;
 
               return (
-                <div
-                  key={item.id}
-                  className="rounded-md bg-surface border border-line shadow-card overflow-hidden"
-                >
-                  <h3 className="text-base sm:text-lg">
-                    <button
-                      type="button"
-                      id={triggerId}
-                      aria-expanded={isOpen}
-                      aria-controls={panelId}
-                      onClick={() => setOpenId(isOpen ? null : item.id)}
-                      className="w-full flex items-center justify-between gap-4 text-left p-6 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-brand-700 hover:bg-tint-50 transition-colors duration-[var(--motion-dur-fast)] motion-reduce:transition-none"
-                    >
-                      <span className="font-bold text-ink-950 leading-snug">
-                        {item.question}
-                      </span>
-                      <span
-                        className={`w-10 h-10 rounded-full bg-tint-100 text-brand-700 flex items-center justify-center shrink-0 transition-transform duration-[var(--motion-dur-base)] motion-reduce:transition-none ${
-                          isOpen ? "rotate-180" : ""
-                        }`}
-                        aria-hidden="true"
-                      >
-                        <svg
-                          className="w-5 h-5"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          strokeWidth="2"
-                          stroke="currentColor"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            d="M19.5 8.25l-7.5 7.5-7.5-7.5"
-                          />
-                        </svg>
-                      </span>
-                    </button>
-                  </h3>
-
+                <StaggerItem key={item.id}>
                   <div
-                    id={panelId}
-                    role="region"
-                    aria-labelledby={triggerId}
-                    data-open={isOpen ? "true" : "false"}
-                    inert={!isOpen}
-                    className="accordion-panel"
-                    style={reducedMotion ? { transition: "none" } : undefined}
+                    className="group card-lift rounded-md bg-surface border border-line hover:border-brand-500 shadow-card overflow-hidden transition-all duration-200"
                   >
-                    <div>
-                      <div className="px-6 pb-6 pt-1 space-y-4">
-                        <div className="text-sm text-text-600 leading-relaxed">
-                          {item.answer}
+                    <h3 className="text-base sm:text-lg">
+                      <button
+                        type="button"
+                        id={triggerId}
+                        aria-expanded={isOpen}
+                        aria-controls={panelId}
+                        onClick={() => setOpenId(isOpen ? null : item.id)}
+                        className="w-full flex items-center justify-between gap-4 text-left p-6 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-brand-700 hover:bg-tint-50 transition-colors duration-[var(--motion-dur-fast)] motion-reduce:transition-none"
+                      >
+                        <span className="font-bold text-ink-950 leading-snug">
+                          {item.question}
+                        </span>
+                        <span
+                          className={`w-10 h-10 rounded-full bg-tint-100 text-brand-700 flex items-center justify-center shrink-0 transition-transform duration-[var(--motion-dur-base)] motion-reduce:transition-none ${
+                            isOpen ? "rotate-90" : "rotate-0"
+                          }`}
+                          aria-hidden="true"
+                        >
+                          <svg
+                            className="w-5 h-5"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            strokeWidth="2"
+                            stroke="currentColor"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              d="M8.25 4.5l7.5 7.5-7.5 7.5"
+                            />
+                          </svg>
+                        </span>
+                      </button>
+                    </h3>
+
+                    <div
+                      id={panelId}
+                      role="region"
+                      aria-labelledby={triggerId}
+                      data-open={isOpen ? "true" : "false"}
+                      inert={!isOpen}
+                      className="accordion-panel"
+                      style={reducedMotion ? { transition: "none" } : undefined}
+                    >
+                      <div>
+                        <div className="px-6 pb-6 pt-1 space-y-4">
+                          <div className="text-sm text-text-600 leading-relaxed">
+                            {item.answer}
+                          </div>
+                          {item.extra}
                         </div>
-                        {item.extra}
                       </div>
                     </div>
                   </div>
-                </div>
+                </StaggerItem>
               );
             })}
-          </div>
+          </Stagger>
         </section>
       ))}
     </div>

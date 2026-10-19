@@ -22,8 +22,13 @@ export function HeroCinematic({
 }: HeroCinematicProps = {}) {
   return (
     <section className="relative w-full min-h-screen flex items-center overflow-hidden bg-ink-950">
-      {/* 1. Full-Bleed Background (runs edge-to-edge from the top of the browser) */}
-      <div className="absolute inset-0 z-0" aria-hidden="true">
+      {/* 1. Full-Bleed Background (runs edge-to-edge from the top of the browser)
+          `hero-photo` = row 35 / D-031: one slow scale 1.04 -> 1 with opacity,
+          800ms ease-out. One element, so no stagger. The animation is a CSS
+          keyframe (see globals.css) so it starts at first paint instead of
+          waiting for hydration, and `prefers-reduced-motion` removes the scale
+          entirely. */}
+      <div className="hero-photo absolute inset-0 z-0" aria-hidden="true">
         {imageUrl ? (
           <>
             <Image
@@ -57,7 +62,7 @@ export function HeroCinematic({
               Block-level flex with w-fit, not inline-flex: inline-flex made the
               badge an inline-level child, so `space-y-6` could not apply its
               vertical margin and the hero rhythm collapsed. */}
-          <div className="flex w-fit items-center gap-2 px-3.5 py-1.5 rounded-pill bg-surface/15 backdrop-blur-md border border-surface/20 text-eyebrow font-semibold uppercase tracking-[0.04em] text-accent-300 shadow-sm">
+          <div className="hero-eyebrow flex w-fit items-center gap-2 px-3.5 py-1.5 rounded-pill bg-surface/15 backdrop-blur-md border border-surface/20 text-eyebrow font-semibold uppercase tracking-[0.04em] text-accent-300 shadow-sm">
             <span
               className="w-2 h-2 rounded-full bg-accent-400"
               aria-hidden="true"
@@ -74,26 +79,33 @@ export function HeroCinematic({
                 Caveat has a smaller x-height than Bricolage, so matching the
                 x-height needs ~1.32em rather than the 1.15em nominal ratio.
                 tracking-normal undoes the inherited negative heading tracking,
-                which otherwise crowds a script face. */}
-          <h1 className="text-display font-bold tracking-[-0.02em] text-surface leading-[1.1] heading-spark">
-            Three disciplines.<br />
-            <span className="font-script text-[1.32em] tracking-normal text-accent-400">
+                which otherwise crowds a script face.
+
+              Row 34 (D-031): the heading is split into three inline-block lines
+              so each can reveal on its own 800ms ease-out pass with an 80ms
+              step — line one, then "company.", then the Caveat word "One" last.
+              The copy is untouched; only the markup that carries the timing is
+              new. `hero-title` delays the spark accent with the final line. */}
+          <h1 className="hero-title text-display font-bold tracking-[-0.02em] text-surface leading-[1.1] heading-spark">
+            <span className="hero-line hero-line-1">Three disciplines.</span>
+            <br />
+            <span className="hero-line hero-line-2 font-script text-[1.32em] tracking-normal text-accent-400">
               One
             </span>{" "}
-            company.
+            <span className="hero-line hero-line-3">company.</span>
           </h1>
 
           {/* Verbatim Approved Copy — docs/03-copy-deck.md:24
               text-on-dark is the documented light-text token; body-lg is the
               spec body size (1.125rem). Previously text-surface/90 + sm:text-xl,
               which both drifted from the token set and exceeded the scale. */}
-          <p className="text-lg text-text-on-dark leading-[1.65] font-normal max-w-xl">
+          <p className="hero-sub text-lg text-text-on-dark leading-[1.65] font-normal max-w-xl">
             NICBEN manages construction-related projects, improves and maintains
             properties, and manages its own corporate treasury and investments.
           </p>
 
           {/* Dual CTAs — docs/03-copy-deck.md:25-26 */}
-          <div className="pt-2 flex flex-wrap items-center gap-4">
+          <div className="hero-actions pt-2 flex flex-wrap items-center gap-4">
             <Button variant="accent" size="lg" withArrow href="/contact">
               Get in Touch
             </Button>
@@ -101,19 +113,21 @@ export function HeroCinematic({
               variant="secondary"
               size="lg"
               href="#what-we-do"
-              className="!bg-surface/10 !text-surface !border-surface/30 hover:!bg-surface/20 backdrop-blur-md"
+              className="!bg-surface/10 !text-surface !border-surface/30 hover:!bg-surface/20 backdrop-blur-md transition-all duration-200"
             >
               What We Do
             </Button>
           </div>
 
-          {/* Fact chips — docs/03-copy-deck.md:27-28 */}
+          {/* Fact chips — docs/03-copy-deck.md:27-28
+              Row 36: translateY 12px -> 0 with opacity, 450ms, 150ms stagger.
+              Copy unchanged; `hero-chip` only adds the timing. */}
           <div className="pt-4 flex flex-wrap items-center gap-3">
-            <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-pill bg-surface/10 backdrop-blur-sm border border-surface/15 text-xs font-semibold text-text-on-dark/85">
+            <span className="hero-chip inline-flex items-center gap-2 px-3 py-1.5 rounded-pill bg-surface/10 backdrop-blur-sm border border-surface/15 text-xs font-semibold text-text-on-dark/85 hover:bg-surface/20 hover:border-surface/30 transition-all duration-200 cursor-default">
               <span className="w-2 h-2 rounded-full bg-brand-500" aria-hidden="true" />
               Registered in Texas
             </span>
-            <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-pill bg-surface/10 backdrop-blur-sm border border-surface/15 text-xs font-semibold text-text-on-dark/85">
+            <span className="hero-chip inline-flex items-center gap-2 px-3 py-1.5 rounded-pill bg-surface/10 backdrop-blur-sm border border-surface/15 text-xs font-semibold text-text-on-dark/85 hover:bg-surface/20 hover:border-surface/30 transition-all duration-200 cursor-default">
               <span className="w-2 h-2 rounded-full bg-brand-500" aria-hidden="true" />
               Serving clients across the US
             </span>

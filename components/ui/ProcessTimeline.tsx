@@ -1,6 +1,8 @@
 "use client";
 
 import React, { useEffect, useRef, useState } from "react";
+import { motion } from "motion/react";
+import { useReveal } from "@/components/motion/useReveal";
 
 export interface ProcessStep {
   /** Displayed step marker, e.g. `01`. */
@@ -24,22 +26,20 @@ const clamp01 = (value: number) => Math.min(1, Math.max(0, value));
  * line that fills as the user scrolls, each step a card with its number in a
  * circle. Steps are an ordered list because the sequence carries meaning.
  *
- * Motion (`docs/05-motion-spec.md` section 4): the connector fill is
- * scroll-linked and only the fill, never the step content, changes — the steps
- * stay readable at all times and no emphasis state is swapped, so there is no
- * hydration flash and no CLS.
+ * Motion (`docs/05-motion-spec.md` section 4):
+ * - Sequential reveal down the 5 steps (`01` -> `05`) with 140ms step lag.
+ * - Card hover: lifts -4px (`card-lift`), border brightens, number indicator lights up to brand teal.
+ * - The connector fill is scroll-linked.
  *
  * Reduced motion (section 5): the scroll listener is never attached and the
- * line renders fully filled. That is also the server-rendered and no-JavaScript
- * state, so nothing is hidden behind an animation. The fill's transition is
- * driven by `--motion-dur-fast`, which collapses to 1ms under
- * `prefers-reduced-motion: reduce`.
+ * line renders fully filled. Under `prefers-reduced-motion: reduce`, all cards render static and visible.
  */
 export const ProcessTimeline: React.FC<ProcessTimelineProps> = ({
   steps,
   className = "",
 }) => {
   const listRef = useRef<HTMLOListElement>(null);
+  const { ref: revealRef, tokens, hidden } = useReveal(0.2, "0px 0px -12% 0px");
   /** 1 = fully filled. */
   const [progress, setProgress] = useState(1);
   /**
@@ -70,12 +70,6 @@ export const ProcessTimeline: React.FC<ProcessTimelineProps> = ({
       setProgress(clamp01((trigger - rect.top) / rect.height));
     };
 
-    /**
-     * One rect read per scroll event. Browsers already coalesce scroll events to
-     * roughly one per frame, and the read is a single element, so this stays off
-     * the animation budget without depending on `requestAnimationFrame` (which
-     * is paused in background tabs and would leave the fill stale there).
-     */
     const onScroll = () => {
       setScrollDriven(true);
       measure();
@@ -123,7 +117,10 @@ export const ProcessTimeline: React.FC<ProcessTimelineProps> = ({
 
   return (
     <ol
-      ref={listRef}
+      ref={(node) => {
+        listRef.current = node;
+        (revealRef as React.MutableRefObject<HTMLOListElement | null>).current = node;
+      }}
       className={`flex flex-col lg:flex-row lg:items-stretch gap-4 lg:gap-6 ${className}`}
     >
       {steps.map((step, index) => {
@@ -145,13 +142,24 @@ export const ProcessTimeline: React.FC<ProcessTimelineProps> = ({
         }`;
 
         return (
-          <li
+          <motion.li
             key={step.num}
-            className="relative flex-1 min-w-0 rounded-md border border-line bg-tint-50 shadow-card p-6 transition-colors duration-[var(--motion-dur-fast)] hover:border-brand-500"
+            initial={false}
+            animate={hidden ? { opacity: 0, y: tokens.distance } : { opacity: 1, y: 0 }}
+            transition={
+              hidden
+                ? { duration: 0 }
+                : {
+                    duration: tokens.durBase / 1000,
+                    delay: (index * 140) / 1000,
+                    ease: tokens.easeOut,
+                  }
+            }
+            className="group card-lift relative flex-1 min-w-0 rounded-xl border border-line bg-tint-50 shadow-card p-6 transition-all duration-300 hover:border-brand-500 hover:bg-surface"
           >
             <div className="flex items-center gap-3">
               <span
-                className="w-11 h-11 shrink-0 rounded-full bg-tint-100 border border-line text-brand-700 font-heading text-sm font-extrabold flex items-center justify-center"
+                className="w-11 h-11 shrink-0 rounded-full bg-tint-100 border border-line text-brand-700 font-heading text-sm font-extrabold flex items-center justify-center transition-all duration-200 group-hover:bg-brand-500 group-hover:text-surface group-hover:border-brand-500 group-hover:scale-105 motion-reduce:group-hover:scale-100"
                 aria-hidden="true"
               >
                 {step.num}
@@ -182,7 +190,7 @@ export const ProcessTimeline: React.FC<ProcessTimelineProps> = ({
                 </span>
               </>
             )}
-          </li>
+          </motion.li>
         );
       })}
     </ol>

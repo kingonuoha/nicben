@@ -5,11 +5,37 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Button } from "@/components/ui/Button";
 
+/**
+ * Focusable candidates inside the mobile sheet. `getClientRects().length` is the
+ * visibility test rather than `offsetParent`, because the sheet's scrim is
+ * `position: fixed` and that makes `offsetParent` unreliable inside it.
+ */
+const FOCUSABLE_SELECTOR = [
+  "a[href]",
+  "button:not([disabled])",
+  "input:not([disabled])",
+  "select:not([disabled])",
+  "textarea:not([disabled])",
+  '[tabindex]:not([tabindex="-1"])',
+].join(",");
+
+function getFocusable(container: HTMLElement): HTMLElement[] {
+  return Array.from(
+    container.querySelectorAll<HTMLElement>(FOCUSABLE_SELECTOR),
+  ).filter(
+    (element) =>
+      element.getAttribute("aria-hidden") !== "true" &&
+      element.getClientRects().length > 0,
+  );
+}
+
 export const Header: React.FC = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
+  const mobileSheetRef = useRef<HTMLDivElement>(null);
+  const menuButtonRef = useRef<HTMLButtonElement>(null);
   const pathname = usePathname();
 
   const isHomePage = pathname === "/";
@@ -51,6 +77,69 @@ export const Header: React.FC = () => {
     return () => {
       document.body.style.overflow = "unset";
     };
+  }, [mobileMenuOpen]);
+
+  /**
+   * Mobile sheet focus management — Phase 07 §6 (the P1 recorded in `ab6dfe0`).
+   *
+   * While the sheet is open it is a modal dialog: focus moves into it on open,
+   * Tab and Shift+Tab cycle through its own focusable elements only (so the hero
+   * CTA painted behind the scrim cannot be reached), and Escape closes it. The
+   * trap is a document-level `keydown` listener because the sheet is the whole
+   * interactive surface while open; the browser's default Tab handling then
+   * never has a chance to leave it.
+   */
+  useEffect(() => {
+    if (!mobileMenuOpen) return;
+    const sheet = mobileSheetRef.current;
+    if (!sheet) return;
+
+    const first = getFocusable(sheet)[0];
+    first?.focus();
+
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        event.preventDefault();
+        setMobileMenuOpen(false);
+        return;
+      }
+      if (event.key !== "Tab") return;
+
+      const focusable = getFocusable(sheet);
+      if (focusable.length === 0) return;
+
+      const firstFocusable = focusable[0];
+      const lastFocusable = focusable[focusable.length - 1];
+      const active = document.activeElement;
+
+      if (!active || !sheet.contains(active)) {
+        event.preventDefault();
+        (event.shiftKey ? lastFocusable : firstFocusable).focus();
+        return;
+      }
+      if (!event.shiftKey && active === lastFocusable) {
+        event.preventDefault();
+        firstFocusable.focus();
+        return;
+      }
+      if (event.shiftKey && active === firstFocusable) {
+        event.preventDefault();
+        lastFocusable.focus();
+      }
+    };
+
+    document.addEventListener("keydown", onKeyDown);
+    return () => document.removeEventListener("keydown", onKeyDown);
+  }, [mobileMenuOpen]);
+
+  // Return focus to the toggle whenever the sheet closes — by the button,
+  // Escape, or a route change — so keyboard position is never lost.
+  const sheetWasOpen = useRef(false);
+  useEffect(() => {
+    if (sheetWasOpen.current && !mobileMenuOpen) {
+      menuButtonRef.current?.focus();
+    }
+    sheetWasOpen.current = mobileMenuOpen;
   }, [mobileMenuOpen]);
 
   const pillars = [
@@ -253,10 +342,12 @@ export const Header: React.FC = () => {
 
         {/* Mobile Hamburger Toggle */}
         <button
+          ref={menuButtonRef}
           type="button"
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
           aria-expanded={mobileMenuOpen}
+          aria-controls="mobile-menu"
           className={`md:hidden p-2 rounded-full transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-brand-700 ${
             isDarkHeroMode
               ? "text-surface hover:bg-surface/20"
@@ -275,10 +366,20 @@ export const Header: React.FC = () => {
         </button>
       </div>
 
-      {/* Mobile Slide-Over Sheet */}
+      {/* Mobile Slide-Over Sheet.
+          `role="dialog"` + `aria-modal` keep assistive technology inside the
+          panel, and the keydown handler above keeps the keyboard inside it too.
+          The scrim is the fixed layer; the panel is what receives focus. */}
       {mobileMenuOpen && (
         <div className="fixed inset-0 top-[72px] z-50 bg-ink-950/40 backdrop-blur-sm md:hidden">
-          <div className="bg-surface border-b border-line p-6 max-h-[85vh] overflow-y-auto rounded-b-3xl shadow-float animate-in slide-in-from-top-4 duration-200">
+          <div
+            ref={mobileSheetRef}
+            id="mobile-menu"
+            role="dialog"
+            aria-modal="true"
+            aria-label="Site menu"
+            className="bg-surface border-b border-line p-6 max-h-[85vh] overflow-y-auto rounded-b-3xl shadow-float animate-in slide-in-from-top-4 duration-200"
+          >
             <nav className="flex flex-col space-y-4">
               <Link
                 href="/"

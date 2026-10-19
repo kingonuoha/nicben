@@ -110,7 +110,7 @@ export const Card: React.FC<CardProps> = ({
         <span
           data-notch-layer=""
           aria-hidden="true"
-          className={`absolute inset-0 rounded-2xl border pointer-events-none ${PANEL[resolvedVariant]}`}
+          className={`absolute inset-0 rounded-2xl border pointer-events-none transition-colors duration-200 group-hover:border-brand-500 ${PANEL[resolvedVariant]}`}
           style={{ clipPath: scoopClipPath(notchedCorner) }}
         />
       )}

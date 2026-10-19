@@ -4,6 +4,8 @@ import Link from "next/link";
 import { Card } from "@/components/ui/Card";
 import { EyebrowChip } from "@/components/ui/EyebrowChip";
 import { SectionWrapper } from "@/components/ui/SectionWrapper";
+import { Reveal } from "@/components/motion/Reveal";
+import { OfficeMap } from "@/components/ui/OfficeMap";
 import {
   getTurnstileSiteKey,
   isAttachmentStorageConfigured,
@@ -15,32 +17,9 @@ import { ContactForm } from "./ContactForm";
 
 /**
  * `/contact` — the enquiry page.
- *
- * **Server component on purpose.** Three of the four values the form needs come
- * from server-only modules that must never reach the browser:
- *
- * 1. `isAttachmentStorageConfigured()` — `decisions.md` D-020: with no
- *    `BLOB_READ_WRITE_TOKEN` the attachment field is **not rendered at all**,
- *    because "a 'your file was ignored' path is worse than an absent field".
- * 2. `isTurnstileWidgetEnabled()` / `getTurnstileSiteKey()` — `lib/enquiry/config.ts`
- *    is server-only (it reads secrets); only the public **site** key is handed
- *    down as a prop.
- * 3. `?enquiry=` — resolved here, not in the browser, so the preselected enquiry
- *    type is already correct in the delivered HTML (no hydration shift, and it
- *    still works with JavaScript unavailable). Reading `searchParams` makes this
- *    route render per request, which is the honest description of a page whose
- *    markup depends on the request.
- *
- * Every visible string on this page traces to `docs/03-copy-deck.md` §11
- * (`:182`–`:196`) or §14 (`:228`); the line is cited at each site. `decisions.md`
- * D-008 — mocks are structure references only, never copy sources — governs the
- * design screen this page reproduces
- * (`docs/design/nicben_asset_holdings_investments_contact_quote_request/`).
  */
 export const metadata: Metadata = {
-  /** `docs/03-copy-deck.md:228`, verbatim (the table's Title tag cell). */
   title: "Contact NICBEN",
-  /** `docs/03-copy-deck.md:228`, verbatim (the table's Meta description cell). */
   description: "Send an enquiry or contact NICBEN by email or phone.",
 };
 
@@ -51,30 +30,17 @@ interface ContactPageProps {
 export default async function ContactPage({ searchParams }: ContactPageProps) {
   const params = await searchParams;
 
-  /**
-   * `docs/01-sitemap-wireframes.md:74`/`:105`/`:118` require the pillar CTAs to
-   * preselect the enquiry type. The three pillar pages link
-   * `/contact?enquiry=project-management-contracting`,
-   * `…=property-improvement-maintenance` and
-   * `…=general-or-business-enquiry`; `resolveEnquiryTypeQuery` maps each spelling
-   * (and the stored value itself) to one stored value, so an unknown or absent
-   * parameter simply leaves the group unselected.
-   */
   const enquiryParam = params.enquiry;
   const defaultEnquiryType = resolveEnquiryTypeQuery(
     Array.isArray(enquiryParam) ? enquiryParam[0] : enquiryParam,
   );
 
-  /* D-020 / D-022 — the two integration switches, read on the server. */
   const attachmentUploadEnabled = isAttachmentStorageConfigured();
   const turnstileSiteKey = isTurnstileWidgetEnabled() ? getTurnstileSiteKey() : null;
 
   return (
     <main className="min-h-screen">
-      {/* 1. HERO
-          Structure from the design screen: breadcrumb left with the corporate
-          status chips right, then the heading block. Header clearance is global
-          (`app/layout.tsx`), so this keeps the standard pt-8 sm:pt-12 rhythm. */}
+      {/* 1. HERO */}
       <SectionWrapper
         background="tint-50"
         className="pt-8 sm:pt-12 pb-12 lg:pb-16"
@@ -97,14 +63,6 @@ export default async function ContactPage({ searchParams }: ContactPageProps) {
             </ol>
           </nav>
 
-          {/*
-            The design screen carries two status chips here (`Texas Registered
-            LLC`, `Direct Client-Site Coordination`). Neither has a deck line, so
-            both are deleted (D-008) and the documented chip row is preserved
-            with the deck's own two approval-cited chip strings: `:27`
-            "Registered in Texas" and `:28` "Serving clients across the US"
-            (both §2 hero chips, used as facts elsewhere on the site already).
-          */}
           <ul className="flex flex-wrap items-center gap-2">
             <li>
               <EyebrowChip dotColor="teal">Registered in Texas</EyebrowChip>
@@ -118,75 +76,36 @@ export default async function ContactPage({ searchParams }: ContactPageProps) {
         </div>
 
         <div className="max-w-2xl">
-          {/* The design's `Get in touch with NICBEN` eyebrow chip had no deck
-              line and is deleted; `03-copy-deck.md:182` already supplies the H1
-              directly beneath it. */}
-          <h1 className="text-display font-extrabold tracking-tight text-ink-950 leading-tight heading-spark">
-            Get in touch
-          </h1>
+          <Reveal from="bottom" speed="base">
+            <h1 className="text-display font-extrabold tracking-tight text-ink-950 leading-tight heading-spark">
+              Get in touch
+            </h1>
+          </Reveal>
 
-          {/* `docs/03-copy-deck.md:183`, verbatim. Its `[CLIENT TO CONFIRM
-              response time]` marker is omitted in full: no approved
-              response-time copy exists to publish (`docs/tasks/phase-05-backend-and-contact/brief.md` §5.3). */}
-          <p className="mt-6 text-lg sm:text-xl text-text-600 leading-relaxed font-normal">
-            Tell us what you need. We will reply by email or phone.
-          </p>
+          <Reveal from="bottom" speed="base" delay={120}>
+            <p className="mt-6 text-lg sm:text-xl text-text-600 leading-relaxed font-normal">
+              Tell us what you need. We will reply by email or phone.
+            </p>
+          </Reveal>
         </div>
       </SectionWrapper>
 
-      {/* 2. CONTACT DETAILS + ENQUIRY FORM
-          The design's 5/7 two-column grid: directory card left, form right,
-          top-aligned. `docs/01-sitemap-wireframes.md:107-111` defines the page
-          as intro, form and contact details card (plus an optional map, which
-          has no approved content and is therefore absent). */}
+      {/* 2. CONTACT DETAILS + ENQUIRY FORM */}
       <SectionWrapper background="tint-50" className="pt-0 pb-16 lg:pb-24">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-start">
-          <div className="lg:col-span-5">
-            <Card variant="surface" className="flex flex-col">
-              <div className="flex items-center justify-between gap-4 pb-4 mb-4 border-b border-line">
-                {/* `Contact` is the deck's own name for this surface — the nav
-                    label (`:11`), the footer column (`:14`) and the page title
-                    (`:228`). The design's `Official Directory` / `Direct
-                    Inquiries & Headquarters` eyebrow and heading have no deck
-                    line and are deleted. */}
-                <h2 className="text-h3 font-bold text-ink-950 tracking-tight">
-                  Contact
-                </h2>
-                <span
-                  className="w-10 h-10 rounded-full bg-tint-100 text-brand-700 flex items-center justify-center shrink-0"
-                  aria-hidden="true"
-                >
-                  <svg
-                    className="w-5 h-5"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    strokeWidth="1.5"
-                    stroke="currentColor"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M2.25 21h19.5m-18-18v18m10.5-18v18m6-13.5V21M6.75 6.75h.75m-.75 3h.75m-.75 3h.75m3-6h.75m-.75 3h.75m-.75 3h.75"
-                    />
-                  </svg>
-                </span>
-              </div>
-
-              {/* `docs/03-copy-deck.md:13` (the footer statement, approved and
-                  already reused as a card body on `/service-areas`). */}
-              <p className="text-sm text-text-600 leading-relaxed">
-                NICBEN Asset Holdings &amp; Investments LLC is a privately owned
-                company registered in Texas.
-              </p>
-
-              <ul className="mt-6 space-y-3">
-                <li className="flex items-start gap-3 rounded-md bg-tint-50 border border-line p-4">
+          <div className="lg:col-span-5 space-y-6">
+            <Reveal from="left" speed="medium" threshold={0.2} margin="0px 0px -12% 0px">
+              <Card variant="surface" className="group card-lift flex flex-col hover:border-brand-500 transition-colors duration-200">
+                <div className="flex items-center justify-between gap-4 pb-4 mb-4 border-b border-line">
+                  <h2 className="text-h3 font-bold text-ink-950 tracking-tight">
+                    Contact
+                  </h2>
                   <span
-                    className="w-7 h-7 rounded-full bg-surface text-brand-700 border border-line flex items-center justify-center shrink-0"
+                    className="w-10 h-10 rounded-full bg-tint-100 text-brand-700 flex items-center justify-center shrink-0 transition-transform duration-200 group-hover:scale-110 motion-reduce:group-hover:scale-100"
                     aria-hidden="true"
                   >
                     <svg
-                      className="w-4 h-4"
+                      className="w-5 h-5"
                       fill="none"
                       viewBox="0 0 24 24"
                       strokeWidth="1.5"
@@ -195,73 +114,137 @@ export default async function ContactPage({ searchParams }: ContactPageProps) {
                       <path
                         strokeLinecap="round"
                         strokeLinejoin="round"
-                        d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z"
-                      />
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"
+                        d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75"
                       />
                     </svg>
                   </span>
-                  <div className="min-w-0">
-                    {/* Label from `docs/03-copy-deck.md:128` (`Address`); value
-                        from `:196`, verbatim. */}
-                    <span className="block text-xs font-semibold uppercase tracking-wider text-text-600">
-                      Address
+                </div>
+
+                <p className="text-sm text-text-600 leading-relaxed">
+                  Send an enquiry through the form, or reach us directly.
+                </p>
+
+                <ul className="mt-6 space-y-4">
+                  <li className="flex items-start gap-3">
+                    <span
+                      className="w-8 h-8 rounded-full bg-tint-100 text-brand-700 flex items-center justify-center shrink-0 mt-0.5"
+                      aria-hidden="true"
+                    >
+                      <svg
+                        className="w-4 h-4"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        strokeWidth="1.5"
+                        stroke="currentColor"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75"
+                        />
+                      </svg>
                     </span>
-                    <span className="block text-sm font-semibold text-ink-950 mt-1">
-                      494 Sonora Ave, Raymondville, TX 78580
+                    <div>
+                      <span className="block text-xs font-semibold uppercase tracking-wider text-text-600">
+                        Email
+                      </span>
+                      <a
+                        href="mailto:bennie104@gmail.com"
+                        className="text-base font-bold text-ink-950 hover:text-brand-700 transition-colors rounded-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-700"
+                      >
+                        bennie104@gmail.com
+                      </a>
+                    </div>
+                  </li>
+
+                  <li className="flex items-start gap-3">
+                    <span
+                      className="w-8 h-8 rounded-full bg-tint-100 text-brand-700 flex items-center justify-center shrink-0 mt-0.5"
+                      aria-hidden="true"
+                    >
+                      <svg
+                        className="w-4 h-4"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        strokeWidth="1.5"
+                        stroke="currentColor"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z"
+                        />
+                      </svg>
                     </span>
-                  </div>
-                </li>
+                    <div>
+                      <span className="block text-xs font-semibold uppercase tracking-wider text-text-600">
+                        Phone
+                      </span>
+                      <a
+                        href="tel:+17193456285"
+                        className="text-base font-bold text-ink-950 hover:text-brand-700 transition-colors rounded-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-700"
+                      >
+                        +1 719 345-6285
+                      </a>
+                    </div>
+                  </li>
 
-                {/*
-                  Reserved layout slots — `decisions.md` D-012. The deck's contact
-                  card (`:196`) lists an email and a phone, both marked
-                  `[CLIENT TO CONFIRM]`, so neither is rendered and neither is
-                  substituted: no `mailto:`, no `tel:`, no placeholder address.
-                  The slots are kept in place (as the Footer already does) so the
-                  confirmed values drop in without a redesign.
+                  <li className="flex items-start gap-3">
+                    <span
+                      className="w-8 h-8 rounded-full bg-tint-100 text-brand-700 flex items-center justify-center shrink-0 mt-0.5"
+                      aria-hidden="true"
+                    >
+                      <svg
+                        className="w-4 h-4"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        strokeWidth="1.5"
+                        stroke="currentColor"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z"
+                        />
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"
+                        />
+                      </svg>
+                    </span>
+                    <div>
+                      <span className="block text-xs font-semibold uppercase tracking-wider text-text-600">
+                        Address
+                      </span>
+                      <p className="text-sm font-semibold text-ink-950">
+                        494 Sonora Ave, Raymondville, TX 78580
+                      </p>
+                      <p className="text-xs text-text-600 mt-1">
+                        Work takes place at the client&apos;s location.
+                      </p>
+                    </div>
+                  </li>
+                </ul>
+              </Card>
+            </Reveal>
 
-                  Reserved slot: confirmed public email renders as a row here.
-                  Reserved slot: confirmed public phone renders as a row here.
-                */}
-              </ul>
-
-              {/*
-                Omitted from the design screen, each for a cited reason:
-                · `Operating Model & Compliance` card — its three bullets and
-                  paragraph have no deck line (`:130` supplies compliance
-                  wording for `/about`, not for `/contact`).
-                · `Expedited Scope Inquiries` dark card — `Expedited`,
-                  `Priority queueing` and the 24-business-hour promise are
-                  authored marketing copy with no deck line, and a response-time
-                  claim is exactly what the brief withholds.
-                · `Response Benchmark` row — the `[CLIENT TO CONFIRM response
-                  time]` marker at `:183`.
-              */}
-            </Card>
+            <Reveal from="left" speed="medium" delay={120} threshold={0.2} margin="0px 0px -12% 0px">
+              <OfficeMap height={280} />
+            </Reveal>
           </div>
 
           <div className="lg:col-span-7">
-            <ContactForm
-              attachmentUploadEnabled={attachmentUploadEnabled}
-              turnstileSiteKey={turnstileSiteKey}
-              defaultEnquiryType={defaultEnquiryType}
-            />
+            <Reveal from="bottom" speed="medium" delay={140} threshold={0.2} margin="0px 0px -12% 0px">
+              <ContactForm
+                attachmentUploadEnabled={attachmentUploadEnabled}
+                turnstileSiteKey={turnstileSiteKey}
+                defaultEnquiryType={defaultEnquiryType}
+              />
+            </Reveal>
           </div>
         </div>
       </SectionWrapper>
-
-      {/*
-        No terminal CTA band on this route: the band's own CTA is
-        `Get in Touch → /contact`, which would link the page to itself. The
-        design screen has no band here either, and
-        `docs/01-sitemap-wireframes.md:107-111` defines `/contact` as intro +
-        form + contact details. The shared `CtaBand` is untouched (D-014) and
-        still terminates every other route.
-      */}
     </main>
   );
 }

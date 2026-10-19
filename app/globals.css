@@ -80,6 +80,20 @@
   --motion-dur-slow: 800ms;
   --motion-stagger: 80ms;
   --motion-reveal-distance: 24px;
+
+  /* Values that docs/05-motion-spec.md section 4 names but the original token
+     block did not carry. They are declared here — not in component code — so
+     every duration, step and distance still resolves through one token source
+     (D-003). Nothing else about the timing model changed.
+
+       --motion-dur-route      section 4 row 1  (page load / route change)
+       --motion-dur-medium     section 4 rows 41 and 45 (About images, CTA draw)
+       --motion-stagger-hero   section 4 row 36  (hero fact chips)
+       --motion-reveal-distance-x section 4 row 41 (About images, horizontal) */
+  --motion-dur-route: 250ms;
+  --motion-dur-medium: 600ms;
+  --motion-stagger-hero: 150ms;
+  --motion-reveal-distance-x: 32px;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -87,7 +101,12 @@
     --motion-dur-fast: 1ms;
     --motion-dur-base: 1ms;
     --motion-dur-slow: 1ms;
+    --motion-dur-route: 1ms;
+    --motion-dur-medium: 1ms;
+    --motion-stagger: 0ms;
+    --motion-stagger-hero: 0ms;
     --motion-reveal-distance: 0px;
+    --motion-reveal-distance-x: 0px;
   }
 }
 
@@ -275,6 +294,235 @@ h1, h2, h3, h4, h5, h6 {
     rgb(var(--color-ink-950-rgb) / 0.45) 55%,
     transparent 70%
   );
+}
+
+/* ---------------------------------------------------------------------------
+   HERO ENTRANCE (docs/05-motion-spec.md section 4 rows 34-36; D-031)
+
+   D-031 keeps the single full-bleed photograph and adapts the entrance:
+   heading lines reveal one by one with the Caveat word landing last, the
+   photograph performs one slow scale 1.04 -> 1, and the fact chips float in
+   with a 150ms step.
+
+   These run as CSS keyframes rather than as a Motion subscription on purpose.
+   The hero is above the fold: it must animate on the browser's *first* paint,
+   not after the client bundle has hydrated, or the visitor sees the finished
+   hero snap back to its hidden state and re-enter. CSS also means the effect
+   still works with JavaScript disabled (section 55, and the JS-off proof in
+   the Phase 07 brief).
+
+   Every offset below is derived from the motion tokens: `--motion-stagger`
+   (80ms) multiples place the photograph at 160ms and the chips at 320ms/470ms,
+   `--motion-reveal-distance` is the heading travel and half of it is the chip
+   travel. Nothing here introduces an untokenised timing value.
+
+   Only `transform` and `opacity` change (section 8). The 1.04 scale is clipped
+   by the hero's own `overflow-hidden`, so it cannot produce horizontal scroll.
+   --------------------------------------------------------------------------- */
+@keyframes hero-line-in {
+  from {
+    opacity: 0;
+    transform: translate3d(0, var(--motion-reveal-distance), 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes hero-fade-in {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 12px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes hero-photo-in {
+  from {
+    opacity: 0;
+    transform: scale(1.04);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes hero-chip-in {
+  from {
+    opacity: 0;
+    transform: translate3d(0, calc(var(--motion-reveal-distance) / 2), 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes hero-accent-in {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes hero-script-in {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 16px, 0) scale(0.92) rotate(-2deg);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1) rotate(0deg);
+  }
+}
+
+.hero-eyebrow {
+  animation: hero-fade-in 600ms var(--motion-ease-out) both;
+  animation-delay: 100ms;
+}
+
+.hero-line {
+  display: inline-block;
+  will-change: transform, opacity;
+}
+
+/* Measured natural spoken cadence for "Three disciplines. One company."
+   Beat 1: "Three disciplines." spoken with measured clarity (~1.0s) */
+.hero-line-1 {
+  animation: hero-line-in 950ms var(--motion-ease-out) both;
+  animation-delay: 300ms;
+}
+
+/* Beat 2: "One" (script accent spoken with flourish, ~0.8s) */
+.hero-line-2 {
+  animation: hero-script-in 850ms var(--motion-ease-out) both;
+  animation-delay: 1400ms;
+}
+
+/* Beat 3: "company." (resolution of the brand statement, ~0.8s) */
+.hero-line-3 {
+  animation: hero-line-in 850ms var(--motion-ease-out) both;
+  animation-delay: 2350ms;
+}
+
+.hero-photo {
+  transform-origin: center;
+  animation: hero-photo-in 1200ms var(--motion-ease-out) both;
+  animation-delay: 150ms;
+}
+
+/* The spark accent illuminates as "company." lands */
+.hero-title::after {
+  animation: hero-accent-in 700ms var(--motion-ease-out) both;
+  animation-delay: 2800ms;
+}
+
+/* Supporting body text appears after the visitor reads the headline */
+.hero-sub {
+  animation: hero-fade-in 750ms var(--motion-ease-out) both;
+  animation-delay: 3200ms;
+}
+
+/* CTAs enter after the message settles */
+.hero-actions {
+  animation: hero-fade-in 700ms var(--motion-ease-out) both;
+  animation-delay: 3800ms;
+}
+
+.hero-chip {
+  animation: hero-chip-in 600ms var(--motion-ease-out) both;
+}
+
+/* Fact chips enter sequentially last */
+.hero-chip:nth-child(1) {
+  animation-delay: 4300ms;
+}
+
+.hero-chip:nth-child(2) {
+  animation-delay: 4550ms;
+}
+
+/* Living Blueprint Geographic Diagram Animations */
+@keyframes hub-pulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.12;
+  }
+  50% {
+    transform: scale(1.22);
+    opacity: 0.3;
+  }
+}
+
+.animate-hub-pulse {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: hub-pulse 4s ease-in-out infinite;
+}
+
+@keyframes arc-flow {
+  from {
+    stroke-dashoffset: 24;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.animate-arc-flow {
+  animation: arc-flow 3s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  /* section 53: no translate, no scale. The elements render in their finished
+     state immediately — the animation is removed, never merely shortened. */
+  .hero-eyebrow,
+  .hero-line,
+  .hero-sub,
+  .hero-actions,
+  .hero-photo,
+  .hero-chip,
+  .hero-title::after,
+  .animate-hub-pulse,
+  .animate-arc-flow {
+    animation: none !important;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   ROUTE CHANGE (docs/05-motion-spec.md section 4 row 1 / brief row 33)
+
+   Content fade 250ms ease-out, no slide. Applied by `app/template.tsx`, which
+   remounts on every navigation. CSS rather than Motion for the same reason as
+   the hero: the fade has to start at first paint, and it must still resolve
+   with JavaScript disabled. Opacity only, so it cannot shift layout.
+   --------------------------------------------------------------------------- */
+@keyframes route-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.route-fade {
+  animation: route-fade-in var(--motion-dur-route) var(--motion-ease-out) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .route-fade {
+    animation: none;
+  }
 }
 
 .texture-dots {

@@ -59,9 +59,9 @@ import {
  */
 const CONTROL_BASE =
   "w-full px-4 rounded-md bg-surface border text-base text-text-900 " +
-  "transition-colors duration-[var(--motion-dur-fast)] motion-reduce:transition-none " +
-  "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 " +
-  "focus-visible:outline-brand-700 disabled:opacity-50 disabled:cursor-not-allowed";
+  "transition-all duration-200 motion-reduce:transition-none " +
+  "focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20 focus-visible:outline-none " +
+  "disabled:opacity-50 disabled:cursor-not-allowed";
 
 /** The documented 52px control height (`04` §5), on the 4px spacing scale. */
 const CONTROL_HEIGHT = "h-[52px]";

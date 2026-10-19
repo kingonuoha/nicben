@@ -3,6 +3,7 @@ import Link from "next/link";
 import { CtaBand } from "@/components/ui/CtaBand";
 import { EmptyState } from "@/components/ui/EmptyState";
 import { SectionWrapper } from "@/components/ui/SectionWrapper";
+import { Reveal } from "@/components/motion/Reveal";
 
 /**
  * Hidden route. `/projects` is intentionally not linked from the header or the
@@ -12,18 +13,12 @@ import { SectionWrapper } from "@/components/ui/SectionWrapper";
 export const metadata: Metadata = {
   title: "Our projects | NICBEN",
   description: "A selection of recent work.",
-  /* R-K: `/projects` has no `03-copy-deck.md` section 14 row. The title derives
-     from the deck H1 (`:202` "Our projects") plus the site name and the
-     description is the deck's own intro line (`:203`) verbatim. The route is
-     excluded from `sitemap.xml` and unlinked until real projects exist. */
 };
 
 export default function ProjectsPage() {
   return (
     <main className="min-h-screen">
-      {/* 1. INTRO
-          Header clearance is global (`app/layout.tsx`), so this hero keeps the
-          standard pt-8 sm:pt-12 section rhythm. */}
+      {/* 1. INTRO */}
       <SectionWrapper
         background="tint-50"
         className="pt-8 sm:pt-12 pb-16 lg:pb-20"
@@ -46,32 +41,28 @@ export default function ProjectsPage() {
         </nav>
 
         <div className="max-w-2xl">
-          <h1 className="text-display font-extrabold tracking-tight text-ink-950 leading-tight heading-spark">
-            Our projects
-          </h1>
+          <Reveal from="bottom" speed="base">
+            <h1 className="text-display font-extrabold tracking-tight text-ink-950 leading-tight heading-spark">
+              Our projects
+            </h1>
+          </Reveal>
 
-          <p className="mt-6 text-lg sm:text-xl text-text-600 leading-relaxed font-normal">
-            A selection of recent work.
-          </p>
+          <Reveal from="bottom" speed="base" delay={120}>
+            <p className="mt-6 text-lg sm:text-xl text-text-600 leading-relaxed font-normal">
+              A selection of recent work.
+            </p>
+          </Reveal>
         </div>
       </SectionWrapper>
 
-      {/* 2. EMPTY STATE — no filter chips and no placeholder projects.
-          The design screen's drafting marks row, notice chip, body copy and
-          custody note are replaced with copy-deck strings only (D-008); the
-          uncited strings (`SPEC:`, `SCALE:`, `PORTFOLIO UPDATE…`) are not
-          published. The three-card "Operational Framework" grid below the empty
-          state is omitted: the route is empty-state only (`brief.md` section
-          3.5) and a second "Pillar 01 — 03" array would conflict with D-001.
-          R-J: the uncited marks label `Project-based work` and the uncited
-          `noteLabel="Registered office"` are deleted; the marks row needs two
-          labels to render, so it is omitted entirely and the note renders its
-          deck:13 body alone. */}
+      {/* 2. EMPTY STATE — Smooth quiet reveal with architectural blueprint icon */}
       <SectionWrapper background="surface" className="border-t border-line">
-        <EmptyState
-          title="Projects will be added here soon."
-          noteBody="NICBEN Asset Holdings &amp; Investments LLC is a privately owned limited liability company registered in Texas."
-        />
+        <Reveal from="bottom" speed="medium" threshold={0.2} margin="0px 0px -12% 0px">
+          <EmptyState
+            title="Projects will be added here soon."
+            noteBody="NICBEN Asset Holdings &amp; Investments LLC is a privately owned limited liability company registered in Texas."
+          />
+        </Reveal>
       </SectionWrapper>
 
       {/* 3. CTA BAND */}

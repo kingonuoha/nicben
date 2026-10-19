@@ -1,12 +1,13 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import Link from "next/link";
-import { Button } from "@/components/ui/Button";
-import { Card } from "@/components/ui/Card";
 import { CtaBand } from "@/components/ui/CtaBand";
 import { EyebrowChip } from "@/components/ui/EyebrowChip";
 import { ProcessTimeline } from "@/components/ui/ProcessTimeline";
 import { SectionWrapper } from "@/components/ui/SectionWrapper";
+import { Reveal } from "@/components/motion/Reveal";
+import { SectionHeading } from "@/components/motion/SectionHeading";
+import { Stagger, StaggerItem } from "@/components/motion/Stagger";
 
 export const metadata: Metadata = {
   title: "How It Works | NICBEN",
@@ -90,9 +91,7 @@ const icons: Record<string, ReactNode> = {
 export default function HowItWorksPage() {
   return (
     <main className="min-h-screen">
-      {/* 1. STEPS
-          Header clearance is global (`app/layout.tsx`), so this hero keeps the
-          standard pt-8 sm:pt-12 section rhythm. */}
+      {/* 1. HERO */}
       <SectionWrapper
         background="tint-50"
         className="pt-8 sm:pt-12 pb-16 lg:pb-20"
@@ -115,108 +114,79 @@ export default function HowItWorksPage() {
         </nav>
 
         <div className="max-w-3xl">
-          <h1 className="text-display font-extrabold tracking-tight text-ink-950 leading-tight heading-spark">
-            How it works
-          </h1>
-          <p className="mt-6 text-lg sm:text-xl text-text-600 leading-relaxed font-normal">
-            Every project is different, but the path usually looks like this.
-          </p>
+          <Reveal from="bottom" speed="base">
+            <h1 className="text-display font-extrabold tracking-tight text-ink-950 leading-tight heading-spark">
+              How it works
+            </h1>
+          </Reveal>
+          <Reveal from="bottom" speed="base" delay={120}>
+            <p className="mt-6 text-lg sm:text-xl text-text-600 leading-relaxed font-normal">
+              Every project is different, but the path usually looks like this.
+            </p>
+          </Reveal>
         </div>
       </SectionWrapper>
 
+      {/* 2. TIMELINE ROADMAP */}
       <SectionWrapper background="surface" className="border-t border-line">
-        <div className="max-w-2xl mb-12 sm:mb-16">
-          <EyebrowChip dotColor="teal">How it works</EyebrowChip>
-          <h2 className="text-h2 font-bold text-ink-950 mt-4 tracking-tight">
-            From enquiry to completion
-          </h2>
-        </div>
+        <SectionHeading
+          className="max-w-2xl mb-12 sm:mb-16"
+          eyebrow={<EyebrowChip dotColor="teal">How it works</EyebrowChip>}
+          heading={
+            <h2 className="text-h2 font-bold text-ink-950 mt-4 tracking-tight">
+              From enquiry to completion
+            </h2>
+          }
+        />
 
         <ProcessTimeline steps={steps} />
       </SectionWrapper>
 
-      {/* 2. WHAT TO PREPARE */}
+      {/* 3. WHAT TO PREPARE */}
       <SectionWrapper background="tint-50" className="border-t border-line">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-start">
-          <div className="lg:col-span-5 space-y-5">
-            <EyebrowChip dotColor="sky">How it works</EyebrowChip>
-            <h2 className="text-h2 font-bold text-ink-950 tracking-tight">
-              What to prepare
-            </h2>
-            <p className="text-base sm:text-lg text-text-600 leading-relaxed font-normal">
-              Location, a short description of the work, photos if you have them,
-              and your preferred timing.
-            </p>
+          <div className="lg:col-span-5">
+            <Reveal from="left" speed="medium" threshold={0.2} margin="0px 0px -12% 0px" className="space-y-5">
+              <EyebrowChip dotColor="sky">How it works</EyebrowChip>
+              <h2 className="text-h2 font-bold text-ink-950 tracking-tight">
+                What to prepare
+              </h2>
+              <p className="text-base sm:text-lg text-text-600 leading-relaxed font-normal">
+                Location, a short description of the work, photos if you have them,
+                and your preferred timing.
+              </p>
+            </Reveal>
           </div>
 
-          <ul className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-4">
-            {preparation.map((item) => (
-              <li
-                key={item.label}
-                className="flex items-center gap-3 rounded-md bg-surface border border-line shadow-card p-6"
-              >
-                <span
-                  className="w-10 h-10 rounded-md bg-tint-100 text-brand-700 flex items-center justify-center shrink-0"
-                  aria-hidden="true"
-                >
-                  <svg
-                    className="w-5 h-5"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    strokeWidth="1.5"
-                    stroke="currentColor"
+          <div className="lg:col-span-7">
+            <Stagger className="grid grid-cols-1 sm:grid-cols-2 gap-4" step={80} threshold={0.2} margin="0px 0px -12% 0px">
+              {preparation.map((item) => (
+                <StaggerItem key={item.label} className="flex">
+                  <div
+                    className="group card-lift w-full flex items-center gap-3 rounded-md bg-surface border border-line hover:border-brand-500 shadow-card p-6 transition-all duration-200"
                   >
-                    {icons[item.icon]}
-                  </svg>
-                </span>
-                <span className="text-sm font-semibold text-ink-950">
-                  {item.label}
-                </span>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </SectionWrapper>
-
-      {/* 3. FAQ TEASER */}
-      <SectionWrapper background="surface" className="border-t border-line">
-        <div className="max-w-2xl mb-10">
-          <EyebrowChip dotColor="teal">FAQ</EyebrowChip>
-          <h2 className="text-h2 font-bold text-ink-950 mt-4 tracking-tight">
-            FAQ
-          </h2>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8 items-stretch">
-          <Card variant="surface" className="flex flex-col justify-between">
-            <div className="space-y-3">
-              <h3 className="text-h3 font-bold text-ink-950 leading-snug">
-                Do you do the work yourselves?
-              </h3>
-              <p className="text-sm text-text-600 leading-relaxed">
-                We coordinate projects by engaging qualified contractors and
-                technicians to perform the work at your location.
-              </p>
-            </div>
-          </Card>
-
-          <Card variant="tint" className="flex flex-col justify-between">
-            <div className="space-y-3">
-              <h3 className="text-h3 font-bold text-ink-950 leading-snug">
-                How do I start a project or ask for a quote?
-              </h3>
-              <p className="text-sm text-text-600 leading-relaxed">
-                Send an enquiry through the contact form, or reach us by email or
-                phone. We will get back to you to discuss the scope.
-              </p>
-            </div>
-          </Card>
-        </div>
-
-        <div className="mt-10">
-          <Button variant="secondary" href="/faq">
-            FAQ
-          </Button>
+                    <span
+                      className="w-10 h-10 rounded-md bg-tint-100 text-brand-700 flex items-center justify-center shrink-0 transition-transform duration-200 group-hover:scale-110 motion-reduce:group-hover:scale-100"
+                      aria-hidden="true"
+                    >
+                      <svg
+                        className="w-5 h-5"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        strokeWidth="1.5"
+                        stroke="currentColor"
+                      >
+                        {icons[item.icon]}
+                      </svg>
+                    </span>
+                    <span className="text-sm font-semibold text-ink-950 leading-snug">
+                      {item.label}
+                    </span>
+                  </div>
+                </StaggerItem>
+              ))}
+            </Stagger>
+          </div>
         </div>
       </SectionWrapper>
 
