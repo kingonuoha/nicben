@@ -183,21 +183,29 @@ export const Header: React.FC = () => {
         {/* Brand Logo / Wordmark */}
         <Link
           href="/"
-          className="flex items-center gap-2 focus-visible:outline focus-visible:outline-2 focus-visible:outline-brand-700 rounded-md py-1"
+          className="flex items-center gap-2.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-brand-700 rounded-md py-1 group"
           aria-label="NICBEN Home"
         >
           <Image
             src={
               isDarkHeroMode
-                ? "/images/brand/nicben-logo-horizontal-white.png"
-                : "/images/brand/nicben-logo-horizontal-dark.png"
+                ? "/images/brand/nicben-logo-icon-white.png"
+                : "/images/brand/nicben-logo-icon-dark.png"
             }
-            alt="NICBEN Asset Holdings & Investments"
-            width={160}
-            height={44}
+            alt=""
+            width={32}
+            height={32}
             priority
-            className="h-8 sm:h-9 w-auto object-contain"
+            className="h-8 w-8 object-contain transition-transform duration-200 group-hover:scale-105"
+            aria-hidden="true"
           />
+          <span
+            className={`font-heading font-extrabold text-xl sm:text-2xl tracking-tight leading-none ${
+              isDarkHeroMode ? "text-surface" : "text-ink-950"
+            }`}
+          >
+            NICBEN
+          </span>
         </Link>
 
         {/* Desktop Navigation */}
